@@ -1,20 +1,20 @@
 const { Pool } = require('pg')
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'postgres',
-    password: 't',
+    user: 'civracsv',
+    host: 'dumbo.db.elephantsql.com',
+    database: 'civracsv',
+    password: 'vlubeHQ53ZlJ0XLNHnHvk_SyRDW0MIME',
     port: 5432,
 })
 
 
 
-pool.query('select * from "test".testje limit 1 ', (err, res) => {
+pool.query('select * from "test".testje', (err, res) => {
     console.log(res.rows)
     pool.end()
 })
 function printName() {
-    pool.query('select * from "test".testje limit 1 ', (err, res) => {
+    pool.query('select * from "test".testje limit 1', (err, res) => {
         console.log(res.rows)
         pool.end()
     })
