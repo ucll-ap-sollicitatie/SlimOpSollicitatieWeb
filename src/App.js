@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
@@ -29,7 +28,7 @@ function App() {
          <Route path="/register" component={Register} exact/>
 
        </Switch>
-    </div> 
+    </div>
   </BrowserRouter>
 
   );
