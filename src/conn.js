@@ -7,10 +7,8 @@ const pool = new Pool({
     port: 5432,
 })
 
-
-
-pool.query('select * from "test".testje', (err, res) => {
-    console.log(res.rows)
+pool.query('select * from test.testje limit 1', (err, res) => {
+    console.log(res.rows[0].naam)
     pool.end()
 })
 function printName() {
