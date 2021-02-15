@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {logindb} from "../user/apiUser"
 
 class login extends Component {
     state = {
@@ -14,7 +14,8 @@ class login extends Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        logindb("arnobunckens@hotmail.com", "t")
+        //console.log(this.state)
     }
 
     render() {

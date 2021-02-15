@@ -1,3 +1,8 @@
+const http = require("http");
+const url = require("url");
+const hostname = "127.0.0.1";
+const port = 3001;
+
 const {Pool} = require('pg')
 const pool = new Pool({
     user: 'civracsv',
@@ -21,20 +26,19 @@ function printName() {
     return x;
 }
 
-printName()
+//printName()
 
 async function log() {
     await new Promise(r => setTimeout(r, 2000));
     console.log("TEST= " + x)
 }
 
-log()
+//log()
 */
 
-login("arnobunckens@hotmail.com", "t")
-
- function login(email, password){
+function login(email, password){
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
+        console.log(res)
         console.log(res.rows[0].email)
         console.log(res.rows[0].hashedpassword)
         let uname = res.rows[0].email
@@ -47,3 +51,23 @@ login("arnobunckens@hotmail.com", "t")
 }
 
 
+const server = http.createServer((req, res) => {
+    const reqUrl = url.parse(req.url, true);
+
+    if (reqUrl.pathname == "/users/login" && req.method === "POST") {
+        let data = '';
+
+        req.on('data', chunk => {
+            data += chunk;
+          })
+          req.on('end', () => {
+            jsondata = JSON.parse(data) 
+            login(jsondata.email, jsondata.pass)
+        })   
+    }
+})
+
+server.listen(port, (error) => {
+    if (error) return console.log(`Error: ${error}`);
+    console.log(`API at http://${hostname}:${port}/`)
+})
