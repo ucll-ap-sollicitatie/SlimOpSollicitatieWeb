@@ -1,9 +1,10 @@
 import React from 'react'
 
+
 function Login() {
     return(
         <div>
-        <h1>Gelieve in te loggen</h1>
+        <h1>Gelieve in te loggen </h1>
         <form>
             <label>
                 <p>Gebruikersnaam</p>
