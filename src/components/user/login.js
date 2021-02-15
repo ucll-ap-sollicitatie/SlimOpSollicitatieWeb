@@ -7,16 +7,29 @@ class login extends Component {
         password: ''
     }
 
+    /**
+     * Change the state of the id that called the function:
+     * Ex. <input type="email" id="email" onChange={this.handleChange}/> calls handleChange:
+     *          - the id is email, so the state that it will change is email
+     */
+
     handleChange = (e) => {
         this.setState({
             [e.target.id]: e.target.value
         })
     }
+    /**
+     * When a user submits the form,
+     * 1. preventDefault: https://www.w3schools.com/jsref/event_preventdefault.asp
+     * 2. logindb calls the api
+     * 3.1. TODO: Clear fields when input is wrong
+     * 3.2. TODO: redirect to home page when login is succesfull
+     */
     handleSubmit = (e) => {
         //"arnobunckens@hotmail.com", "t"
+
         e.preventDefault();
         logindb(this.state.email, this.state.password)
-        //console.log(this.state)
     }
 
     render() {
