@@ -13,8 +13,9 @@ class login extends Component {
         })
     }
     handleSubmit = (e) => {
+        //"arnobunckens@hotmail.com", "t"
         e.preventDefault();
-        logindb("arnobunckens@hotmail.com", "t")
+        logindb(this.state.email, this.state.password)
         //console.log(this.state)
     }
 
