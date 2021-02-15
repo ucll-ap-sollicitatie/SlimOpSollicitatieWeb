@@ -38,17 +38,19 @@ async function log() {
 
 function login(email, password){
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
-        console.log(res)
-        console.log(res.rows[0].email)
-        console.log(res.rows[0].hashedpassword)
         let uname = res.rows[0].email
         let pw = res.rows[0].hashedpassword
-        if(uname === email && password === pw){
+        let hashpw = generateHash(password)
+        console.log("pw in db: " + pw)
+        console.log("Hashed gegeven pw: " + hashpw)
+        if(uname === email && hashpw === pw){
             console.log("Ingelogd")
         } else console.log("Login failed")
         pool.end()
     })
 }
+
+
 
 
 const server = http.createServer((req, res) => {
@@ -71,3 +73,27 @@ server.listen(port, (error) => {
     if (error) return console.log(`Error: ${error}`);
     console.log(`API at http://${hostname}:${port}/`)
 })
+
+function register(email, password, username){
+    let hPassword = generateHash(password);
+
+    pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
+        console.log("Goeed")
+    })
+}
+
+register("arnobunckens@hotmaila.com", "t", "arnold")
+
+login("arnobunckens@hotmaila.com", "t")
+
+function generateHash(string) {
+    var hash = 0;
+    if (string.length == 0)
+        return hash;
+    for (let i = 0; i < string.length; i++) {
+        var charCode = string.charCodeAt(i);
+        hash = ((hash << 7) - hash) + charCode;
+        hash = hash & hash;
+    }
+    return hash;
+}
