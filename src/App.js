@@ -5,8 +5,8 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './components/navigation';
 import Home from './components/home';
 import Register from './components/user/register';
+import Camera from "./components/user/camera"
 import loginPage from "./components/user/login";
-
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
          <Route path="/" component={Home} exact/>
          <Route path="/login" component={loginPage} exact />
          <Route path="/register" component={Register} exact/>
+         <Route path="/camera" component={Camera} exact/>
 
        </Switch>
     </div>
