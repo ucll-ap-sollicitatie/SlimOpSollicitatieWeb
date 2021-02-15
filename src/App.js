@@ -6,7 +6,7 @@ import Navigation from './components/navigation';
 import Home from './components/home';
 import Register from './components/user/register';
 import Login from "./components/user/login";
-
+import Camera from "./components/user/camera"
 
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
          <Route path="/" component={Home} exact/>
          <Route path="/login" component={Login} exact />
          <Route path="/register" component={Register} exact/>
+         <Route path="/camera" component={Camera} exact/>
 
        </Switch>
     </div>
