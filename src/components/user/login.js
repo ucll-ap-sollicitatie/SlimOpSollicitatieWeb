@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 class login extends Component {
     state = {
         email: '',
@@ -21,7 +22,7 @@ class login extends Component {
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
                 <form onSubmit={this.handleSubmit} className="wite">
-                    <label for="email">Email</label>
+                    <label for="username">username</label>
                     <input type="email" id="email" onChange={this.handleChange}/>
 
                     <label for="password">password</label>
@@ -36,3 +37,7 @@ class login extends Component {
 }
 
 export default login;
+
+
+
+

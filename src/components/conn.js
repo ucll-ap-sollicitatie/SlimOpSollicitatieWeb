@@ -7,10 +7,11 @@ const pool = new Pool({
     port: 5432,
 })
 
+/**
 let x = "";
-export default function printName() {
-    pool.query('select * from "test".testje limit 1', (err, res) => {
-        let result = res.rows[0].naam
+function printName() {
+    pool.query('select * from slimopsol.users', (err, res) => {
+        let result = res.rows[0].username
         if (result != null) {
             x = result
             console.log(result + " --> result from Query")
@@ -20,6 +21,7 @@ export default function printName() {
     return x;
 }
 
+printName()
 
 async function log() {
     await new Promise(r => setTimeout(r, 2000));
@@ -27,5 +29,21 @@ async function log() {
 }
 
 log()
+*/
+
+login("arnobunckens@hotmail.com", "t")
+
+ function login(email, password){
+    pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
+        console.log(res.rows[0].email)
+        console.log(res.rows[0].hashedpassword)
+        let uname = res.rows[0].email
+        let pw = res.rows[0].hashedpassword
+        if(uname === email && password === pw){
+            console.log("Ingelogd")
+        } else console.log("Login failed")
+        pool.end()
+    })
+}
 
 
