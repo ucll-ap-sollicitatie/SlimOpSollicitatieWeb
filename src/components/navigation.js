@@ -10,7 +10,7 @@ const Navigation = () => {
                 - add a new NavLink element with the path and label
             */}
           <NavLink to="/">Home</NavLink>
-           <NavLink to="/login">Login</NavLink>
+            <NavLink to="/login">Login</NavLink>
           <NavLink to="/register">Register</NavLink>
           <NavLink to="/camera">Camera</NavLink>
        </div>

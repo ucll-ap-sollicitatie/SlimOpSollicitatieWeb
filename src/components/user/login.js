@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {logindb} from "../user/apiUser"
 
 class login extends Component {
     state = {
@@ -12,8 +13,10 @@ class login extends Component {
         })
     }
     handleSubmit = (e) => {
+        //"arnobunckens@hotmail.com", "t"
         e.preventDefault();
-        console.log(this.state)
+        logindb(this.state.email, this.state.password)
+        //console.log(this.state)
     }
 
     render() {
@@ -21,7 +24,7 @@ class login extends Component {
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
                 <form onSubmit={this.handleSubmit} className="wite">
-                    <label for="email">Email</label>
+                    <label for="username">username</label>
                     <input type="email" id="email" onChange={this.handleChange}/>
 
                     <label for="password">password</label>
@@ -36,3 +39,7 @@ class login extends Component {
 }
 
 export default login;
+
+
+
+
