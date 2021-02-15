@@ -1,6 +1,8 @@
 const http = require("http");
 const url = require("url");
+//hostname of the api
 const hostname = "127.0.0.1";
+//port of the api
 const port = 3001;
 
 const {Pool} = require('pg')
@@ -50,23 +52,36 @@ function login(email, password){
     })
 }
 
-
+/**
+ * Creates server, with possible requests.
+ * 
+ * To add a request:
+ * add if statement and check on:
+ *      - reqUrl.pathname: the path where you will request the api
+ *      - req.method: request type (POST,GET,...)
+ * And write the body
+ */
 const server = http.createServer((req, res) => {
     const reqUrl = url.parse(req.url, true);
 
     if (reqUrl.pathname == "/users/login" && req.method === "POST") {
         let data = '';
-
+        //data will be the ?binary data?
         req.on('data', chunk => {
             data += chunk;
           })
+        //parse data to JSON
           req.on('end', () => {
             jsondata = JSON.parse(data) 
             login(jsondata.email, jsondata.pass)
         })   
     }
 })
-
+/**
+ * Create a server that listens on defined port.
+ * If there is an error, print it
+ * If there is on error, log that server is running
+ */
 server.listen(port, (error) => {
     if (error) return console.log(`Error: ${error}`);
     console.log(`API at http://${hostname}:${port}/`)
