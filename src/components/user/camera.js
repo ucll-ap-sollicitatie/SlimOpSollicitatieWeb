@@ -4,8 +4,10 @@ import ReactDOM from "react-dom"
 import { render } from "@testing-library/react";
 
 class camera extends Component{
-  
-    render(){
+  render(){
+    if(document.getElementById("cam") != null) {
+      document.getElementById("cam").remove()
+    } 
       var cambox = document.createElement("div")
       cambox.setAttribute("id", "cam")
       document.getElementById("root").appendChild(cambox)
