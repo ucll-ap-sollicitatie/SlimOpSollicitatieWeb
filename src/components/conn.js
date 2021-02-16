@@ -111,7 +111,9 @@ const server = http.createServer((req, res) => {
     }
     res.writeHead(200, {
         'Content-Type': 'application/json',
-        
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+        'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
       });
     res.end('<html><body><h1>ow!</h1></body></html>');          
 
