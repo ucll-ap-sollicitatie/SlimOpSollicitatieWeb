@@ -5,18 +5,19 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Navigation from './components/navigation';
 import Home from './components/home';
 import Register from './components/user/register';
-import Camera from "./components/user/camera"
+import Camera, { resetCam } from "./components/user/camera"
 import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
 
 function App() {
-    return (
-        <BrowserRouter>
-            <div>
-                <Navigation/>
-                <Switch>
-                    {/* Add new routes to navigation:
+
+  return (
+    <BrowserRouter>
+    <div>
+      <Navigation />
+        <Switch>
+        {/* Add new routes to navigation:
               1. Import component
                     (import Register from './components/register';)
               2. Choose path

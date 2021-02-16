@@ -1,11 +1,11 @@
-import authReducer from "./authReducer"
-import tempReducer from "./tempReducer"
+// import authReducer from "./authReducer"
+// import tempReducer from "./tempReducer"
 
-import {combineReducers} from "redux"
+// import {combineReducers} from "redux"
 
-const rootReducer = combineReducers({
-    auth: authReducer,
-    temp: tempReducer
-})
+// const rootReducer = combineReducers({
+//     auth: authReducer,
+//     temp: tempReducer
+// })
 
-export default rootReducer
+// export default rootReducer
