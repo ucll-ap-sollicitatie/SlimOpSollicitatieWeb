@@ -29,7 +29,11 @@ class login extends Component {
         //"arnobunckens@hotmail.com", "t"
 
         e.preventDefault();
-        logindb(this.state.email, this.state.password)
+        var status = logindb(this.state.email, this.state.password)
+        document.getElementById('email').value = ''
+        document.getElementById('password').value = ''
+
+
     }
 
     render() {
@@ -37,10 +41,10 @@ class login extends Component {
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
                 <form onSubmit={this.handleSubmit} className="wite">
-                    <label for="username">username</label>
+                    <label htmlFor="email">username</label>
                     <input type="email" id="email" onChange={this.handleChange}/>
 
-                    <label for="password">password</label>
+                    <label htmlFor="password">password</label>
                     <input type="password" id="password" onChange={this.handleChange}/>
 
                     <button>login</button>
