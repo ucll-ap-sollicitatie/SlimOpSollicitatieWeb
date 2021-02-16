@@ -22,3 +22,24 @@ module.exports.logindb = async function logindb(eml, pss) {
         console.log("error " + error);
       });
 }
+
+module.exports.registerdb = async function registerdb(eml, pss, un) {
+  axios
+  // sends post request to the api on this path
+    .post("http://127.0.0.1:3001/users/register",
+    //the request body:
+    {
+      email: eml,
+      pass: pss,
+      username: un
+    },
+    //without header, it will not send a POST but a OPTIONS request
+    {headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+  }}
+  ).then((response) => {
+      console.log("response " + response);
+    }, (error) => {
+      console.log("error " + error);
+    });
+}

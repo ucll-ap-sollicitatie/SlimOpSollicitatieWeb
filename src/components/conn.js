@@ -76,6 +76,19 @@ const server = http.createServer((req, res) => {
           req.on('end', () => {
             jsondata = JSON.parse(data) 
             login(jsondata.email, jsondata.pass)
+        })
+           
+    }
+    if (reqUrl.pathname == "/users/register" && req.method === "POST"){
+        let data = '';
+        //data will be the ?binary data?
+        req.on('data', chunk => {
+            data += chunk;
+          })
+        //parse data to JSON
+          req.on('end', () => {
+            jsondata = JSON.parse(data) 
+            register(jsondata.email, jsondata.pass, jsondata.username)
         })   
     }
 })
@@ -91,15 +104,16 @@ server.listen(port, (error) => {
 
 function register(email, password, username){
     let hPassword = generateHash(password);
-
+    console.log("registering user with email: " + email + " password: " + password + " username: " + username)
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
-        console.log("Goeed")
+        //console.log("Goeed")
     })
+    
 }
 
-register("arnobunckens@hotmaila.com", "t", "arnold")
+//register("arnobunckens@hotmaila.com", "t", "arnold")
 
-login("arnobunckens@hotmaila.com", "t")
+//login("arnobunckens@hotmaila.com", "t")
 
 function generateHash(string) {
     var hash = 0;
