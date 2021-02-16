@@ -41,8 +41,8 @@ async function log() {
 function login(email, password){
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
         let uname = res.rows[0].email
-        let pw = res.rows[0].hashedpassword
-        let hashpw = generateHash(password)
+        let pw = res.rows[0].hashedpassword.toString()
+        let hashpw = hashCode(password).toString()
         console.log("pw in db: " + pw)
         console.log("Hashed gegeven pw: " + hashpw)
         if(uname === email && hashpw === pw){
@@ -90,25 +90,22 @@ server.listen(port, (error) => {
 })
 
 function register(email, password, username){
-    let hPassword = generateHash(password);
+    let hPassword = hashCode(password);
 
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
-        console.log("Goeed")
+        console.log("G")
     })
 }
 
-register("arnobunckens@hotmaila.com", "t", "arnold")
 
-login("arnobunckens@hotmaila.com", "t")
 
-function generateHash(string) {
-    var hash = 0;
-    if (string.length == 0)
-        return hash;
-    for (let i = 0; i < string.length; i++) {
-        var charCode = string.charCodeAt(i);
-        hash = ((hash << 7) - hash) + charCode;
-        hash = hash & hash;
+
+function hashCode(str) {
+    var hash = 0, i, chr;
+    for (i = 0; i < str.length; i++) {
+        chr   = str.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0;
     }
     return hash;
 }
