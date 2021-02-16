@@ -6,7 +6,7 @@ class login extends Component {
         email: '',
         password: ''
     }
-
+ 
     /**
      * Change the state of the id that called the function:
      * Ex. <input type="email" id="email" onChange={this.handleChange}/> calls handleChange:
@@ -29,10 +29,10 @@ class login extends Component {
         //"arnobunckens@hotmail.com", "t"
 
         e.preventDefault();
-        var status = logindb(this.state.email, this.state.password)
-        document.getElementById('email').value = ''
-        document.getElementById('password').value = ''
+        logindb(this.state.email, this.state.password)
 
+        // If(TODO) succesfull
+        console.log(this.state)
 
     }
 
