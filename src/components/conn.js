@@ -87,14 +87,14 @@ const server = http.createServer((req, res) => {
           req.on('end', () => {
             jsondata = JSON.parse(data) 
             login(jsondata.email, jsondata.pass)
-            
-            
-            res.writeHead(200, {
-                'Content-Type': 'application/json',
-                'X-Powered-By': 'bacon'
-              });
-            res.end('<html><body><h1>Hello, World!</h1></body></html>');
-        })          
+        })
+        res.writeHead(200, {
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+            'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+          });
+        res.end('Ok');          
     }
 
     if (reqUrl.pathname == "/users/register" && req.method === "POST"){
@@ -109,6 +109,12 @@ const server = http.createServer((req, res) => {
             register(jsondata.email, jsondata.pass, jsondata.username)
         })   
     }
+    res.writeHead(200, {
+        'Content-Type': 'application/json',
+        
+      });
+    res.end('<html><body><h1>ow!</h1></body></html>');          
+
 
 })
 /**

@@ -5,21 +5,23 @@ const axios = require("axios");
  */
 module.exports.logindb = async function logindb(eml, pss) {
   var data = JSON.stringify({"email":eml,"pass":pss});
-  
+  console.log(data)
   var config = {
     method: 'post',
     url: 'http://127.0.0.1:3001/users/login',
     headers: { 
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     },
     data : data
   };
   
   axios(config)
-  .then(response => response.data)
-  .catch(function (error) {
-    console.log(error);
-  });
+  .then(function (response) {
+    console.log(JSON.stringify(response.data));
+  })
+      .catch(function (error) {
+        console.log(error);
+    });
   
 
     // axios
