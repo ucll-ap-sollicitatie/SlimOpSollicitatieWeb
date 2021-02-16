@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Navigation from './components/navigation';
 import Home from './components/home';
 import Register from './components/user/register';
-import Camera, { resetCam } from "./components/user/camera"
+import Camera from "./components/user/camera"
 import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
