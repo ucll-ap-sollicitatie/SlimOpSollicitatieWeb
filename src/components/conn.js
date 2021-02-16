@@ -1,5 +1,6 @@
 const http = require("http");
 const url = require("url");
+
 //hostname of the api
 const hostname = "127.0.0.1";
 //port of the api
@@ -40,19 +41,29 @@ async function log() {
 
 function login(email, password){
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
-        let uname = res.rows[0].email
-        let pw = res.rows[0].hashedpassword
-        let hashpw = generateHash(password)
-        console.log("pw in db: " + pw)
-        console.log("Hashed gegeven pw: " + hashpw)
-        if(uname === email && hashpw === pw){
-            console.log("Ingelogd")
-        } else console.log("Login failed")
-        pool.end()
+            let uname = res.rows[0].email
+            let pw = res.rows[0].hashedpassword.toString()
+            let hashpw = hashCode(password).toString()
+            console.log("pw in db: " + pw)
+            console.log("Hashed gegeven pw: " + hashpw)
+            if(uname === email && hashpw === pw){
+                console.log("Ingelogd")
+            } else console.log("Login failed")
+            pool.end()
+        
     })
 }
 
 
+
+function register(email, password, username){
+    let hPassword = hashCode(password);
+    console.log("registering user with email: " + email + " password: " + password + " username: " + username)
+    pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
+        console.log("G")
+    })
+    
+}
 /**
  * Creates server, with possible requests.
  * 
@@ -76,9 +87,16 @@ const server = http.createServer((req, res) => {
           req.on('end', () => {
             jsondata = JSON.parse(data) 
             login(jsondata.email, jsondata.pass)
-        })
-           
+            
+            
+            res.writeHead(200, {
+                'Content-Type': 'application/json',
+                'X-Powered-By': 'bacon'
+              });
+            res.end('<html><body><h1>Hello, World!</h1></body></html>');
+        })          
     }
+
     if (reqUrl.pathname == "/users/register" && req.method === "POST"){
         let data = '';
         //data will be the ?binary data?
@@ -91,6 +109,7 @@ const server = http.createServer((req, res) => {
             register(jsondata.email, jsondata.pass, jsondata.username)
         })   
     }
+
 })
 /**
  * Create a server that listens on defined port.
@@ -102,27 +121,14 @@ server.listen(port, (error) => {
     console.log(`API at http://${hostname}:${port}/`)
 })
 
-function register(email, password, username){
-    let hPassword = generateHash(password);
-    console.log("registering user with email: " + email + " password: " + password + " username: " + username)
-    pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
-        //console.log("Goeed")
-    })
-    
-}
 
-//register("arnobunckens@hotmaila.com", "t", "arnold")
 
-//login("arnobunckens@hotmaila.com", "t")
-
-function generateHash(string) {
-    var hash = 0;
-    if (string.length == 0)
-        return hash;
-    for (let i = 0; i < string.length; i++) {
-        var charCode = string.charCodeAt(i);
-        hash = ((hash << 7) - hash) + charCode;
-        hash = hash & hash;
+function hashCode(str) {
+    var hash = 0, i, chr;
+    for (i = 0; i < str.length; i++) {
+        chr   = str.charCodeAt(i);
+        hash  = ((hash << 5) - hash) + chr;
+        hash |= 0;
     }
     return hash;
 }
