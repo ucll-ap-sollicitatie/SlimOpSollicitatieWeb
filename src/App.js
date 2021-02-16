@@ -5,10 +5,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Navigation from './components/navigation';
 import Home from './components/home';
 import Register from './components/user/register';
-import Camera from "./components/user/camera"
+import Camera, { resetCam } from "./components/user/camera"
 import loginPage from "./components/user/login";
 
 function App() {
+
   return (
     <BrowserRouter>
     <div>

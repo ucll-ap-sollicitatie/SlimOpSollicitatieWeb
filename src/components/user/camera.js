@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
 import ReactDOM from "react-dom"
+import { render } from "@testing-library/react";
 
 class camera extends Component{
+  
     render(){
-      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam"));
-        return(<div id="cam"></div>) 
+      var cambox = document.createElement("div")
+      cambox.setAttribute("id", "cam")
+      document.getElementById("root").appendChild(cambox)
+      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam")) 
+      return(<p/>)
     }
-
   }
 
 const WebcamStreamCapture = () => {
@@ -60,8 +64,10 @@ const WebcamStreamCapture = () => {
     }, [recordedChunks]);
   
     return (
-      <>
-        <Webcam audio={true} ref={webcamRef} />
+      <div style={{position: "relative"}}>
+        <Webcam audio={true} ref={webcamRef}>
+          <div id="overlay" style={{position: "absolute", fontSize: "500px", color: "white"}}>YEET</div>
+        </Webcam>
         {capturing ? (
           <button onClick={handleStopCaptureClick}>Stop Capture</button>
         ) : (
@@ -70,8 +76,12 @@ const WebcamStreamCapture = () => {
         {recordedChunks.length > 0 && (
           <button onClick={handleDownload}>Download</button>
         )}
-      </>
+      </div>
     );
   };
   
 export default camera;
+
+export function resetCam(){
+    if(document.getElementById("cam") != null) document.getElementById("cam").remove()
+}
