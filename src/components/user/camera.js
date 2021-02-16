@@ -4,10 +4,11 @@ import ReactDOM from "react-dom"
 
 class camera extends Component{
     render(){
-        return(<div id="root"></div>)
+      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam"));
+        return(<div id="cam"></div>) 
     }
-}
 
+  }
 
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
@@ -73,7 +74,4 @@ const WebcamStreamCapture = () => {
     );
   };
   
-  ReactDOM.render(<WebcamStreamCapture />, document.getElementById("root"));
-
-
 export default camera;
