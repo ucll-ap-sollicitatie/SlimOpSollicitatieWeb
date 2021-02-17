@@ -31,7 +31,6 @@ class register extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         registerdb(this.state.email, this.state.password, this.state.username)
-
         console.log(this.state)
     }
 
@@ -40,13 +39,16 @@ class register extends Component {
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
                 <form onSubmit={this.handleSubmit} className="wite">
-                    <label for="email">Email</label>
+                    <label htmlFor="email">Email</label>
                     <input type="email" id="email" onChange={this.handleChange}/>
 
-                    <label for="password">password</label>
+                    <label htmlFor="username">username</label>
+                    <input type="username" id="username" onChange={this.handleChange}/>
+
+                    <label htmlFor="password">password</label>
                     <input type="password" id="password" onChange={this.handleChange}/>
                     
-                    <label for="confpassword">confirm password</label>
+                    <label htmlFor="confpassword">confirm password</label>
                     <input type="password" id="confpassword" onChange={this.handleChange}/>
 
                     <button>login</button>

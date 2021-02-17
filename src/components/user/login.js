@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import {logindb} from "../user/apiUser"
+import {useDispatch} from 'react-redux'
+import { StaticRouter } from 'react-router-dom';
 
 class login extends Component {
     state = {
         email: '',
         password: ''
     }
+
+    
+
+
  
     /**
      * Change the state of the id that called the function:
@@ -26,17 +32,28 @@ class login extends Component {
      * 3.2. TODO: redirect to home page when login is succesfull
      */
     handleSubmit = (e) => {
+
         //"arnobunckens@hotmail.com", "t"
 
         e.preventDefault();
-        logindb(this.state.email, this.state.password)
+        
+        logindb(this.state.email, this.state.password).then(console.log("t"))
+        // const dispatch = Reduc()
+        // dispatch(login({
+        //     email: this.state.email,
+        //     password: this.state.password,
+        //     loggedIn: true,
+        // }))
 
         // If(TODO) succesfull
-        console.log(this.state)
 
     }
+    
+
+    
 
     render() {
+
         return (
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
@@ -54,6 +71,11 @@ class login extends Component {
         );
     }
 }
+
+// function Reduc(){
+//     const dispatch = useDispatch()
+//     return dispatch
+// }
 
 export default login;
 

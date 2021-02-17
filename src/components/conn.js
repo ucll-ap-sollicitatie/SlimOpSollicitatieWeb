@@ -58,9 +58,6 @@ function login(email, password){
     })
 }
 
-register("arnob", "t")
-
-
 
 function register(email, password, username){
     let hPassword = hashCode(password);
@@ -95,7 +92,19 @@ const server = http.createServer((req, res) => {
         //parse data to JSON
           req.on('end', () => {
             jsondata = JSON.parse(data) 
-            login(jsondata.email, jsondata.pass)
+
+            try{
+                login(jsondata.email, jsondata.pass)
+            }
+            catch(error){
+                res.writeHead(200, {
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+                    'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+                  });
+                res.end('NOK: ' + error); 
+            }
         })
         res.writeHead(200, {
             'Content-Type': 'application/json',
