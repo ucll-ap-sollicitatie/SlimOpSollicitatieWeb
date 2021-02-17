@@ -1,17 +1,16 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
 import ReactDOM from "react-dom"
-import { render } from "@testing-library/react";
 
 class camera extends Component{
   render(){
-    if(document.getElementById("cam") != null) {
+    if(document.getElementById("cam") != null) { /** Disables multi creation of cam */
       document.getElementById("cam").remove()
     } 
       var cambox = document.createElement("div")
       cambox.setAttribute("id", "cam")
-      document.getElementById("root").appendChild(cambox)
-      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam")) 
+      document.getElementById("root").appendChild(cambox) /** creates cam and adds it to root so webcam can use this element */
+      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam")) /** adds webcam to element */
       return(<p/>)
     }
   }
@@ -22,7 +21,7 @@ const WebcamStreamCapture = () => {
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
   
-    const handleStartCaptureClick = React.useCallback(() => {
+    const handleStartCaptureClick = React.useCallback(() => { /** Start */
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: "video/webm"
@@ -43,7 +42,7 @@ const WebcamStreamCapture = () => {
       [setRecordedChunks]
     );
   
-    const handleStopCaptureClick = React.useCallback(() => {
+    const handleStopCaptureClick = React.useCallback(() => { /** Stop */
       mediaRecorderRef.current.stop();
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
@@ -65,10 +64,10 @@ const WebcamStreamCapture = () => {
       }
     }, [recordedChunks]);
   
-    return (
+    return (  /** returns webcam + check capturing state to start/stop/download */
       <div style={{position: "relative"}}>
         <Webcam audio={true} ref={webcamRef}>
-          <div id="overlay" style={{position: "absolute", fontSize: "500px", color: "white"}}>YEET</div>
+          <div id="overlay" style={{position: "absolute", fontSize: "500px", color: "white"}}>YEET</div> 
         </Webcam>
         {capturing ? (
           <button onClick={handleStopCaptureClick}>Stop Capture</button>
@@ -83,7 +82,3 @@ const WebcamStreamCapture = () => {
   };
   
 export default camera;
-
-export function resetCam(){
-    if(document.getElementById("cam") != null) document.getElementById("cam").remove()
-}
