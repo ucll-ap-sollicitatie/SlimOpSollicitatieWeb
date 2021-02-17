@@ -82,3 +82,8 @@ const WebcamStreamCapture = () => {
   };
   
 export default camera;
+
+
+/** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011
+ *  Camera: react-webcam
+ */
