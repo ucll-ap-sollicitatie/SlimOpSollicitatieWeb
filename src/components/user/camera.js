@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
-import ReactDOM from "react-dom"
 
 class camera extends Component{
   render(){
@@ -79,7 +78,6 @@ const WebcamStreamCapture = () => {
     <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column"}}>
       <div style={{position: "relative", height: "480px"}}>
         <Webcam audio={true} ref={webcamRef} style={{position: "absolute", left: "0px", top: "0px" }}>
-          <p>xjlkfjdlkfj</p>
         </Webcam>
         <div id="overlay" style={{position: "absolute", fontSize: "50px", color: "white", left: "0px", top: "0px"}}>YEET</div> 
       </div>
