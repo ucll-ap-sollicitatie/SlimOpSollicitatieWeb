@@ -31,7 +31,7 @@ class login extends Component {
         e.preventDefault();
         logindb(this.state.email, this.state.password)
 
-        // If(TODO) succesfull
+        // If(TODO) succesful
         console.log(this.state)
 
     }

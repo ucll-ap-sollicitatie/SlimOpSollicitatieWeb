@@ -4,16 +4,11 @@ import ReactDOM from "react-dom"
 
 class camera extends Component{
   render(){
-    if(document.getElementById("cam") != null) { /** Disables multi creation of cam */
-      document.getElementById("cam").remove()
-    } 
-      var cambox = document.createElement("div")
-      cambox.setAttribute("id", "cam")
-      document.getElementById("root").appendChild(cambox) /** creates cam and adds it to root so webcam can use this element */
-      ReactDOM.render(<WebcamStreamCapture />, document.getElementById("cam")) /** adds webcam to element */
-      return(<p/>)
-    }
+    return (
+      <WebcamStreamCapture />
+    );
   }
+}
 
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
@@ -64,21 +59,40 @@ const WebcamStreamCapture = () => {
       }
     }, [recordedChunks]);
   
-    return (  /** returns webcam + check capturing state to start/stop/download */
-      <div style={{position: "relative"}}>
-        <Webcam audio={true} ref={webcamRef}>
-          <div id="overlay" style={{position: "absolute", fontSize: "500px", color: "white"}}>YEET</div> 
+//    return (  /** returns webcam + check capturing state to start/stop/download */
+//      <div style={{position: "relative"}}>
+//        <Webcam audio={true} ref={webcamRef}>
+//          <div id="overlay" style={{position: "absolute", fontSize: "500px", color: "white"}}>YEET</div> 
+//        </Webcam>
+//        {capturing ? (
+//          <button onClick={handleStopCaptureClick}>Stop Capture</button>
+//        ) : (
+//          <button onClick={handleStartCaptureClick}>Start Capture</button>
+//        )}
+//        {recordedChunks.length > 0 && (
+//          <button onClick={handleDownload}>Download</button>
+//        )}
+//      </div>
+//    );
+
+  return (  /** returns webcam + check capturing state to start/stop/download */
+    <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column"}}>
+      <div style={{position: "relative", height: "480px"}}>
+        <Webcam audio={true} ref={webcamRef} style={{position: "absolute", left: "0px", top: "0px" }}>
+          <p>xjlkfjdlkfj</p>
         </Webcam>
-        {capturing ? (
-          <button onClick={handleStopCaptureClick}>Stop Capture</button>
-        ) : (
-          <button onClick={handleStartCaptureClick}>Start Capture</button>
-        )}
-        {recordedChunks.length > 0 && (
-          <button onClick={handleDownload}>Download</button>
-        )}
+        <div id="overlay" style={{position: "absolute", fontSize: "50px", color: "white", left: "0px", top: "0px"}}>YEET</div> 
       </div>
-    );
+      {capturing ? (
+        <button onClick={handleStopCaptureClick}>Stop Capture</button>
+      ) : (
+        <button onClick={handleStartCaptureClick}>Start Capture</button>
+      )}
+      {recordedChunks.length > 0 && (
+        <button onClick={handleDownload}>Download</button>
+      )}
+    </div>
+  );
   };
   
 export default camera;
