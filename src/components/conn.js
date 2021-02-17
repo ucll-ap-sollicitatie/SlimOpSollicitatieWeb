@@ -41,6 +41,10 @@ async function log() {
 
 function login(email, password){
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
+        if(res.rowCount === 0 ){
+            console.log("foutje")
+            throw new Error("No user found")
+        }
             let uname = res.rows[0].email
             let pw = res.rows[0].hashedpassword.toString()
             let hashpw = hashCode(password).toString()
@@ -48,16 +52,21 @@ function login(email, password){
             console.log("Hashed gegeven pw: " + hashpw)
             if(uname === email && hashpw === pw){
                 console.log("Ingelogd")
-            } else console.log("Login failed")
+            } else throw new Error("Foute gebruikersnaam/password")
             pool.end()
         
     })
 }
 
+register("arnob", "t")
+
 
 
 function register(email, password, username){
     let hPassword = hashCode(password);
+    if(!email.includes("@")){
+        throw new Error("this is not an email")
+    }
     console.log("registering user with email: " + email + " password: " + password + " username: " + username)
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
         console.log("G")
