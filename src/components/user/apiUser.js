@@ -3,7 +3,7 @@ const axios = require("axios");
 /**
  * send an api request based on the email (eml) and password(pss)
  */
-module.exports.logindb = async function logindb(eml, pss) {
+async function logindb(eml, pss) {
 
   var data = JSON.stringify({"email":eml,"pass":pss});
   // console.log(data)
@@ -26,7 +26,7 @@ module.exports.logindb = async function logindb(eml, pss) {
     });
 }
 
-module.exports.registerdb = async function registerdb(eml, pss, un) {
+async function registerdb(eml, pss, un) {
   axios
   // sends post request to the api on this path
     .post("http://127.0.0.1:3001/users/register",
@@ -45,4 +45,9 @@ module.exports.registerdb = async function registerdb(eml, pss, un) {
     }, (error) => {
       console.log("error " + error);
     });
+}
+
+export {
+  logindb,
+  registerdb
 }
