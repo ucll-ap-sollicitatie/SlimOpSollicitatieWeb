@@ -21,7 +21,7 @@ module.exports.logindb = async function logindb(eml, pss) {
     // console.log(response)
     data = JSON.stringify(response.data);
   })
-      .catch(function (error) {
+  .catch(function (error) {
         // console.log(error);
     });
 }

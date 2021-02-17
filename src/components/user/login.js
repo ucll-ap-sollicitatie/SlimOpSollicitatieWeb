@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {logindb} from "../user/apiUser"
 import {useDispatch} from 'react-redux'
+import {connect} from 'react-redux'
+
 import { StaticRouter } from 'react-router-dom';
 
 class login extends Component {
@@ -9,10 +11,6 @@ class login extends Component {
         password: ''
     }
 
-    
-
-
- 
     /**
      * Change the state of the id that called the function:
      * Ex. <input type="email" id="email" onChange={this.handleChange}/> calls handleChange:
@@ -38,28 +36,19 @@ class login extends Component {
         e.preventDefault();
         
         logindb(this.state.email, this.state.password).then(console.log("t"))
-        // const dispatch = Reduc()
-        // dispatch(login({
-        //     email: this.state.email,
-        //     password: this.state.password,
-        //     loggedIn: true,
-        // }))
-
+        this.props.login(this.state.email, this.state.password)
         // If(TODO) succesfull
 
     }
-    
-
-    
 
     render() {
-
+        console.log(this.props)
         return (
             <div className="containter">
                 <h1>Gelieve in te loggen</h1>
                 <form onSubmit={this.handleSubmit} className="wite">
                     <label htmlFor="email">username</label>
-                    <input type="email" id="email" onChange={this.handleChange}/>
+                    <input type="email" id="email"  onChange={this.handleChange}/>
 
                     <label htmlFor="password">password</label>
                     <input type="password" id="password" onChange={this.handleChange}/>
@@ -76,8 +65,23 @@ class login extends Component {
 //     const dispatch = useDispatch()
 //     return dispatch
 // }
+const mapStateToProps = (state) => {
+    console.log(state)
+    return{
+        user: state.user
 
-export default login;
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return{
+        login: (email, pass) => {
+            dispatch({type: 'login', email: email})
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (login);
 
 
 
