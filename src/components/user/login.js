@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {logindb} from "../user/apiUser"
 import {useDispatch} from 'react-redux'
 import {connect} from 'react-redux'
-
+import {loginUser} from "../../redux/Features/userSlice"
 import { StaticRouter } from 'react-router-dom';
 
 class login extends Component {
@@ -36,7 +36,7 @@ class login extends Component {
         e.preventDefault();
         
         logindb(this.state.email, this.state.password).then(console.log("t"))
-        this.props.login(this.state.email, this.state.password)
+        this.props.loginUser(this.state.email, this.state.password)
         // If(TODO) succesfull
 
     }
@@ -73,14 +73,17 @@ const mapStateToProps = (state) => {
     }
 }
 
+/**
+ * maps the props to the dispatch so that you can dispatch within a class
+ */
 const mapDispatchToProps = (dispatch) => {
     return{
-        login: (email, pass) => {
-            dispatch({type: 'login', email: email})
+        loginUser: (email) => {
+            dispatch({type: 'loginUser', payload: email})
         }
     }
 }
-
+//connect state with page
 export default connect(mapStateToProps,mapDispatchToProps) (login);
 
 
