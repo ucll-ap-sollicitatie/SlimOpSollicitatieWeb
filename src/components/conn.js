@@ -75,7 +75,6 @@ function login(email, password){
 })
 }
 
-
 function register(email, password, username){
     let hPassword = hashCode(password);
     if(!email.includes("@")){
@@ -84,9 +83,17 @@ function register(email, password, username){
     console.log("registering user with email: " + email + " password: " + password + " username: " + username)
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
         console.log("G")
+        makeJob(email)
     })
-    
+
 }
+
+function makeJob(email) {
+    pool.query('insert into slimopsol.jobs(id, titel, inter, tech, tech2, email) values' + "('" + Math.random() + "', 'Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "')", (err, res) => {
+        console.log(res)
+    })
+}
+
 /**
  * Creates server, with possible requests.
  * 
