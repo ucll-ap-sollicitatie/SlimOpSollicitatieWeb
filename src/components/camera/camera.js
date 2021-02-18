@@ -14,8 +14,22 @@ const WebcamStreamCapture = () => {
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
+
+    function NextQuestion(){
+      
+    }
+
+    function showNextButton() {
+      var x = document.getElementById("nextQButton");
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+    }
   
     const handleStartCaptureClick = React.useCallback(() => { /** Start */
+      showNextButton();
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: "video/webm"
@@ -37,6 +51,7 @@ const WebcamStreamCapture = () => {
     );
   
     const handleStopCaptureClick = React.useCallback(() => { /** Stop */
+      showNextButton();
       mediaRecorderRef.current.stop();
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
@@ -75,11 +90,11 @@ const WebcamStreamCapture = () => {
 //    );
 
   return (  /** returns webcam + check capturing state to start/stop/download */
-    <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column"}}>
-      <div style={{position: "relative", height: "480px"}}>
-        <Webcam audio={true} ref={webcamRef} style={{position: "absolute", left: "0px", top: "0px" }}>
-        </Webcam>
-        <div id="overlay" style={{position: "absolute", fontSize: "50px", color: "white", left: "0px", top: "0px"}}>YEET</div> 
+    <>
+      <div>
+        <div id="overlay">PLACEHOLDER QUESTION</div> 
+        <button id="nextQButton" style={{display: "none"}} onClick={NextQuestion}>Next question</button>
+        <Webcam audio={true} ref={webcamRef}/>       
       </div>
       {capturing ? (
         <button onClick={handleStopCaptureClick}>Stop Capture</button>
@@ -89,7 +104,7 @@ const WebcamStreamCapture = () => {
       {recordedChunks.length > 0 && (
         <button onClick={handleDownload}>Download</button>
       )}
-    </div>
+    </>
   );
   };
   
