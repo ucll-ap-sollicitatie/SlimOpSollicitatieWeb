@@ -2,8 +2,9 @@ import React from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import {Link} from "react-router-dom";
+import {connect} from 'react-redux'
 
-const Home = () => {
+function Home(props) {
     return(
     <div className="App">
         <h1>Welkom bij slim op sollicitatie</h1>
@@ -16,8 +17,13 @@ const Home = () => {
         <br/>
         <br/>
         <Link to="/camera"><button>Neem een nieuwe video op</button></Link>
+
+        <button onClick={handleClick}>Logout</button>
     </div>
     )
+    function handleClick(){
+        props.logoutUser()
+    }
 }
 
 const imageStyle= {
@@ -28,4 +34,23 @@ const imageStyle1= {
 }
 
 
-export default Home;
+const mapStateToProps = (state) => {
+    console.log("state")
+    console.log(state)
+    return{
+        email: state.users
+    }
+}
+
+/**
+ * maps the props to the dispatch so that you can dispatch within a class
+ */
+const mapDispatchToProps = (dispatch) => {
+    return{
+        logoutUser: (email) => {
+            dispatch({type: 'LOGOUT_USER'})
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (Home);

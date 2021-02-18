@@ -7,7 +7,6 @@ import {connect} from "react-redux";
 
 class profile extends Component {
 
-
     render() {
         const {email} = this.props
         console.log(email)

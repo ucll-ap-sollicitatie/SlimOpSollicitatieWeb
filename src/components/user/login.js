@@ -4,11 +4,12 @@ import {useDispatch} from 'react-redux'
 import {connect} from 'react-redux'
 import {loginUser} from "../../redux/Features/userSlice"
 import { StaticRouter } from 'react-router-dom';
-
+import { useHistory } from "react-router-dom";
 
 // TODO login ---> Login
 function Login(props)
 {
+    const history = useHistory();
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -44,12 +45,16 @@ function Login(props)
         console.log("result:")
         console.log(result)
         if(result.email){
+
             setStatus(`Received ${result.email}`);
             props.loginUser(result.email)
+            history.push("/");
+
         }
         // If(TODO) succesful
     }
 }
+
 
 // function Reduc(){
 //     const dispatch = useDispatch()
