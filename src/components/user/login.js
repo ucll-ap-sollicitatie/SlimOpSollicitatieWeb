@@ -38,7 +38,6 @@ class login extends Component {
         logindb(this.state.email, this.state.password).then(console.log("t"))
         this.props.loginUser(this.state.email, this.state.password)
         // If(TODO) succesfull
-
     }
 
     render() {
@@ -79,13 +78,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         loginUser: (email) => {
-            dispatch({type: 'loginUser', payload: email})
+            dispatch({type: 'LOGIN_USER', payload: email})
         }
     }
 }
 //connect state with page
 export default connect(mapStateToProps,mapDispatchToProps) (login);
-
-
-
-
