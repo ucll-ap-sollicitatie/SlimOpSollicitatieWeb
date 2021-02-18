@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
+import vragenlijst from "../questions/questions.js";
 
 class camera extends Component{
   render(){
@@ -9,6 +10,8 @@ class camera extends Component{
   }
 }
 
+var vragencounter;
+
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
@@ -16,7 +19,8 @@ const WebcamStreamCapture = () => {
     const [recordedChunks, setRecordedChunks] = React.useState([]);
 
     function NextQuestion(){
-      
+      vragencounter++;
+      document.getElementById("overlay").innerHTML = vragenlijst()[vragencounter]
     }
 
     function showNextButton() {
@@ -29,6 +33,7 @@ const WebcamStreamCapture = () => {
     }
   
     const handleStartCaptureClick = React.useCallback(() => { /** Start */
+      vragencounter = 0;
       showNextButton();
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
@@ -92,7 +97,7 @@ const WebcamStreamCapture = () => {
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
       <div>
-        <div id="overlay">PLACEHOLDER QUESTION</div> 
+        <div id="overlay">{vragenlijst()[0]}</div> 
         <button id="nextQButton" style={{display: "none"}} onClick={NextQuestion}>Next question</button>
         <Webcam audio={true} ref={webcamRef}/>       
       </div>
