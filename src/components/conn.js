@@ -46,6 +46,7 @@ function login(email, password){
             throw new Error("No user found")
         }
             let uname = res.rows[0].email
+            let name = res.rows[0].username
             let pw = res.rows[0].hashedpassword.toString()
             let hashpw = hashCode(password).toString()
             console.log("pw in db: " + pw)
@@ -54,7 +55,12 @@ function login(email, password){
                 console.log("Ingelogd")
             } else throw new Error("Foute gebruikersnaam/password")
             pool.end()
-        
+        const user = {
+            username: name,
+            email: email
+        }
+        console.log(user)
+        return user
     })
 }
 
