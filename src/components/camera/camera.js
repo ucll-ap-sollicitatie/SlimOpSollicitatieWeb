@@ -19,7 +19,8 @@ const WebcamStreamCapture = () => {
     const [recordedChunks, setRecordedChunks] = React.useState([]);
 
     function NextQuestion(){
-      vragencounter++;
+      if(vragencounter < vragenlijst().length -1 ){vragencounter++;}
+      else{showNextButton()}
       document.getElementById("overlay").innerHTML = vragenlijst()[vragencounter]
     }
 
