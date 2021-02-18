@@ -26,6 +26,7 @@ function App() {
                     (<Route path="/register" component={Register} exact/>)
               4. Add new route to navigation.js
         */}
+
                     <Route path="/" component={Home} exact/>
                     <Route path="/login" component={loginPage} exact/>
                     <Route path="/register" component={Register} exact/>

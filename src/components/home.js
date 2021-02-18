@@ -5,22 +5,26 @@ import '../App.css';
 const Home = () => {
     return(
     <div className="App">
-    <header className="App-header">
-    <img src={logo} className="App-logo" alt="logo" />
-    <p>
-        Edit <code>src/App.js</code> and save to reload.
-    </p>
-    <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        Learn React
-    </a>
-    </header>
+        <h1>Welkom bij slim op sollicitatie</h1>
+
+        <section>
+        <h3>Bekijk hier je meest recente videos</h3>
+        <img src="https://via.placeholder.com/352x240" style={imageStyle1}/>
+        <img src="https://via.placeholder.com/352x240" style={imageStyle}/>
+        </section>
+        <br/>
+        <br/>
+        <button>Neem een nieuwe video op</button>
     </div>
     )
 }
+
+const imageStyle= {
+    marginLeft: 100
+}
+const imageStyle1= {
+    marginRight: 100
+}
+
 
 export default Home;
