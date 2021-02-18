@@ -36,7 +36,7 @@ function Register(props){
      * 2. TODO: check if pass and confirm pass is the same
      * 3. registerdb calls the api
      * 4.1. TODO: Clear fields when input is wrong
-     * 4.2. TODO: redirect to home page when login is succesfull
+     * 4.2. redirect to home page when login is succesfull
      * 
      */
     function handleSubmit(e)

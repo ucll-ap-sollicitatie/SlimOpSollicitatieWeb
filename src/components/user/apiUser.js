@@ -6,6 +6,7 @@ const axios = require("axios");
  * send an api request based on the email (eml) and password(pss)
  */
 async function logindb(eml, pss) {
+  //return promise so that in login.js the function correctly waits for a response
   return new Promise((resolve, reject) =>{
 
   var data = JSON.stringify({"email":eml,"pass":pss});
