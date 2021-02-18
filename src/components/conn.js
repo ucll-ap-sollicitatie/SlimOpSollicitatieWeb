@@ -48,8 +48,9 @@ const pool = new Pool({
  */
 
 function login(email, password) {
+    //returns promise so that in createServer the await function works
     return new Promise((resolve, reject) => {
-
+        
         pool.query('select * from slimopsol.users where email = ' + "'" + email + "'", (err, res) => {
             console.log(err)
             if (res.rowCount === 0) {
@@ -116,6 +117,9 @@ const server = http.createServer((req, res) => makeServer(req, res))
 
 async function makeServer(req, res) {
     const reqUrl = url.parse(req.url, true);
+    /**
+     * Login user
+     */
     if (reqUrl.pathname == "/users/login" && req.method === "POST") {
         let data = '';
         //data will be the ?binary data?
@@ -139,7 +143,9 @@ async function makeServer(req, res) {
             res.write(JSON.stringify(user))
             res.end();
         })
-
+        /**
+         * Register user
+         */
     } else if (reqUrl.pathname == "/users/register" && req.method === "POST") {
         let data = '';
         //data will be the ?binary data?
@@ -154,24 +160,9 @@ async function makeServer(req, res) {
 
     } else {
         res.writeHead(200, header);
-        res.end();
-
-        // res.writeHead(200, {
-        //     'Content-Type': 'application/json',
-        //     "Access-Control-Allow-Origin": "*",
-        //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-        //     'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-        //   });
-        // res.end('OK');          
-
+        res.end();        
     }
-    // res.writeHead(200, {
-    //     'Content-Type': 'application/json',
-    //     "Access-Control-Allow-Origin": "*",
-    //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-    //     'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-    //   });
-    // res.end('NOK');          
+       
 
 
 }
