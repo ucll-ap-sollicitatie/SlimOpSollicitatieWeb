@@ -20,6 +20,7 @@ async function logindb(eml, pss) {
   .then(function (response) {
     // console.log(response)
     data = JSON.stringify(response.data);
+    return data;
   })
   .catch(function (error) {
         // console.log(error);

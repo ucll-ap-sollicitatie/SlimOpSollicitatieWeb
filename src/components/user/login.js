@@ -1,62 +1,54 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import {logindb} from "../user/apiUser"
 import {useDispatch} from 'react-redux'
 import {connect} from 'react-redux'
 import {loginUser} from "../../redux/Features/userSlice"
 import { StaticRouter } from 'react-router-dom';
 
-class login extends Component {
-    state = {
-        email: '',
-        password: ''
-    }
 
-    /**
-     * Change the state of the id that called the function:
-     * Ex. <input type="email" id="email" onChange={this.handleChange}/> calls handleChange:
-     *          - the id is email, so the state that it will change is email
-     */
+// TODO login ---> Login
+function Login(props)
+{
+    const dispatch = useDispatch();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [status, setStatus] = useState('Nothing to report');
 
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    }
+    return (
+        <div className="containter">
+            <h1>Gelieve in te loggen</h1>
+            <form onSubmit={handleSubmit} className="wite">
+                <label htmlFor="email">username</label>
+                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+
+                <label htmlFor="password">password</label>
+                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+
+                <button>login</button>
+
+                <p>{status}</p>
+            </form>
+        </div>
+    );
+
     /**
      * When a user submits the form,
      * 1. preventDefault: https://www.w3schools.com/jsref/event_preventdefault.asp
      * 2. logindb calls the api
      * 3.1. TODO: Clear fields when input is wrong
-     * 3.2. TODO: redirect to home page when login is succesfull
+     * 3.2. TODO: redirect to home page when login is succesful
      */
-    handleSubmit = (e) => {
+    async function handleSubmit(e)
+    {
 
         //"arnobunckens@hotmail.com", "t"
 
         e.preventDefault();
         
-        logindb(this.state.email, this.state.password).then(console.log("t"))
-        this.props.loginUser(this.state.email, this.state.password)
-        // If(TODO) succesfull
-    }
-
-    render() {
-        console.log(this.props)
-        return (
-            <div className="containter">
-                <h1>Gelieve in te loggen</h1>
-                <form onSubmit={this.handleSubmit} className="wite">
-                    <label htmlFor="email">username</label>
-                    <input type="email" id="email"  onChange={this.handleChange}/>
-
-                    <label htmlFor="password">password</label>
-                    <input type="password" id="password" onChange={this.handleChange}/>
-
-                    <button>login</button>
-                </form>
-                
-            </div>
-        );
+        const result = await logindb(email, password).then(console.log("t"));
+        setStatus(`Received ${result}`);
+        props.loginUser(email, password)
+        // If(TODO) succesful
     }
 }
 
@@ -65,10 +57,10 @@ class login extends Component {
 //     return dispatch
 // }
 const mapStateToProps = (state) => {
+    console.log("state")
     console.log(state)
     return{
-        user: state.user
-
+        email: state.users
     }
 }
 
@@ -83,4 +75,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 //connect state with page
-export default connect(mapStateToProps,mapDispatchToProps) (login);
+export default connect(mapStateToProps,mapDispatchToProps) (Login);

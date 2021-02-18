@@ -8,6 +8,7 @@ class profile extends Component {
             <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
             <section>
                 <p>Gebruikersnaam</p>
+                <div></div>
                 <button style={buttonStyle}>Verander Gebruikersnaam</button>
 
 
