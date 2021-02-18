@@ -25,7 +25,6 @@ function Login(props)
                 <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
 
                 <button>login</button>
-
                 <p>{status}</p>
             </form>
         </div>
@@ -40,18 +39,14 @@ function Login(props)
      */
     async function handleSubmit(e)
     {
-
-        //"arnobunckens@hotmail.com", "t"
-
         e.preventDefault();
-        
         const result = await logindb(email, password)
-        console.log("result")
-        setStatus(`Received ${result}`);
-
-        console.log("response write")
-
-        props.loginUser(email, password)
+        console.log("result:")
+        console.log(result)
+        if(result.email){
+            setStatus(`Received ${result.email}`);
+            props.loginUser(result.email)
+        }
         // If(TODO) succesful
     }
 }

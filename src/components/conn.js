@@ -48,7 +48,9 @@ async function log() {
 
 function login(email, password){
     return new Promise((resolve, reject) =>{
+
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
+        console.log(err)
         if(res.rowCount === 0 ){
             console.log("foutje")
             throw new Error("No user found")
@@ -62,7 +64,6 @@ function login(email, password){
             if(uname === email && hashpw === pw){
                 console.log("Ingelogd")
             } else throw new Error("Foute gebruikersnaam/password")
-            pool.end()
         const user = {
             username: name,
             email: email
@@ -116,6 +117,7 @@ async function makeServer(req, res){
             }   
             catch(error){
                 res.writeHead(200, header);
+                console.log("error" + error)
                 // res.end('NOK: ' + error); 
             }
             res.writeHead(200, header);
