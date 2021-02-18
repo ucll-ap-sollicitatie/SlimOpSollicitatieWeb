@@ -7,6 +7,7 @@ import App from './App.js'
 import reportWebVitals from './reportWebVitals';
 import {createStore} from 'redux'
 import userApp from './redux/store/reducers/rootReducer'
+import "bootstrap/dist/css/bootstrap.css";
 
 
 const store = createStore(userApp);
