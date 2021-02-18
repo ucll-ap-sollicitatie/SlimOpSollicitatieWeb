@@ -45,8 +45,12 @@ function Login(props)
 
         e.preventDefault();
         
-        const result = await logindb(email, password).then(console.log("t"));
+        const result = await logindb(email, password)
+        console.log("result")
         setStatus(`Received ${result}`);
+
+        console.log("response write")
+
         props.loginUser(email, password)
         // If(TODO) succesful
     }

@@ -5,6 +5,13 @@ const url = require("url");
 const hostname = "127.0.0.1";
 //port of the api
 const port = 3001;
+const header = {
+    'Content-Type': 'application/json',
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+    'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+  }
+
 
 const {Pool} = require('pg')
 const pool = new Pool({
@@ -40,6 +47,7 @@ async function log() {
 */
 
 function login(email, password){
+    return new Promise((resolve, reject) =>{
     pool.query('select * from slimopsol.users where email = '+ "'" + email + "'", (err, res) => {
         if(res.rowCount === 0 ){
             console.log("foutje")
@@ -59,9 +67,11 @@ function login(email, password){
             username: name,
             email: email
         }
-        console.log(user)
+        resolve(user)
         return user
     })
+
+})
 }
 
 
@@ -86,42 +96,37 @@ function register(email, password, username){
  * And write the body
  */
 
-const server = http.createServer((req, res) => {
-    const reqUrl = url.parse(req.url, true);
+const server = http.createServer((req, res) => makeServer(req, res))
 
+async function makeServer(req, res){
+    const reqUrl = url.parse(req.url, true);
     if (reqUrl.pathname == "/users/login" && req.method === "POST") {
         let data = '';
         //data will be the ?binary data?
         req.on('data', chunk => {
             data += chunk;
           })
+          user = {}
         //parse data to JSON
-          req.on('end', () => {
+          req.on('end', async () => {
             jsondata = JSON.parse(data) 
-
             try{
-                login(jsondata.email, jsondata.pass)
-            }
+                user = await login(jsondata.email, jsondata.pass)
+                console.log(user)
+            }   
             catch(error){
-                res.writeHead(200, {
-                    'Content-Type': 'application/json',
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-                    'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-                  });
-                res.end('NOK: ' + error); 
+                res.writeHead(200, header);
+                // res.end('NOK: ' + error); 
             }
+            res.writeHead(200, header);
+            console.log(JSON.stringify(user))
+            res.write(JSON.stringify(user))
+            res.end();   
         })
-        res.writeHead(200, {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-            'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-          });
-        res.end('OK');          
+        
     }
 
-    if (reqUrl.pathname == "/users/register" && req.method === "POST"){
+    else if (reqUrl.pathname == "/users/register" && req.method === "POST"){
         let data = '';
         //data will be the ?binary data?
         req.on('data', chunk => {
@@ -132,25 +137,31 @@ const server = http.createServer((req, res) => {
             jsondata = JSON.parse(data) 
             register(jsondata.email, jsondata.pass, jsondata.username)
         })   
-        res.writeHead(200, {
-            'Content-Type': 'application/json',
-            "Access-Control-Allow-Origin": "*",
-            "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-            'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-          });
-        res.end('OK');          
+    
+    }
+    else {
+        res.writeHead(200, header);
+        res.end();          
+
+        // res.writeHead(200, {
+        //     'Content-Type': 'application/json',
+        //     "Access-Control-Allow-Origin": "*",
+        //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+        //     'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+        //   });
+        // res.end('OK');          
 
     }
-    res.writeHead(200, {
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
-        'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
-      });
-    res.end('NOK');          
+    // res.writeHead(200, {
+    //     'Content-Type': 'application/json',
+    //     "Access-Control-Allow-Origin": "*",
+    //     "Access-Control-Allow-Methods": "DELETE, POST, GET, OPTIONS",
+    //     'Access-Control-Allow-Headers': "Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With"
+    //   });
+    // res.end('NOK');          
 
 
-})
+}
 /**
  * Create a server that listens on defined port.
  * If there is an error, print it

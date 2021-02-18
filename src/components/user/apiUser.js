@@ -1,12 +1,14 @@
 const axios = require("axios");
 
+
+
 /**
  * send an api request based on the email (eml) and password(pss)
  */
 async function logindb(eml, pss) {
 
+
   var data = JSON.stringify({"email":eml,"pass":pss});
-  // console.log(data)
   var config = {
     method: 'post',
     url: 'http://127.0.0.1:3001/users/login',
@@ -15,14 +17,13 @@ async function logindb(eml, pss) {
     },
     data : data
   };
-  
   axios(config)
   .then(function (response) {
-    // console.log(response)
-    data = JSON.stringify(response.data);
-    return data;
+    console.log(response.data)
+    return response;
   })
   .catch(function (error) {
+    return "NOK"
         // console.log(error);
     });
 }
