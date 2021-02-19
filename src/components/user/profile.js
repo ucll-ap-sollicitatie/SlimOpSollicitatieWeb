@@ -44,9 +44,7 @@ function Profile(props){
                                 <button style={buttonStyle}>Wijzig Job</button>
                                 <button style={buttonStyle}>Verwijder Job</button>
                             </ul>
-                        
                         </div>)
-                     
                  })
                 }
                  

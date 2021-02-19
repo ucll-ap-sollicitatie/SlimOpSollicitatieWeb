@@ -10,6 +10,7 @@ import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
 import './components/css/AppMain.css'
+import Feedback from "./components/feedback"
 
 function App() {
 
@@ -34,6 +35,8 @@ function App() {
                     <Route path="/camera" component={Camera} exact/>
                     <Route path="/profile" component={profile} exact/>
                     <Route path="/addJob" component={addJob} exact />
+                    <Route path="/feedback" component={Feedback} exact />
+
                 </Switch>
             </div>
         </BrowserRouter>

@@ -9,14 +9,14 @@ async function logindb(eml, pss) {
   //return promise so that in login.js the function correctly waits for a response
   return new Promise((resolve, reject) =>{
 
-  var data = JSON.stringify({"email":eml,"pass":pss});
-  var config = {
-    method: 'post',
-    url: `${webIp}/users/login`,
-    headers: { 
-      'Content-Type': 'application/json',
-    },
-    data : data
+    var data = JSON.stringify({"email":eml,"pass":pss});
+    var config = {
+      method: 'post',
+      url: `${webIp}/users/login`,
+      headers: { 
+        'Content-Type': 'application/json',
+      },
+      data : data
   };
   axios(config)
   .then(function (response) {
