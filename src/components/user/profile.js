@@ -4,43 +4,61 @@ import {connect} from "react-redux";
 
 
 
-
-class profile extends Component {
-
-    render() {
-        const {email} = this.props
-        console.log(email)
-        return (
-        <div className="centerPage">
-        <div className="containter profilePage">
-            <section>
-                <div className="profileRight">
-                <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
-                <section>
-                    <p>{email}</p>
-                    <button style={buttonStyle}>Wijzig Gebruikersnaam</button>
-
-
-                </section>
-                </div>
-                <section>
-                    <h4>Jobtitel 1: </h4>
-                    <ul>
-                        <li>Skill A</li>
-                        <li>Skill B</li>
-                        <li>Skill C</li>
-                        <button style={buttonStyle}>Wijzig Job</button>
-                        <button style={buttonStyle}>Verwijder Job</button>
-                    </ul>
-                    <Link to="/addJob">
-                        <button style={buttonStyle}>Add job</button>
-                    </Link>
-                </section>
-            </section>
-
-            </div>
-        </div>);
+function Profile(props){
+    var email = ""
+    var jobs = []
+    if(props.email != null){
+        email = props.email
+        jobs = props.jobs
+        console.log(jobs)
     }
+
+    
+
+    console.log(props.email)
+    return (
+    <div className="centerPage">
+    <div className="containter profilePage">
+        <section>
+            <div className="profileRight">
+            <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
+            <section>
+                <p>{email}</p>
+                <button style={buttonStyle}>Wijzig Gebruikersnaam</button>
+
+
+            </section>
+            </div>
+            <section>
+                 {
+                 jobs.map(job => { 
+                     console.log(job.titel)
+                     return (
+                        <div>
+                            <h4>{job.titel}</h4>
+                            <h5>skills:</h5>
+                            <ul>
+                                <li>{job.inter}</li>
+                                <li>{job.tech}</li>
+                                <li>{job.tech2}</li>
+                                <button style={buttonStyle}>Wijzig Job</button>
+                                <button style={buttonStyle}>Verwijder Job</button>
+                            </ul>
+                        
+                        </div>)
+                     
+                 })
+                }
+                 
+                <Link to="/addJob">
+                    <button style={buttonStyle}>Add job</button>
+                </Link>
+            </section>
+        </section>
+
+        </div>
+    </div>
+    );
 }
 
 const imgstyle = {
@@ -53,8 +71,9 @@ const buttonStyle = {
 
 const mapStateToProps = (state) => {
     return{
-        email: state.users.email
+        email: state.users.email,
+        jobs: state.users.jobs
     }
 }
 
-export default connect(mapStateToProps, null) (profile);
+export default connect(mapStateToProps, null) (Profile);
