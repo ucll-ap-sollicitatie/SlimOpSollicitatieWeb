@@ -82,10 +82,11 @@ function login(email, password) {
     })
 }
 
-function register(email, password, username) {
+function register(email, password, username, confPass) {
     let hPassword = hashCode(password);
-    if (!email.includes("@")) {
-        throw new Error("this is not an email")
+    let confHashPassword = hashCode(confPass);
+    if (!email.includes("@") || confHashPassword.toString() !== hPassword.toString()) {
+        return
     }
     console.log("registering user with email: " + email + " password: " + password + " username: " + username)
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
@@ -105,6 +106,14 @@ function getJobs(email) {
 
 function makeJob(email) {
     pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "'," + "'Ober" + email + "')", (err, res) => {
+    })
+}
+
+
+function makeNewJob(titel, inter, tech, tech2, email){
+    pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')", (err, res) => {
+        console.log('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel +"', '" + inter +"', '" + tech + "', '" + tech2 + "', '" + email +"', '" + titel + email + "')")
+        console.log(err)
     })
 }
 
@@ -160,7 +169,7 @@ async function makeServer(req, res) {
         //parse data to JSON
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            register(jsondata.email, jsondata.pass, jsondata.username)
+            register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass)
         })
         res.writeHead(200, header);
         console.log("true")

@@ -8,6 +8,7 @@ function Register(props){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
+    const [confPass, setConfPass] = useState('');
 
     return (
         <div className="centerPage">
@@ -24,7 +25,7 @@ function Register(props){
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
                 
                 <label htmlFor="confpassword">Confirm password</label>
-                <input type="password" placeholder="Confirm Password" id="confpassword" onChange={console.log("")}/>
+                <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
 
                 <button>Maak account</button>
             </form>
@@ -43,7 +44,7 @@ function Register(props){
     async function handleSubmit(e)
     {
         e.preventDefault();
-        const result = await registerdb(email, password, username)
+        const result = await registerdb(email, password, username, confPass)
         console.log(result === true)        
         if(result === true){
             history.push("/login");
