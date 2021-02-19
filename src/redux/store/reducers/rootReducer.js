@@ -3,6 +3,14 @@ import {combineReducers} from "redux";
 
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
+const UPDATE_USER = 'UPDATE_USER'
+
+export function updateUser(jobs) {
+    return {
+        type: 'UPDATE_USER',
+        jobs
+    }
+}
 
 export function loginUser(user) {
     return {
@@ -38,6 +46,11 @@ function users(state=defaultUser, action){
                 email: null,
                 username: null,
                 jobs: []
+            }
+        case UPDATE_USER:
+            return {
+                ...state,
+                jobs: action.payload.jobs
             }
             
         default:

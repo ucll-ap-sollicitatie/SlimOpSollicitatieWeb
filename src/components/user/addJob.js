@@ -2,10 +2,12 @@ import React, {Component, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {addJobdb} from "./apiUser";
 import {connect} from "react-redux";
+import {useDispatch} from 'react-redux'
 
 
 function AddJob(props){
     const history = useHistory();
+    const dispatch = useDispatch();
 
     const [titel, setTitel] = useState('');
     const [inter, setInter] = useState('');
@@ -44,11 +46,8 @@ function AddJob(props){
         console.log(result === true)
         if(result === true){
             history.push("/profile");
-
         }
     }
-
-
 }
 
 const mapStateToProps = (state) => {
@@ -58,4 +57,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default   connect(mapStateToProps, null) (AddJob);
+const mapDispatchToProps = (dispatch) => {
+    return{
+        updateUser: (jobs) => {
+            dispatch({type: 'UPDATE_USER', payload: {jobs}})
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (AddJob);
