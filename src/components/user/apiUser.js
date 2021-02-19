@@ -31,7 +31,7 @@ async function logindb(eml, pss) {
   })
 }
 
-async function registerdb(eml, pss, un) {
+async function registerdb(eml, pss, un, cp) {
   return new Promise((resolve, reject) =>{
 
   axios
@@ -41,7 +41,8 @@ async function registerdb(eml, pss, un) {
     {
       email: eml,
       pass: pss,
-      username: un
+      username: un,
+      confPass: cp
     },
     //without header, it will not send a POST but a OPTIONS request
     {headers: {
