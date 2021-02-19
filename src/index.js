@@ -8,10 +8,16 @@ import reportWebVitals from './reportWebVitals';
 import {createStore} from 'redux'
 import userApp from './redux/store/reducers/rootReducer'
 import "bootstrap/dist/css/bootstrap.css";
+import {loadState, saveState} from './redux/localStorage.js'
 
-
-const store = createStore(userApp);
-
+const persistedState = loadState()
+const store = createStore(
+  userApp,
+  persistedState
+  );
+store.subscribe(() => {
+  saveState({users: store.getState().users})
+})
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

@@ -3,8 +3,11 @@ import logo from '../logo.svg';
 import '../App.css';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux'
+import { useHistory } from "react-router-dom";
 
 function Home(props) {
+    const history = useHistory();
+
     return(
     <div className="App">
         <h1>Welkom bij slim op sollicitatie</h1>
@@ -23,6 +26,8 @@ function Home(props) {
     )
     function handleClick(){
         props.logoutUser()
+        history.push("/login");
+
     }
 }
 

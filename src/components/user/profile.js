@@ -1,15 +1,15 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 
 
 
 function Profile(props){
+    const [jobs, setJobs] = useState(props.jobs);
+
     var email = ""
-    var jobs = []
     if(props.email != null){
         email = props.email
-        jobs = props.jobs
         console.log(jobs)
     }
 
