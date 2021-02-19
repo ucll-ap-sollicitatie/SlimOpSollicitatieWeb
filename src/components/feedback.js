@@ -1,6 +1,6 @@
 function Feedback(props){
 
-
+    const criteria = ["Criteria A", "Criteria B", "Criteria C", "Criteria D"]
 
     return(
         <div className="App">
@@ -9,14 +9,23 @@ function Feedback(props){
             <section id="vid-feedback-container">
                 <img src="https://via.placeholder.com/768x432"></img>
                 
-                <section>
-                    <input type="checkbox"/>
-                    <p>crit A</p>
-                </section>
+                {criteria.map(criterium => 
+                    {
+                        return(
+                        <section>
+                            <input id={criterium} type="checkbox" onChange={onChange}/>
+                            <p>{criterium}</p>
+                        </section>)
+                    }    
+                )}
 
             </section>
 
         </div>
     )
+
+    function onChange(e){
+        console.log(`Updated ${e.target.id} to ${e.target.checked}`)
+    }
 }
 export default Feedback
