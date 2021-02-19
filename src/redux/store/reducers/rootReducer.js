@@ -19,14 +19,18 @@ export function logoutUser() {
 
 const defaultUser = 
     {
-        email: null
+        email: null,
+        username: null
     }
 
 
 function users(state=defaultUser, action){
     switch (action.type) {
         case LOGIN_USER:
-            return {email: action.payload}
+            return {
+                email: action.payload.email,
+                username: action.payload.username
+            }
         case LOGOUT_USER:
             return {email: null}
             

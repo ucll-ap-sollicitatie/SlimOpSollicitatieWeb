@@ -13,6 +13,7 @@ function Login(props)
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [status, setStatus] = useState('Nothing to report'); //needed?
 
     return (
@@ -47,9 +48,8 @@ function Login(props)
         console.log("result:")
         console.log(result)
         if(result.email){
-
             setStatus(`Received ${result.email}`);
-            props.loginUser(result.email)
+            props.loginUser(result.email, result.username)
             history.push("/");
 
         }
@@ -75,8 +75,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
     return{
-        loginUser: (email) => {
-            dispatch({type: 'LOGIN_USER', payload: email})
+        loginUser: (email, username) => {
+            dispatch({type: 'LOGIN_USER', payload: {email, username}})
         }
     }
 }
