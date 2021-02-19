@@ -1,25 +1,61 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
+import {useHistory} from "react-router-dom";
+import {addJobdb} from "./apiUser";
+import {connect} from "react-redux";
 
 
-class addJob extends Component {
-    render() {
-        return (<div className="containter">
-            <h2>Maak een nieuwe functie aan</h2>
-            <form onSubmit={this.handleSubmit} className="wite">
-                <label htmlFor="Jobtitel">Jobtitel</label>
-                <input type="jobtitel" id="jobtitel" onChange={this.handleChange}/><br/>
+function AddJob(props){
+    const history = useHistory();
 
-                <label htmlFor="skill1">Skill 1</label>
-                <input type="skill1" id="skill1" onChange={this.handleChange}/><br/>
-                <label htmlFor="skill2">Skill 3</label>
-                <input type="skill2" id="skill2" onChange={this.handleChange}/><br/>
-                <label htmlFor="skill3">Skill 3</label>
-                <input type="skill3" id="skill3" onChange={this.handleChange}/>
+    const [titel, setTitel] = useState('');
+    const [inter, setInter] = useState('');
+    const [tech, setTech] = useState('');
+    const [tech2, setTech2] = useState('');
+    const [email, setEmail] = useState(props.email);
 
-                <button>Voeg job toe</button>
-            </form>
-        </div>);
+
+        return (
+            <div className="centerPage">
+                <div>
+                    <h1>Maak een nieuwe job aan</h1>
+                    <form onSubmit={handleSubmit} className="wite">
+                        <label htmlFor="titel">Functie die je wil inoefenen</label>
+                        <input type="text" placeholder="titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
+
+                        <label htmlFor="inter">Interpersoonlijke vaardigheid</label>
+                        <input type="text" placeholder="inter" id="inter" onChange={(e) => setInter(e.target.value)}/>
+
+                        <label htmlFor="tech">Technische vaardigheid 1</label>
+                        <input type="text" placeholder="Technische vaardigheid 1" id="tech" onChange={(e) => setTech(e.target.value)}/>
+
+                        <label htmlFor="tech2">Technische vaardigheid 2</label>
+                        <input type="text" placeholder="Technische vaardigheid 2" id="tech2" onChange={(e) => setTech2(e.target.value)}/>
+
+                        <button>Maak account</button>
+                    </form>
+                </div>
+            </div>
+        )
+
+    async function handleSubmit(e)
+    {
+        e.preventDefault();
+        const result = await addJobdb(titel, inter, tech, tech2, email)
+        console.log(result === true)
+        if(result === true){
+            history.push("/profile");
+
+        }
+    }
+
+
+}
+
+const mapStateToProps = (state) => {
+    return{
+        email: state.users.email,
+        jobs: state.users.jobs
     }
 }
 
-export default addJob
+export default   connect(mapStateToProps, null) (AddJob);

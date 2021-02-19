@@ -174,9 +174,25 @@ async function makeServer(req, res) {
         res.writeHead(200, header);
         console.log("true")
         res.write("true")
-        res.end();  
+        res.end();
+    } else if(reqUrl.path === "/users/addjob" && req.method === "POST"){
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            console.log(jsondata)
+            makeNewJob(jsondata.titel, jsondata.inter, jsondata.tech, jsondata.tech2, jsondata.email)
+        })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
+        res.end();
+    }
 
-    } else {
+
+    else {
         res.writeHead(200, header);
         console.log("true")
         res.write("true")
@@ -184,6 +200,8 @@ async function makeServer(req, res) {
     }
 
 }
+
+
 
 /**
  * Create a server that listens on defined port.
