@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-
+const webIp = "http://127.0.0.1:3001"
 
 /**
  * send an api request based on the email (eml) and password(pss)
@@ -12,7 +12,7 @@ async function logindb(eml, pss) {
   var data = JSON.stringify({"email":eml,"pass":pss});
   var config = {
     method: 'post',
-    url: 'http://127.0.0.1:3001/users/login',
+    url: `${webIp}/users/login`,
     headers: { 
       'Content-Type': 'application/json',
     },
@@ -32,9 +32,11 @@ async function logindb(eml, pss) {
 }
 
 async function registerdb(eml, pss, un) {
+  return new Promise((resolve, reject) =>{
+
   axios
   // sends post request to the api on this path
-    .post("http://127.0.0.1:3001/users/register",
+    .post(`${webIp}/users/register`,
     //the request body:
     {
       email: eml,
@@ -45,11 +47,16 @@ async function registerdb(eml, pss, un) {
     {headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
   }}
-  ).then((response) => {
-      JSON.stringify(response.data);
-    }, (error) => {
-      console.log("error " + error);
+  ).then(function (response) {
+    console.log("respData: " + response.data)
+    resolve(response.data)
+    return response.data;
+  })
+  .catch(function (error) {
+    return "NOK"
+        // console.log(error);
     });
+  })
 }
 
 export {

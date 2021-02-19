@@ -12,7 +12,7 @@ function Register(props){
     return (
         <div className="centerPage">
         <div className="container registerPage">
-            <h1>Gelieve in te loggen</h1>
+            <h1>Gelieve te registreren</h1>
             <form onSubmit={handleSubmit} className="wite">
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
@@ -26,7 +26,7 @@ function Register(props){
                 <label htmlFor="confpassword">Confirm password</label>
                 <input type="password" placeholder="Confirm Password" id="confpassword" onChange={console.log("")}/>
 
-                <button>Login</button>
+                <button>Maak account</button>
             </form>
             </div>
         </div>
@@ -40,14 +40,14 @@ function Register(props){
      * 4.2. redirect to home page when login is succesfull
      * 
      */
-    function handleSubmit(e)
+    async function handleSubmit(e)
     {
         e.preventDefault();
-        registerdb(email, password, username)
-        //temporarily success always true. should change based on the registerdb function
-        const success = true
-        if(success){
-            
+        const result = await registerdb(email, password, username)
+        console.log(result === true)        
+        if(result === true){
+            history.push("/login");
+
         }
     }
 

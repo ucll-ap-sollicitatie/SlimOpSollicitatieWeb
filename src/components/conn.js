@@ -157,9 +157,15 @@ async function makeServer(req, res) {
             jsondata = JSON.parse(data)
             register(jsondata.email, jsondata.pass, jsondata.username)
         })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
+        res.end();  
 
     } else {
         res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
         res.end();        
     }
        
