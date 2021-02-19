@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
+import {deleteJobdb} from "./apiUser";
 
 
 
 function Profile(props){
+    const history = useHistory();
     const [jobs, setJobs] = useState(props.jobs);
 
     var email = ""
@@ -41,8 +43,7 @@ function Profile(props){
                                 <li>{job.inter}</li>
                                 <li>{job.tech}</li>
                                 <li>{job.tech2}</li>
-                                <button style={buttonStyle}>Wijzig Job</button>
-                                <button style={buttonStyle}>Verwijder Job</button>
+                                <button style={buttonStyle} id={job.titel} onClick={deleteJob}>Verwijder Job</button>
                             </ul>
                         </div>)
                  })
@@ -57,6 +58,16 @@ function Profile(props){
         </div>
     </div>
     );
+
+    async function deleteJob(e) {
+        e.preventDefault();
+        const result = await deleteJobdb(e.target.id, props.email)
+        console.log(result === true)
+        if(result === true){
+            history.push("/");
+
+        }
+    }
 }
 
 const imgstyle = {
@@ -66,6 +77,8 @@ const imgstyle = {
 const buttonStyle = {
     margin: 7
 }
+
+
 
 const mapStateToProps = (state) => {
     return{

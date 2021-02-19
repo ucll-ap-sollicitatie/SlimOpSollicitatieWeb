@@ -2,6 +2,30 @@ const axios = require("axios");
 
 const webIp = "http://127.0.0.1:3001"
 
+
+
+async function getAlldatadb(eml){
+    return new Promise((resolve, reject) => {
+    axios
+        .get(`${webIp}/users/getAll`,
+            {
+                email: eml
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function (response) {
+        console.log("respData: " + response.data)
+        resolve(response.data)
+        return response.data
+    }).catch(function (error) {
+        return "NOK"
+    });
+    })
+}
+
+
 /**
  * send an api request based on the email (eml) and password(pss)
  */
@@ -89,8 +113,34 @@ async function addJobdb(tit, inter, tech, tech2, email) {
     })
 }
 
+async function deleteJobdb(titel, email){
+    return new Promise((resolve, reject) => {
+
+        axios
+
+            .post(`${webIp}/users/deletejob`,
+                {
+                    titel: titel,
+                    email: email
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (response) {
+            console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        }).catch(function (error) {
+            return "NOK"
+        });
+    })
+}
+
 export {
     logindb,
     registerdb,
-    addJobdb
+    addJobdb,
+    deleteJobdb,
+    getAlldatadb
 }

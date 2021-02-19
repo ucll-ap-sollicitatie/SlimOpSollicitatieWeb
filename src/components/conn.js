@@ -131,6 +131,7 @@ const server = http.createServer((req, res) => makeServer(req, res))
 
 async function makeServer(req, res) {
     const reqUrl = url.parse(req.url, true);
+    console.log(req.method)
     /**
      * Login user
      */
@@ -191,6 +192,39 @@ async function makeServer(req, res) {
         res.end();
     }
 
+    else if(reqUrl.path === "/users/deletejob" && req.method === "POST"){
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            console.log(jsondata)
+            deleteJob(jsondata.titel, jsondata.email)
+        })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
+        res.end();
+    }
+
+
+    else if(reqUrl.path === "/users/getAll" && req.method === "GET"){
+
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            console.log(jsondata)
+
+        })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write(getJobs(jsondata.email))
+        res.end();
+    }
 
     else {
         res.writeHead(200, header);
@@ -200,8 +234,6 @@ async function makeServer(req, res) {
     }
 
 }
-
-
 
 /**
  * Create a server that listens on defined port.
@@ -227,6 +259,12 @@ function updatePassword(password, email){
     })
 }
 
+function deleteJob(title, email) {
+    pool.query('delete from slimopsol.job where titelmail =' + "'" + title + email + "'", (err, res) => {
+        console.log(err)
+    })
+}
+
 function hashCode(str) {
     var hash = 0, i, chr;
     for (i = 0; i < str.length; i++) {
@@ -236,3 +274,5 @@ function hashCode(str) {
     }
     return hash;
 }
+
+
