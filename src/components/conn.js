@@ -50,22 +50,26 @@ const pool = new Pool({
 function login(email, password) {
     //returns promise so that in createServer the await function works
     return new Promise((resolve, reject) => {
-        
+
         pool.query('select * from slimopsol.users where email = ' + "'" + email + "'", (err, res) => {
             console.log(err)
             if (res.rowCount === 0) {
                 console.log("foutje")
-                throw new Error("No user found")
+                return
             }
+
             let uname = res.rows[0].email
             let name = res.rows[0].username
             let pw = res.rows[0].hashedpassword.toString()
             let hashpw = hashCode(password).toString()
             console.log("pw in db: " + pw)
             console.log("Hashed gegeven pw: " + hashpw)
+
             if (uname === email && hashpw === pw) {
                 console.log("Ingelogd")
-            } else throw new Error("Foute gebruikersnaam/password")
+            }
+
+            else return
             const user = {
                 username: name,
                 email: email,
@@ -183,6 +187,19 @@ server.listen(port, (error) => {
     console.log(`API at http://${hostname}:${port}/`)
 })
 
+function updateUsername(username, email){
+    pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
+        console.log("username changed")
+    })
+}
+
+function updatePassword(password, email){
+    let hashpw = hashCode(password).toString()
+
+    pool.query('update slimopsol.users set hashedpassword =' + "'" + hashpw + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
+        console.log("password changed")
+    })
+}
 
 function hashCode(str) {
     var hash = 0, i, chr;

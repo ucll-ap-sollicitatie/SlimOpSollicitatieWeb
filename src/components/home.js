@@ -30,8 +30,10 @@ const imageStyle= {
     marginLeft: 100
 }
 const imageStyle1= {
-    marginRight: 100
+    marginRight: 100,
 }
+
+
 
 
 const mapStateToProps = (state) => {
