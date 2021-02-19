@@ -97,6 +97,7 @@ function register(email, password, username, confPass) {
 }
 
 function getJobs(email) {
+
     pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
         jobs =  res.rows
     })
@@ -131,7 +132,9 @@ const server = http.createServer((req, res) => makeServer(req, res))
 
 async function makeServer(req, res) {
     const reqUrl = url.parse(req.url, true);
-    console.log(req.method)
+    const path = reqUrl.path
+    const regex = /\/users\/getAll\?user=(.*)/
+
     /**
      * Login user
      */
@@ -176,7 +179,8 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
-    } else if(reqUrl.path === "/users/addjob" && req.method === "POST"){
+    } 
+    else if(reqUrl.path === "/users/addjob" && req.method === "POST"){
         let data = '';
         req.on('data', chunk => {
             data += chunk;
@@ -207,24 +211,33 @@ async function makeServer(req, res) {
         res.write("true")
         res.end();
     }
-
-
-    else if(reqUrl.path === "/users/getAll" && req.method === "GET"){
-
+    else if(path.match(regex) != null && req.method === "GET"){
         let data = '';
-        req.on('data', chunk => {
-            data += chunk;
-        })
-        req.on('end', () => {
-            jsondata = JSON.parse(data)
-            console.log(jsondata)
 
-        })
+        //API werkt
+        
+        email = path.match(regex)[1]
+        console.log(email)
+        try{
+            jobs = await getJobs(email)
+            console.log(jobs)
+        }catch(err){
+            console.log(err)
+        }
+        // req.on('end', async () => {
+        //     jsondata = JSON.parse(data)
+        //     try {
+        //     jobs = await getJobs(jsondata.email)
+        //     console.log(jsondata)
+        //     }catch(err){
+        //         console.log(err)
+        //     }
+        // })
+
         res.writeHead(200, header);
-        console.log("true")
-        res.write(getJobs(jsondata.email))
+        res.write(JSON.stringify(jobs))
         res.end();
-    }
+}
 
     else {
         res.writeHead(200, header);

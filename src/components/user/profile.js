@@ -33,21 +33,23 @@ function Profile(props){
             </div>
             <section>
                  {
-                 jobs.map(job => { 
-                     console.log(job.titel)
-                     return (
-                        <div>
-                            <h4>{job.titel}</h4>
-                            <h5>skills:</h5>
-                            <ul>
-                                <li>{job.inter}</li>
-                                <li>{job.tech}</li>
-                                <li>{job.tech2}</li>
-                                <button style={buttonStyle} id={job.titel} onClick={deleteJob}>Verwijder Job</button>
-                            </ul>
-                        </div>)
-                 })
+                    jobs.map(job => { 
+                        console.log(job.titel)
+                        return (
+                            <div>
+                                <h4>{job.titel}</h4>
+                                <h5>skills:</h5>
+                                <ul>
+                                    <li>{job.inter}</li>
+                                    <li>{job.tech}</li>
+                                    <li>{job.tech2}</li>
+                                    <button style={buttonStyle} id={job.titel} onClick={deleteJob}>Verwijder Job</button>
+                                </ul>
+                            </div>)
+                    })
                 }
+                       
+                
                  
                 <Link to="/addJob">
                     <button style={buttonStyle}>Add job</button>
