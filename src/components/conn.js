@@ -96,14 +96,15 @@ function register(email, password, username) {
 }
 
 function getJobs(email) {
-    pool.query('select * from slimopsol.jobs where email =' + "'" + email + "'", (err, res) => {
+    pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
         jobs =  res.rows
     })
     return jobs
 }
 
+
 function makeJob(email) {
-    pool.query('insert into slimopsol.jobs(id, titel, inter, tech, tech2, email) values' + "('" + Math.random() + "', 'Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "')", (err, res) => {
+    pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "'," + "'Ober" + email + "')", (err, res) => {
     })
 }
 
@@ -172,8 +173,6 @@ async function makeServer(req, res) {
         res.write("true")
         res.end();        
     }
-       
-
 
 }
 
