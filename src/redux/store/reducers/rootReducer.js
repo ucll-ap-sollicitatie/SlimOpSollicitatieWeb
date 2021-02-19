@@ -20,7 +20,8 @@ export function logoutUser() {
 const defaultUser = 
     {
         email: null,
-        username: null
+        username: null,
+        jobs: []
     }
 
 
@@ -29,10 +30,15 @@ function users(state=defaultUser, action){
         case LOGIN_USER:
             return {
                 email: action.payload.email,
-                username: action.payload.username
+                username: action.payload.username,
+                jobs: action.payload.jobs
             }
         case LOGOUT_USER:
-            return {email: null}
+            return {
+                email: null,
+                username: null,
+                jobs: []
+            }
             
         default:
             return state;

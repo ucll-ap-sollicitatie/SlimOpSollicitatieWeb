@@ -49,9 +49,8 @@ function Login(props)
         console.log(result)
         if(result.email){
             setStatus(`Received ${result.email}`);
-            props.loginUser(result.email, result.username)
+            props.loginUser(result.email, result.username, result.jobs)
             history.push("/");
-
         }
         // If(TODO) succesful
     }
@@ -75,8 +74,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
     return{
-        loginUser: (email, username) => {
-            dispatch({type: 'LOGIN_USER', payload: {email, username}})
+        loginUser: (email, username, jobs) => {
+            dispatch({type: 'LOGIN_USER', payload: {email, username, jobs}})
         }
     }
 }
