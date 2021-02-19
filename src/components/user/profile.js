@@ -10,8 +10,11 @@ class profile extends Component {
     render() {
         const {email} = this.props
         console.log(email)
-        return (<div className="containter">
+        return (
+        <div className="centerPage">
+        <div className="containter profilePage">
             <section>
+                <div className="profileRight">
                 <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
                 <section>
                     <p>{email}</p>
@@ -19,22 +22,23 @@ class profile extends Component {
 
 
                 </section>
+                </div>
                 <section>
                     <h4>Jobtitel 1: </h4>
-                    <ol>
+                    <ul>
                         <li>Skill A</li>
                         <li>Skill B</li>
                         <li>Skill C</li>
                         <button style={buttonStyle}>Wijzig Job</button>
                         <button style={buttonStyle}>Verwijder Job</button>
-                    </ol>
+                    </ul>
                     <Link to="/addJob">
                         <button style={buttonStyle}>Add job</button>
                     </Link>
                 </section>
             </section>
 
-
+            </div>
         </div>);
     }
 }

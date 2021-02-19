@@ -13,21 +13,23 @@ function Login(props)
     const dispatch = useDispatch();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [status, setStatus] = useState('Nothing to report');
+    const [status, setStatus] = useState('Nothing to report'); //needed?
 
     return (
-        <div className="containter">
+        <div className="centerPage">
+        <div className="loginPage">
             <h1>Gelieve in te loggen</h1>
-            <form onSubmit={handleSubmit} className="wite">
-                <label htmlFor="email">username</label>
-                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Username</label>
+                <input type="email" placeholder="Username" id="email" onChange={(e) => setEmail(e.target.value)}/>
 
-                <label htmlFor="password">password</label>
-                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                <label htmlFor="password">Password</label>
+                <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
 
-                <button>login</button>
+                <button>Login</button>
                 <p>{status}</p>
             </form>
+        </div>
         </div>
     );
 

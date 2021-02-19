@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
+import vragenlijst from "../questions/questions.js";
 
 class camera extends Component{
   render(){
@@ -9,13 +10,36 @@ class camera extends Component{
   }
 }
 
+var vragencounter;
+
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
+
+    function NextQuestion(){
+      if(vragencounter < vragenlijst().length -1 ){
+        vragencounter++;
+        if(vragencounter == vragenlijst().length -1){
+          document.getElementById("nextQButton").style.visibility = "hidden"
+        }
+      }
+      document.getElementById("overlay").innerHTML = vragenlijst()[vragencounter]
+    }
+
+    function showNextButton() {
+      var x = document.getElementById("nextQButton");
+      if (x.style.visibility === "hidden") {
+        x.style.visibility = "visible";
+      } else {
+        x.style.visibility = "hidden";
+      }
+    }
   
     const handleStartCaptureClick = React.useCallback(() => { /** Start */
+      vragencounter = 0;
+      showNextButton();
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
         mimeType: "video/webm"
@@ -37,6 +61,7 @@ const WebcamStreamCapture = () => {
     );
   
     const handleStopCaptureClick = React.useCallback(() => { /** Stop */
+      document.getElementById("nextQButton").style.visibility = "hidden"
       mediaRecorderRef.current.stop();
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
@@ -75,12 +100,15 @@ const WebcamStreamCapture = () => {
 //    );
 
   return (  /** returns webcam + check capturing state to start/stop/download */
-    <div style={{display: "flex", justifyContent: "flex-start", flexDirection: "column"}}>
-      <div style={{position: "relative", height: "480px"}}>
-        <Webcam audio={true} ref={webcamRef} style={{position: "absolute", left: "0px", top: "0px" }}>
-        </Webcam>
-        <div id="overlay" style={{position: "absolute", fontSize: "50px", color: "white", left: "0px", top: "0px"}}>YEET</div> 
-      </div>
+    <>
+    <div className="centerPage">
+    <div id="overlay">{vragenlijst()[0]}</div> 
+        <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
+    </div>
+      <div id="cameraDiv">
+        
+        <Webcam audio={true} ref={webcamRef}/>       
+      <br/>
       {capturing ? (
         <button onClick={handleStopCaptureClick}>Stop Capture</button>
       ) : (
@@ -89,7 +117,8 @@ const WebcamStreamCapture = () => {
       {recordedChunks.length > 0 && (
         <button onClick={handleDownload}>Download</button>
       )}
-    </div>
+      </div>
+    </>
   );
   };
   

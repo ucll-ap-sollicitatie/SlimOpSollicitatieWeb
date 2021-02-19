@@ -20,11 +20,11 @@ const Navigation = () => {
                             - Follow instructions in App.js
                             - add a new NavLink element with the path and label
                         */}
-                        <NavLink className="px-3 text-white" to="/">Home</NavLink>
-                        <NavLink className="px-3 text-white" to="/login">Login</NavLink>
-                        <NavLink className="px-3 text-white" to="/register">Register</NavLink>
-                        <NavLink className="px-3 text-white" to="/camera">Camera</NavLink>
-                        <NavLink className="px-3 text-white" to="/profile">My Profile</NavLink>
+                        <NavLink className="nav-item nav-link" to="/">Home</NavLink>
+                        <NavLink className="nav-item nav-link" to="/login">Login</NavLink>
+                        <NavLink className="nav-item nav-link" to="/register">Register</NavLink>
+                        <NavLink className="nav-item nav-link" to="/camera">Camera</NavLink>
+                        <NavLink className="nav-item nav-link" to="/profile">My Profile</NavLink>
                     </Nav>
                 </Container>
             </Navbar>
