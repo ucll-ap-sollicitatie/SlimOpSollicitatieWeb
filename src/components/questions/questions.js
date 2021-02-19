@@ -6,10 +6,6 @@ const vrA = "Wat is jouw motivatie voor deze job als X?"
 const vrU = "Welke vragen heb jij over deze job of over het werken bij ons?"
 const vrS = "Score"
 
-
-
-
-
 function vragenlijst(){
     return [vrTaken, vrTakenD2, vrCar, vrCom, vrA, vrU, vrS]
 }

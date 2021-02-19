@@ -9,6 +9,7 @@ import Camera from "./components/camera/camera"
 import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
+import './components/css/AppMain.css'
 
 function App() {
 

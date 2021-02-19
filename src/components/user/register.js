@@ -10,24 +10,25 @@ function Register(props){
     const [username, setUsername] = useState('');
 
     return (
-        <div className="containter">
+        <div className="centerPage">
+        <div className="container registerPage">
             <h1>Gelieve in te loggen</h1>
             <form onSubmit={handleSubmit} className="wite">
                 <label htmlFor="email">Email</label>
-                <input type="email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
 
-                <label htmlFor="username">username</label>
-                <input type="text" id="username" onChange={(e) => setUsername(e.target.value)}/>
+                <label htmlFor="username">Username</label>
+                <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
 
-                <label htmlFor="password">password</label>
-                <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                <label htmlFor="password">Password</label>
+                <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
                 
-                <label htmlFor="confpassword">confirm password</label>
-                <input type="password" id="confpassword" onChange={console.log("")}/>
+                <label htmlFor="confpassword">Confirm password</label>
+                <input type="password" placeholder="Confirm Password" id="confpassword" onChange={console.log("")}/>
 
-                <button>login</button>
+                <button>Login</button>
             </form>
-            
+            </div>
         </div>
     );
     /**

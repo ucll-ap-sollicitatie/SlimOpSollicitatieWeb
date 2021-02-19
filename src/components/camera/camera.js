@@ -19,17 +19,21 @@ const WebcamStreamCapture = () => {
     const [recordedChunks, setRecordedChunks] = React.useState([]);
 
     function NextQuestion(){
-      if(vragencounter < vragenlijst().length -1 ){vragencounter++;}
-      else{showNextButton()}
+      if(vragencounter < vragenlijst().length -1 ){
+        vragencounter++;
+        if(vragencounter == vragenlijst().length -1){
+          document.getElementById("nextQButton").style.visibility = "hidden"
+        }
+      }
       document.getElementById("overlay").innerHTML = vragenlijst()[vragencounter]
     }
 
     function showNextButton() {
       var x = document.getElementById("nextQButton");
-      if (x.style.display === "none") {
-        x.style.display = "block";
+      if (x.style.visibility === "hidden") {
+        x.style.visibility = "visible";
       } else {
-        x.style.display = "none";
+        x.style.visibility = "hidden";
       }
     }
   
@@ -57,7 +61,7 @@ const WebcamStreamCapture = () => {
     );
   
     const handleStopCaptureClick = React.useCallback(() => { /** Stop */
-      showNextButton();
+      document.getElementById("nextQButton").style.visibility = "hidden"
       mediaRecorderRef.current.stop();
       setCapturing(false);
     }, [mediaRecorderRef, webcamRef, setCapturing]);
@@ -97,11 +101,14 @@ const WebcamStreamCapture = () => {
 
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
-      <div>
-        <div id="overlay">{vragenlijst()[0]}</div> 
-        <button id="nextQButton" style={{display: "none"}} onClick={NextQuestion}>Next question</button>
+    <div className="centerPage">
+    <div id="overlay">{vragenlijst()[0]}</div> 
+        <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
+    </div>
+      <div id="cameraDiv">
+        
         <Webcam audio={true} ref={webcamRef}/>       
-      </div>
+      <br/>
       {capturing ? (
         <button onClick={handleStopCaptureClick}>Stop Capture</button>
       ) : (
@@ -110,6 +117,7 @@ const WebcamStreamCapture = () => {
       {recordedChunks.length > 0 && (
         <button onClick={handleDownload}>Download</button>
       )}
+      </div>
     </>
   );
   };
