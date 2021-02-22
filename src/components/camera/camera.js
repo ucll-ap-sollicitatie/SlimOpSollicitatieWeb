@@ -82,6 +82,17 @@ const WebcamStreamCapture = () => {
         setRecordedChunks([]);
       }
     }, [recordedChunks]);
+
+    const handleSave = React.useCallback(() => {
+      const blob = null;
+      if (recordedChunks.length) {
+        blob = new Blob(recordedChunks, {
+          type: "video/webm"
+        });
+      }
+      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:blob})
+                .then(response => console.log(response.text()))
+    })
   
 //    return (  /** returns webcam + check capturing state to start/stop/download */
 //      <div style={{position: "relative"}}>
@@ -102,6 +113,7 @@ const WebcamStreamCapture = () => {
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
     <div className="centerPage">
+      <button onClick={handleSave}>TEST</button>
     <div id="overlay">{vragenlijst()[0]}</div> 
         <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
     </div>
