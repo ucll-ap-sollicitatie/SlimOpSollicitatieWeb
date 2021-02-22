@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
-import vragenlijst from "../questions/questions.js";
+import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 
 class camera extends Component{
   render(){
@@ -12,20 +12,22 @@ class camera extends Component{
 
 var vragencounter;
 
+//the question list that will be used
+const vl = parsedvragenlijst("Ober", ["Vriendelijk", "Snel"])
+console.log(vl)
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
-
     function NextQuestion(){
-      if(vragencounter < vragenlijst().length -1 ){
+      if(vragencounter < vl.length -1 ){
         vragencounter++;
-        if(vragencounter == vragenlijst().length -1){
+        if(vragencounter == vl.length -1){
           document.getElementById("nextQButton").style.visibility = "hidden"
         }
       }
-      document.getElementById("overlay").innerHTML = vragenlijst()[vragencounter]
+      document.getElementById("overlay").innerHTML = vl[vragencounter]
     }
 
     function showNextButton() {
@@ -114,7 +116,7 @@ const WebcamStreamCapture = () => {
     <>
     <div className="centerPage">
       <button onClick={handleSave}>TEST</button>
-    <div id="overlay">{vragenlijst()[0]}</div> 
+    <div id="overlay">{vl[0]}</div> 
         <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
     </div>
       <div id="cameraDiv">
