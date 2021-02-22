@@ -90,7 +90,7 @@ const WebcamStreamCapture = () => {
           type: "video/webm"
         });
       }
-      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:blob})
+      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:URL.createObjectURL(blob)})
                 .then(response => console.log(response.text()))
     })
   
