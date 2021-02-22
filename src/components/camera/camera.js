@@ -10,6 +10,7 @@ class camera extends Component{
   }
 }
 
+
 var vragencounter;
 
 const WebcamStreamCapture = () => {
@@ -78,27 +79,14 @@ const WebcamStreamCapture = () => {
         a.href = url;
         a.download = "react-webcam-stream-capture.webm";
         a.click();
+        /** -------------------- */
+     
+        /** -------------------- */
         window.URL.revokeObjectURL(url);
         setRecordedChunks([]);
       }
     }, [recordedChunks]);
 
-    const handleSave = React.useCallback(() => {
-      const a = document.createElement("a");
-      if (recordedChunks.length) {
-        const blob = new Blob(recordedChunks, {
-          type: "video/webm"
-        });
-        const url = URL.createObjectURL(blob);  
-        document.body.appendChild(a);
-        a.style = "display: none";
-        a.href = url;
-        a.download = "TEST.webm";
-        
-      }
-      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:a.click()})
-                .then(response => console.log(response.text()))
-    })
   
 //    return (  /** returns webcam + check capturing state to start/stop/download */
 //      <div style={{position: "relative"}}>
@@ -119,7 +107,6 @@ const WebcamStreamCapture = () => {
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
     <div className="centerPage">
-      <button onClick={handleSave}>TEST</button>
     <div id="overlay">{vragenlijst()[0]}</div> 
         <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
     </div>
