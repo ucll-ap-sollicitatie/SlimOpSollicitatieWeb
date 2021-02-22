@@ -36,7 +36,6 @@ const Navigation = (props) => {
                         <NavLink className="nav-item nav-link" to="/camera">Camera</NavLink>
                         <NavLink className="nav-item nav-link" to="/profile">My Profile</NavLink>
                         <NavLink className="nav-item nav-link" to="/feedback">Feedback</NavLink>
-                        <NavLink className="nav-item nav-link" to="/chooseJob">job</NavLink>
                         <Link onClick={handleClick} className="nav-item nav-link" > Logout</Link>
 
                     </Nav>

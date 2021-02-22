@@ -19,7 +19,7 @@ function Home(props) {
         </section>
         <br/>
         <br/>
-        <Link to="/camera"><button>Neem een nieuwe video op</button></Link>
+        <Link to="/chooseJob"><button>Neem een nieuwe video op</button></Link>
     </div>
     )
 }
