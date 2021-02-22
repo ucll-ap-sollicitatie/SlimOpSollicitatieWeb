@@ -97,19 +97,16 @@ function register(email, password, username, confPass) {
 }
 
 function getJobs(email) {
-
     pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
         jobs =  res.rows
     })
     return jobs
 }
 
-
 function makeJob(email) {
     pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "'," + "'Ober" + email + "')", (err, res) => {
     })
 }
-
 
 function makeNewJob(titel, inter, tech, tech2, email){
     pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')", (err, res) => {
@@ -117,6 +114,7 @@ function makeNewJob(titel, inter, tech, tech2, email){
         console.log(err)
     })
 }
+
 function updateUsername(username, email){
     
     pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
@@ -137,7 +135,6 @@ function deleteJob(title, email) {
         console.log(err)
     })
 }
-
 
 /**
  * Creates server, with possible requests.
@@ -216,7 +213,6 @@ async function makeServer(req, res) {
         res.write("true")
         res.end();
     }
-
     else if(reqUrl.path === "/users/deletejob" && req.method === "POST"){
         let data = '';
         req.on('data', chunk => {
@@ -274,7 +270,6 @@ async function makeServer(req, res) {
         res.write("true")
         res.end();
     }
-
     else {
         res.writeHead(200, header);
         console.log("true")
@@ -293,7 +288,6 @@ server.listen(port, (error) => {
     if (error) return console.log(`Error: ${error}`);
     console.log(`API at http://${hostname}:${port}/`)
 })
-
 
 function hashCode(str) {
     var hash = 0, i, chr;

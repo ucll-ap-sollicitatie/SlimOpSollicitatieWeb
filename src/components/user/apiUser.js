@@ -2,7 +2,6 @@ const axios = require("axios");
 
 const webIp = "http://127.0.0.1:3001"
 
-
 async function getJobs(eml){
     return new Promise((resolve, reject) => {
 
@@ -45,7 +44,6 @@ async function getAlldatadb(eml){
     });
     })
 }
-
 
 /**
  * send an api request based on the email (eml) and password(pss)
@@ -157,6 +155,7 @@ async function deleteJobdb(titel, email){
         });
     })
 }
+
 async function updateUsername(username, eml){
     return new Promise((resolve, reject) => {
         var data = JSON.stringify({"username": username, "email": eml});
@@ -181,6 +180,7 @@ async function updateUsername(username, eml){
           
     })
 }
+
 export {
     logindb,
     registerdb,

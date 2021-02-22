@@ -65,7 +65,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return{
         updateUser: (jobs) => {
-            dispatch({type: 'UPDATE_USER', payload: {jobs}})
+            dispatch({type: 'UPDATE_USER_JOBS', payload: {jobs}})
         }
     }
 }
