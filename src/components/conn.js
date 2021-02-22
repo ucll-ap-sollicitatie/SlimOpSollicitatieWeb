@@ -230,9 +230,6 @@ async function makeServer(req, res) {
     }
     else if(path.match(regex) != null && req.method === "GET"){
         let data = '';
-
-
-        
         email = path.match(regex)[1]
         console.log(email + " => Conn.js")
         try{

@@ -12,11 +12,10 @@ function Profile(props){
     var email = ""
     if(props.email != null){
         email = props.email
-        console.log(jobs)
-    }
-    
+        //console.log(jobs)
+       }
 
-    console.log(props.email)
+    //console.log(props.email)
     return (
     <div className="centerPage">
     <div className="containter profilePage">
@@ -35,7 +34,7 @@ function Profile(props){
             <section>
                  {
                     jobs.map(job => { 
-                        console.log(job.titel)
+                        //console.log(job.titel)
                         return (
                             <div>
                                 <h4>{job.titel}</h4>
@@ -68,7 +67,6 @@ function Profile(props){
 
     async function updateJobs(){
         var jobsnew = await getJobs(props.email)
-        console.log("jobsnew:")
         console.log(jobsnew)
         props.updateUser(jobsnew)
         setJobs(jobsnew)
@@ -78,13 +76,9 @@ function Profile(props){
     async function deleteJob(e) {
         e.preventDefault();
         const result = await deleteJobdb(e.target.id, props.email)
-        console.log(result === true)
+        //console.log(result === true)
         if(result === true){
-            var jobsnew = await getJobs(props.email)
-            console.log("jobsnew:")
-            console.log(jobsnew)
-            props.updateUser(jobsnew)
-            setJobs(jobsnew)
+            updateJobs()
             history.push("/profile");
         }
     }
