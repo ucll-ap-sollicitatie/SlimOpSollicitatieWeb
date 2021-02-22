@@ -82,6 +82,33 @@ const WebcamStreamCapture = () => {
         setRecordedChunks([]);
       }
     }, [recordedChunks]);
+
+    const handleSave = React.useCallback(() => {
+      if (recordedChunks.length) {
+        const blob = new Blob(recordedChunks, {
+          type: "video/webm"
+        });
+      var url = (window.URL || window.webkitURL).createObjectURL(blob);
+      console.log(url);
+
+      var filename = "test.webm"
+      var data = new FormData();
+      data.append('file', blob);
+
+      $.ajax({
+        url :  "lib/vocal_render.php",
+        type: 'POST',
+        data: data,
+        contentType: false,
+        processData: false,
+        success: function(data) {
+          alert("boa!");
+        },    
+        error: function() {
+          alert("not so boa!");
+        }
+      });
+    })
   
 //    return (  /** returns webcam + check capturing state to start/stop/download */
 //      <div style={{position: "relative"}}>
@@ -102,6 +129,7 @@ const WebcamStreamCapture = () => {
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
     <div className="centerPage">
+      <button onClick={handleSave}>TEST</button>
     <div id="overlay">{vragenlijst()[0]}</div> 
         <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
     </div>
