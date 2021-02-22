@@ -172,9 +172,9 @@ async function deleteJobdb(titel, email){
 /**
  * api request to update tue username
  */
-async function updateUsername(username, eml){
+async function updateUsername(username, eml, pss){
     return new Promise((resolve, reject) => {
-        var data = JSON.stringify({"username": username, "email": eml});
+        var data = JSON.stringify({"username": username, "email": eml, "password": pss});
 
         var config = {
             method: 'post',

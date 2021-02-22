@@ -257,10 +257,14 @@ async function makeServer(req, res) {
         req.on('data', chunk => {
             data += chunk;
         })
-        req.on('end', () => {
+        req.on('end', async() => {
             jsondata = JSON.parse(data)
             console.log(jsondata + " => conn.js")
-            updateUsername(jsondata.username, jsondata.email)
+            checkpass = await login(jsondata.email, jsondata.password)
+            console.log(checkpass.email)
+            if(checkpass.email){
+                updateUsername(jsondata.username, jsondata.email)
+            }
         })
         res.writeHead(200, header);
         console.log("true")

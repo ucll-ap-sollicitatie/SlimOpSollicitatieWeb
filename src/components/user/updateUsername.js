@@ -5,6 +5,8 @@ import {Link, useHistory} from "react-router-dom";
 
 function UpdateUsername(props){
     const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
     const history = useHistory();
 
     return (
@@ -15,6 +17,9 @@ function UpdateUsername(props){
                     <label htmlFor="titel">Username</label>
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
 
+                    <label htmlFor="titel">password</label>
+                    <input type="text" placeholder="titel" id="titel" onChange={(e) => setPassword(e.target.value)}/>
+
                     <button>update username</button>
                 </form>
             </div>
@@ -23,7 +28,7 @@ function UpdateUsername(props){
 
     function handleSubmit(){
         //set in state
-        updateUsername(username, props.email)
+        updateUsername(username, props.email, password)
         history.push("/profile");
     }
 
