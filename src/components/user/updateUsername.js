@@ -1,9 +1,11 @@
 import {updateUsername} from "./apiUser"
 import React, { useState } from 'react';
 import {connect} from "react-redux";
+import {Link, useHistory} from "react-router-dom";
 
 function UpdateUsername(props){
     const [username, setUsername] = useState('');
+    const history = useHistory();
 
     return (
         <div className="centerPage">
@@ -20,7 +22,9 @@ function UpdateUsername(props){
     )
 
     function handleSubmit(){
+        //set in state
         updateUsername(username, props.email)
+        history.push("/profile");
     }
 
 
