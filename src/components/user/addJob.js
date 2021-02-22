@@ -45,10 +45,7 @@ function AddJob(props){
         const result = await addJobdb(titel, inter, tech, tech2, email)
         console.log(result === true)
         if(result === true){
-
             var jobs = await getJobs(email)
-            console.log("jobs:")
-            console.log(jobs)
             props.updateUser(jobs)
             history.push("/profile");
         }

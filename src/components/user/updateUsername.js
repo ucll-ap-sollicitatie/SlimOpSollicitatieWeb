@@ -12,13 +12,14 @@ function UpdateUsername(props){
     return (
         <div className="centerPage">
             <div>
-                <h1>Maak een nieuwe job aan</h1>
+                <h1>Change username</h1>
                 <form onSubmit={handleSubmit} className="wite">
                     <label htmlFor="titel">Username</label>
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
+                    <p id="userror" style={{display: "none"}}>Username cannot be empty</p>
 
-                    <label htmlFor="titel">password</label>
-                    <input type="password" placeholder="titel" id="titel" onChange={(e) => setPassword(e.target.value)}/>
+                    <label htmlFor="pass">password</label>
+                    <input type="password" placeholder="pass" id="pass" onChange={(e) => setPassword(e.target.value)}/>
 
                     <button>update username</button>
                 </form>
@@ -26,10 +27,16 @@ function UpdateUsername(props){
         </div>
     )
 
-    function handleSubmit(){
+    function handleSubmit(e){
         //set in state
-        updateUsername(username, props.email, password)
-        history.push("/profile");
+        if(username === ""){
+            var elem = document.getElementById("userror")
+            elem.style.display = "block";
+        }
+        else{
+            updateUsername(username, props.email, password)
+            history.push("/profile");    
+        }
     }
 
 

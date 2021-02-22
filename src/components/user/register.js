@@ -20,6 +20,7 @@ function Register(props){
 
                 <label htmlFor="username">Username</label>
                 <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
+                <p id="eruser" style={{display: "none"}}>username cant be empty</p>
 
                 <label htmlFor="password">Password</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
@@ -44,16 +45,28 @@ function Register(props){
      * 3. registerdb calls the api
      * 4.1. TODO: Clear fields when input is wrong
      * 4.2. redirect to home page when login is succesfull
-     * 
      */
     async function handleSubmit(e)
     {
+        /**
+         * error when username is empty
+         */
+        if(username === ""){
+            var elem = document.getElementById("eruser")
+            elem.style.display = "block";
+        }else{
+            elem.style.display = "none";
+        }
+
         e.preventDefault();
         const result = await registerdb(email, password, username, confPass)
         console.log(result === true)        
         if(result === true){
             history.push("/login");
         }
+        /**
+         * Error when server returns error (general)
+         */
         else{
             var elem = document.getElementById("error")
             if (elem.style.display === "none") {
