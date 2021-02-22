@@ -19,7 +19,6 @@ function parsedvragenlijst(functie, skills){
         else{
             list.push(vraag)
         }
-
     }); 
     return list
 }

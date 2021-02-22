@@ -26,6 +26,7 @@ const Navigation = () => {
                         <NavLink className="nav-item nav-link" to="/camera">Camera</NavLink>
                         <NavLink className="nav-item nav-link" to="/profile">My Profile</NavLink>
                         <NavLink className="nav-item nav-link" to="/feedback">Feedback</NavLink>
+                        <NavLink className="nav-item nav-link" to="/chooseJob">job</NavLink>
 
                     </Nav>
                 </Container>
