@@ -20,15 +20,8 @@ function Home(props) {
         <br/>
         <br/>
         <Link to="/camera"><button>Neem een nieuwe video op</button></Link>
-
-        <button onClick={handleClick}>Logout</button>
     </div>
     )
-    function handleClick(){
-        props.logoutUser()
-        history.push("/login");
-
-    }
 }
 
 const imageStyle= {
