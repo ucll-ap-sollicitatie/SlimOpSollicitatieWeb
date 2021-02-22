@@ -45,8 +45,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        setjob: (selectedJobTitle, selectedskills) => {
-            dispatch({type: 'SET_JOB', payload: {selectedJobTitle, selectedskills}})
+        setjob: (selectedJobTitle, selectedSkills) => {
+            dispatch({type: 'SET_JOB', payload: {selectedJobTitle, selectedSkills}})
         }
     }
 }

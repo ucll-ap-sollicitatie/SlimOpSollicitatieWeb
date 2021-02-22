@@ -1,19 +1,24 @@
 import React, { Component } from "react";
 import Webcam from "react-webcam"
 import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
+import {connect} from "react-redux";
+var vl;
 
-class camera extends Component{
-  render(){
+
+function Camera(props) {
+  var title = props.selectedJobTitle
+  var skills = props.selectedSkills
+  vl = parsedvragenlijst(title, skills)
     return (
       <WebcamStreamCapture />
     );
-  }
 }
+
 
 var vragencounter;
 
 //the question list that will be used
-const vl = parsedvragenlijst("Ober", ["Vriendelijk", "Snel"])
+//const vl = parsedvragenlijst("title", ["Vriendelijk", "Snel"])
 console.log(vl)
 const WebcamStreamCapture = () => {
     const webcamRef = React.useRef(null);
@@ -80,21 +85,70 @@ const WebcamStreamCapture = () => {
         a.href = url;
         a.download = "react-webcam-stream-capture.webm";
         a.click();
+        /** -------------------- */       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /** -------------------- */
         window.URL.revokeObjectURL(url);
         setRecordedChunks([]);
       }
     }, [recordedChunks]);
-
-    const handleSave = React.useCallback(() => {
-      const blob = null;
+/**
+ * FOR LATER USE WHEN DOWNLOAD & SAVE WORK
+ * 
+ * const handleDownload = React.useCallback(() => {
       if (recordedChunks.length) {
-        blob = new Blob(recordedChunks, {
+        const blob = new Blob(recordedChunks, {
           type: "video/webm"
         });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = "react-webcam-stream-capture.webm";
+        a.click();
+
+        window.URL.revokeObjectURL(url);
+        setRecordedChunks([]);
       }
-      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:blob})
-                .then(response => console.log(response.text()))
-    })
+    }, [recordedChunks]);
+ */
   
 //    return (  /** returns webcam + check capturing state to start/stop/download */
 //      <div style={{position: "relative"}}>
@@ -115,9 +169,8 @@ const WebcamStreamCapture = () => {
   return (  /** returns webcam + check capturing state to start/stop/download */
     <>
     <div className="centerPage">
-      <button onClick={handleSave}>TEST</button>
     <div id="overlay">{vl[0]}</div> 
-        <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
+    <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
     </div>
       <div id="cameraDiv">
         
@@ -136,7 +189,14 @@ const WebcamStreamCapture = () => {
   );
   };
   
-export default camera;
+  const mapStateToProps = (state) => {
+    return{
+      selectedJobTitle: state.users.selectedJobTitle,
+      selectedSkills: state.users.selectedSkills
+    }
+}
+
+export default connect (mapStateToProps)(Camera);
 
 
 /** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011

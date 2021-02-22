@@ -28,11 +28,11 @@ export function logoutUser() {
 }
 
 
-export function setjob(selectedJobTitle, selectedskills){
+export function setjob(selectedJobTitle, selectedSkills){
     return{
         type: 'SET_JOB',
         selectedJobTitle,
-        selectedskills
+        selectedSkills
     }
 }
 
@@ -45,7 +45,7 @@ const defaultUser =
         username: null,
         jobs: [],
         selectedJobTitle: "Ober",
-        selectedskills: ["Vriendelijk", "snel", "slim"]
+        selectedSkills: ["Vriendelijk", "snel", "slim"]
     }
 
 
@@ -91,7 +91,7 @@ function users(state=defaultUser, action){
             return{
                 ...state,
                 selectedJobTitle: action.payload.selectedJobTitle,
-                selectedskills: action.payload.skills
+                selectedSkills: action.payload.selectedSkills
             }
             
         default:

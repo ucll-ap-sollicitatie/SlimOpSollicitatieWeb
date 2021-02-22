@@ -10,10 +10,15 @@ function Profile(props){
     const history = useHistory();
     const [jobs, setJobs] = useState(props.jobs);
     var email = ""
+    var name = ""
     if(props.email != null){
         email = props.email
         //console.log(jobs)
        }
+
+    if(props.name != null){
+        name = props.name
+    }
 
     //console.log(props.email)
     return (
@@ -24,6 +29,7 @@ function Profile(props){
             <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
             <section>
                 <p>{email}</p>
+                <p>{name}</p>
                 <Link to="/updateUsername">
                     <button style={buttonStyle}>Wijzig Gebruikersnaam</button>
                 </Link>
@@ -97,6 +103,7 @@ const buttonStyle = {
 const mapStateToProps = (state) => {
     return{
         email: state.users.email,
+        name: state.users.username,
         jobs: state.users.jobs
     }
 }
