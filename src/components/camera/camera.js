@@ -84,13 +84,19 @@ const WebcamStreamCapture = () => {
     }, [recordedChunks]);
 
     const handleSave = React.useCallback(() => {
-      const blob = null;
+      const a = document.createElement("a");
       if (recordedChunks.length) {
-        blob = new Blob(recordedChunks, {
+        const blob = new Blob(recordedChunks, {
           type: "video/webm"
         });
+        const url = URL.createObjectURL(blob);  
+        document.body.appendChild(a);
+        a.style = "display: none";
+        a.href = url;
+        a.download = "TEST.webm";
+        
       }
-      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:URL.createObjectURL(blob)})
+      fetch(`https://www.slimopsollicitatie.xyz/camera.js`, {method:"POST", body:a.click()})
                 .then(response => console.log(response.text()))
     })
   
