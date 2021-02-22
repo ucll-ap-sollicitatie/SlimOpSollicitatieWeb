@@ -1,8 +1,30 @@
 const axios = require("axios");
-
 const webIp = "http://127.0.0.1:3001"
 
+/**
+ * get all jobs of a user
+ */
+async function getJobs(eml){
+    return new Promise((resolve, reject) => {
 
+    var config = {
+        method: 'get',
+        url: `http://127.0.0.1:3001/users/getAll?user=${eml}`,
+        headers: { },
+      };
+      
+      axios(config)
+      .then(
+        function (response) {
+            console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        })
+        .catch(function (error) {
+            return "NOK"
+        });
+    })
+}
 
 async function getAlldatadb(eml){
     return new Promise((resolve, reject) => {
@@ -25,9 +47,8 @@ async function getAlldatadb(eml){
     })
 }
 
-
 /**
- * send an api request based on the email (eml) and password(pss)
+ * send an api request to log in a user based on the email (eml) and password(pss)
  */
 async function logindb(eml, pss) {
     //return promise so that in login.js the function correctly waits for a response
@@ -55,6 +76,13 @@ async function logindb(eml, pss) {
     })
 }
 
+/**
+ * send an api request register a user in the database
+ *  eml: email
+ *  pss: password
+ *  un: username
+ *  cp: confirm password
+ */
 async function registerdb(eml, pss, un, cp) {
     return new Promise((resolve, reject) => {
 
@@ -86,6 +114,9 @@ async function registerdb(eml, pss, un, cp) {
     })
 }
 
+/**
+ * api request to add a new job to the database
+ */
 async function addJobdb(tit, inter, tech, tech2, email) {
     return new Promise((resolve, reject) => {
 
@@ -113,11 +144,12 @@ async function addJobdb(tit, inter, tech, tech2, email) {
     })
 }
 
+/**
+ * api request to delete a job from the user
+ */
 async function deleteJobdb(titel, email){
     return new Promise((resolve, reject) => {
-
         axios
-
             .post(`${webIp}/users/deletejob`,
                 {
                     titel: titel,
@@ -137,10 +169,40 @@ async function deleteJobdb(titel, email){
     })
 }
 
+/**
+ * api request to update tue username
+ */
+async function updateUsername(username, eml, pss){
+    return new Promise((resolve, reject) => {
+        var data = JSON.stringify({"username": username, "email": eml, "password": pss});
+
+        var config = {
+            method: 'post',
+            url: 'http://127.0.0.1:3001/users/updateUsername',
+            headers: { 
+              'Content-Type': 'application/json'
+            },
+            data : data
+          };
+          
+          axios(config)
+          .then(function (response) {
+            console.log(response.data)
+            resolve(response.data)
+            return response;
+        }).catch(function (error) {
+            return "NOK"
+        });
+          
+    })
+}
+
 export {
     logindb,
     registerdb,
     addJobdb,
     deleteJobdb,
-    getAlldatadb
+    getAlldatadb,
+    getJobs,
+    updateUsername
 }

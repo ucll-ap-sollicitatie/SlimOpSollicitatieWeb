@@ -3,11 +3,11 @@ import {combineReducers} from "redux";
 
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
-const UPDATE_USER = 'UPDATE_USER'
+const UPDATE_USER_JOBS = 'UPDATE_USER_JOBS'
 
 export function updateUser(jobs) {
     return {
-        type: 'UPDATE_USER',
+        type: 'UPDATE_USER_JOBS',
         jobs
     }
 }
@@ -25,6 +25,9 @@ export function logoutUser() {
     }
 }
 
+/**
+ * Default values of a user that is not logged in
+ */
 const defaultUser = 
     {
         email: null,
@@ -35,21 +38,37 @@ const defaultUser =
 
 function users(state=defaultUser, action){
     switch (action.type) {
+        /**
+         * LOGIN USER:
+         *  change the state of email, username and jobs
+         */
         case LOGIN_USER:
             return {
                 email: action.payload.email,
                 username: action.payload.username,
                 jobs: action.payload.jobs
             }
+
+        /**
+         * LOGOUT USER:
+         *  change the state of email, username and jobs back to default
+         */
         case LOGOUT_USER:
             return {
                 email: null,
                 username: null,
                 jobs: []
             }
-        case UPDATE_USER:
+        
+        /**
+         * UPDATE USER JOBS:
+         *  change the jobs of a user
+         */
+        case UPDATE_USER_JOBS:
             return {
+                //copy state
                 ...state,
+                //update jobs
                 jobs: action.payload.jobs
             }
             

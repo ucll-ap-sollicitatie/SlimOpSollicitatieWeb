@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import {logindb} from "../user/apiUser"
 import {useDispatch} from 'react-redux'
 import {connect} from 'react-redux'
-import {loginUser} from "../../redux/Features/userSlice"
 import { StaticRouter } from 'react-router-dom';
 import { useHistory } from "react-router-dom";
 
