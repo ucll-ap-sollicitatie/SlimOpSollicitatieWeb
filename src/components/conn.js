@@ -85,16 +85,21 @@ function login(email, password) {
 }
 
 function register(email, password, username, confPass) {
+    return new Promise((resolve, reject) => {
+
     let hPassword = hashCode(password);
     let confHashPassword = hashCode(confPass);
     if (!email.includes("@") || confHashPassword.toString() !== hPassword.toString()) {
-        return
+        resolve("Err")
+        return "Err"
     }
     console.log("registering user with email: " + email + " password: " + password + " username: " + username)
     pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
         console.log("G")
         makeJob(email)
+        resolve("OK")
     })
+})
 
 }
 
@@ -184,21 +189,26 @@ async function makeServer(req, res) {
         /**
          * Register user
          */
-    } else if (reqUrl.pathname == "/users/register" && req.method === "POST") {
+    } 
+    else if (reqUrl.pathname == "/users/register" && req.method === "POST") {
         let data = '';
+        var ret = "true"
         //data will be the ?binary data?
         req.on('data', chunk => {
             data += chunk;
         })
         //parse data to JSON
-        req.on('end', () => {
+        req.on('end', async() => {
             jsondata = JSON.parse(data)
-            register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass)
+            var i = await register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass)
+            if(i === "Err"){
+                ret = "false"
+            }
+            res.writeHead(200, header);
+            res.write(ret)
+            res.end();
+    
         })
-        res.writeHead(200, header);
-        console.log("true")
-        res.write("true")
-        res.end();
     } 
     else if(reqUrl.path === "/users/addjob" && req.method === "POST"){
         let data = '';

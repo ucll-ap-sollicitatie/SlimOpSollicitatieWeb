@@ -56,20 +56,12 @@ function Login(props)
             var elem = document.getElementById("error")
             if (elem.style.display === "none") {
                 elem.style.display = "block";
-              } else {
-                elem.style.display = "none";
               }
-                    }
-        
-        // If(TODO) succesful
+        }
     }
 }
 
 
-// function Reduc(){
-//     const dispatch = useDispatch()
-//     return dispatch
-// }
 const mapStateToProps = (state) => {
     console.log("state")
     console.log(state)

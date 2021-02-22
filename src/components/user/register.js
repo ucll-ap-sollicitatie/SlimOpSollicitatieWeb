@@ -29,6 +29,11 @@ function Register(props){
 
                 <button>Maak account</button>
             </form>
+
+            <div>
+                <p id="error" style={{display: "none"}}>Problem with creating your account</p>
+            </div>
+
             </div>
         </div>
     );
@@ -48,11 +53,14 @@ function Register(props){
         console.log(result === true)        
         if(result === true){
             history.push("/login");
-
+        }
+        else{
+            var elem = document.getElementById("error")
+            if (elem.style.display === "none") {
+                elem.style.display = "block";
+              } 
         }
     }
-
-
 }
 
 export default Register;
