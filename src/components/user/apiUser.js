@@ -65,11 +65,15 @@ async function logindb(eml, pss) {
         };
         axios(config)
             .then(function (response) {
+                console.log("errtest")
                 console.log(response.data)
                 resolve(response.data)
                 return response;
             })
             .catch(function (error) {
+                console.log("error")
+                resolve(error)
+
                 return "NOK"
                 // console.log(error);
             });

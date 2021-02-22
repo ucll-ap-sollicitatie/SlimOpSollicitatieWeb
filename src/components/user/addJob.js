@@ -33,7 +33,7 @@ function AddJob(props){
                         <label htmlFor="tech2">Technische vaardigheid 2</label>
                         <input type="text" placeholder="Technische vaardigheid 2" id="tech2" onChange={(e) => setTech2(e.target.value)}/>
 
-                        <button>Maak account</button>
+                        <button>Voeg job toe</button>
                     </form>
                 </div>
             </div>

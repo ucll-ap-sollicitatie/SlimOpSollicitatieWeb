@@ -18,7 +18,7 @@ function UpdateUsername(props){
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
 
                     <label htmlFor="titel">password</label>
-                    <input type="text" placeholder="titel" id="titel" onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="password" placeholder="titel" id="titel" onChange={(e) => setPassword(e.target.value)}/>
 
                     <button>update username</button>
                 </form>

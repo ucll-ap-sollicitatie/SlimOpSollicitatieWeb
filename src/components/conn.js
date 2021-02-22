@@ -52,7 +52,6 @@ function login(email, password) {
     return new Promise((resolve, reject) => {
 
         pool.query('select * from slimopsol.users where email = ' + "'" + email + "'", (err, res) => {
-            console.log(err)
             if (res.rowCount === 0) {
                 console.log("foutje")
                 return
@@ -69,7 +68,10 @@ function login(email, password) {
                 console.log("Ingelogd")
             }
 
-            else return
+            else {
+                resolve("err")
+                return
+            }
             const user = {
                 username: name,
                 email: email,

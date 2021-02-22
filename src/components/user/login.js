@@ -13,7 +13,6 @@ function Login(props)
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
-    const [status, setStatus] = useState('Nothing to report'); //needed?
 
     return (
         <div className="centerPage">
@@ -27,8 +26,10 @@ function Login(props)
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
 
                 <button>Login</button>
-                <p>{status}</p>
             </form>
+            <div>
+                <p id="error" style={{display: "none"}}>Wrong username or password</p>
+            </div>
         </div>
         </div>
     );
@@ -43,14 +44,23 @@ function Login(props)
     async function handleSubmit(e)
     {
         e.preventDefault();
+        console.log("test:")
+
         const result = await logindb(email, password)
         console.log("result:")
-        console.log(result)
-        if(result.email){
-            setStatus(`Received ${result.email}`);
+        if(result.email != null){
             props.loginUser(result.email, result.username, result.jobs)
             history.push("/");
         }
+        else{
+            var elem = document.getElementById("error")
+            if (elem.style.display === "none") {
+                elem.style.display = "block";
+              } else {
+                elem.style.display = "none";
+              }
+                    }
+        
         // If(TODO) succesful
     }
 }
