@@ -117,6 +117,27 @@ function makeNewJob(titel, inter, tech, tech2, email){
         console.log(err)
     })
 }
+function updateUsername(username, email){
+    
+    pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
+        console.log("username changed")
+    })
+}
+
+function updatePassword(password, email){
+    let hashpw = hashCode(password).toString()
+
+    pool.query('update slimopsol.users set hashedpassword =' + "'" + hashpw + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
+        console.log("password changed")
+    })
+}
+
+function deleteJob(title, email) {
+    pool.query('delete from slimopsol.job where titelmail =' + "'" + title + email + "'", (err, res) => {
+        console.log(err)
+    })
+}
+
 
 /**
  * Creates server, with possible requests.
@@ -203,7 +224,7 @@ async function makeServer(req, res) {
         })
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            console.log(jsondata)
+            console.log(jsondata + " => conn.js")
             deleteJob(jsondata.titel, jsondata.email)
         })
         res.writeHead(200, header);
@@ -214,10 +235,10 @@ async function makeServer(req, res) {
     else if(path.match(regex) != null && req.method === "GET"){
         let data = '';
 
-        //API werkt
+
         
         email = path.match(regex)[1]
-        console.log(email)
+        console.log(email + " => Conn.js")
         try{
             jobs = await getJobs(email)
             console.log(jobs)
@@ -237,7 +258,22 @@ async function makeServer(req, res) {
         res.writeHead(200, header);
         res.write(JSON.stringify(jobs))
         res.end();
-}
+    }
+    else if(reqUrl.path === "/users/updateUsername" && req.method === "POST"){
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            console.log(jsondata + " => conn.js")
+            updateUsername(jsondata.username, jsondata.email)
+        })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
+        res.end();
+    }
 
     else {
         res.writeHead(200, header);
@@ -258,25 +294,6 @@ server.listen(port, (error) => {
     console.log(`API at http://${hostname}:${port}/`)
 })
 
-function updateUsername(username, email){
-    pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
-        console.log("username changed")
-    })
-}
-
-function updatePassword(password, email){
-    let hashpw = hashCode(password).toString()
-
-    pool.query('update slimopsol.users set hashedpassword =' + "'" + hashpw + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
-        console.log("password changed")
-    })
-}
-
-function deleteJob(title, email) {
-    pool.query('delete from slimopsol.job where titelmail =' + "'" + title + email + "'", (err, res) => {
-        console.log(err)
-    })
-}
 
 function hashCode(str) {
     var hash = 0, i, chr;

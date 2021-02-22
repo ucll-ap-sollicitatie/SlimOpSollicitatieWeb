@@ -11,6 +11,7 @@ import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
 import './components/css/AppMain.css'
 import Feedback from "./components/feedback"
+import UpdateUsername from "./components/user/updateUsername"
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
                     <Route path="/profile" component={profile} exact/>
                     <Route path="/addJob" component={addJob} exact />
                     <Route path="/feedback" component={Feedback} exact />
+                    <Route path="/updateUsername" component={UpdateUsername} exact />
 
                 </Switch>
             </div>

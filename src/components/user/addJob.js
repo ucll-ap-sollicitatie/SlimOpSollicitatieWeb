@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import {useHistory} from "react-router-dom";
-import {addJobdb} from "./apiUser";
+import {addJobdb, getJobs} from "./apiUser";
 import {connect} from "react-redux";
 import {useDispatch} from 'react-redux'
 
@@ -45,6 +45,11 @@ function AddJob(props){
         const result = await addJobdb(titel, inter, tech, tech2, email)
         console.log(result === true)
         if(result === true){
+
+            var jobs = await getJobs(email)
+            console.log("jobs:")
+            console.log(jobs)
+            props.updateUser(jobs)
             history.push("/profile");
         }
     }
