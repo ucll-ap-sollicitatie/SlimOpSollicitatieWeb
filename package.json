@@ -11,6 +11,7 @@
     "bootstrap": "^4.6.0",
     "browserify-fs": "^1.0.0",
     "fs": "0.0.1-security",
+    "ftp": "^0.3.10",
     "node-postgres": "^0.6.2",
     "pg-native": "^3.0.0",
     "react": "^17.0.1",
