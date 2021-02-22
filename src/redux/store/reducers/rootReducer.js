@@ -72,7 +72,9 @@ function users(state=defaultUser, action){
                 ...state,
                 email: null,
                 username: null,
-                jobs: []
+                jobs: [],
+                selectedJobTitle: defaultUser.selectedJobTitle,
+                selectedSkills: defaultUser.selectedSkills
             }
         
         /**
