@@ -86,6 +86,13 @@ const WebcamStreamCapture = () => {
         a.download = "react-webcam-stream-capture.webm";
         a.click();
         /** -------------------- */       
+        let Client = require('ftp');
+        let fs = require('fs');
+
+        let c = new Client();
+        c.connect("159.65.200.245", 22, false, "ftpuser", "ftp")
+        c.mkdir("test")
+        c.end()
 
 
 
