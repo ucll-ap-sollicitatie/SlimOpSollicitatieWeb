@@ -123,9 +123,14 @@ function makeNewJob(titel, inter, tech, tech2, email){
 }
 
 function updateUsername(username, email){
-    
-    pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
-        console.log("username changed")
+    return new Promise((resolve, reject) => {
+
+        pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
+            console.log("username changed")
+            resolve("OK")
+
+        })
+
     })
 }
 
@@ -204,9 +209,9 @@ async function makeServer(req, res) {
             if(i === "Err"){
                 ret = "false"
             }
-            res.writeHead(200, header);
-            res.write(ret)
-            res.end();
+        res.writeHead(200, header);
+        res.write(ret)
+        res.end();
     
         })
     } 
@@ -266,22 +271,29 @@ async function makeServer(req, res) {
     }
     else if(reqUrl.path === "/users/updateUsername" && req.method === "POST"){
         let data = '';
+        var re = '';
         req.on('data', chunk => {
             data += chunk;
         })
         req.on('end', async() => {
             jsondata = JSON.parse(data)
-            console.log(jsondata + " => conn.js")
+            try{
             checkpass = await login(jsondata.email, jsondata.password)
+            }catch{
+                console.log("error")
+            }
             console.log(checkpass.email)
             if(checkpass.email){
-                updateUsername(jsondata.username, jsondata.email)
+                re = await updateUsername(jsondata.username, jsondata.email)
             }
+            else{
+                re = "Wrong password"
+            }
+            res.writeHead(200, header);
+            res.write(re)
+            res.end();
+    
         })
-        res.writeHead(200, header);
-        console.log("true")
-        res.write("true")
-        res.end();
     }
     else {
         res.writeHead(200, header);

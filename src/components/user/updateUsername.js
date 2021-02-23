@@ -20,6 +20,7 @@ function UpdateUsername(props){
 
                     <label htmlFor="pass">password</label>
                     <input type="password" placeholder="pass" id="pass" onChange={(e) => setPassword(e.target.value)}/>
+                    <p id="passerror" style={{display: "none"}}>password is not correct</p>
 
                     <button>update username</button>
                 </form>
@@ -28,15 +29,24 @@ function UpdateUsername(props){
     )
 
     function handleSubmit(e){
+        e.preventDefault();
+
         //set in state
         if(username === ""){
             var elem = document.getElementById("userror")
             elem.style.display = "block";
         }
         else{
-            updateUsername(username, props.email, password)
-            history.push("/profile");    
+            var i = updateUsername(username, props.email, password)
+            if(i === "OK"){
+                history.push("/profile");    
+            }
+            else{
+                var elem = document.getElementById("passerror")
+                elem.style.display = "block";
+            }
         }
+
     }
 
 
