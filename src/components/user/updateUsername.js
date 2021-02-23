@@ -28,7 +28,7 @@ function UpdateUsername(props){
         </div>
     )
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
 
         //set in state
@@ -37,8 +37,11 @@ function UpdateUsername(props){
             elem.style.display = "block";
         }
         else{
-            var i = updateUsername(username, props.email, password)
+            var i = await updateUsername(username, props.email, password)
+            console.log(i)
             if(i === "OK"){
+                setUsername(username)
+                props.updateUsername(username)
                 history.push("/profile");    
             }
             else{
@@ -55,7 +58,16 @@ function UpdateUsername(props){
 const mapStateToProps = (state) => {
     return{
         email: state.users.email,
+        username: state.users.username
     }
 }
 
-export default connect(mapStateToProps) (UpdateUsername)
+const mapDispatchToProps = (dispatch) => {
+    return{
+        updateUsername: (username) => {
+            dispatch({type: 'UPDATE_USERNAME', payload: {username}})
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps) (UpdateUsername)

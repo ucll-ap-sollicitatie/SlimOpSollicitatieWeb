@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect  } from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import {deleteJobdb,getJobs} from "./apiUser";
@@ -19,6 +19,8 @@ function Profile(props){
     if(props.name != null){
         name = props.name
     }
+
+    
 
     //console.log(props.email)
     return (
@@ -76,6 +78,8 @@ function Profile(props){
         console.log(jobsnew)
         props.updateUser(jobsnew)
         setJobs(jobsnew)
+        history.push("/profile");
+
     }
 
     //er zijn volgens mij nog ergens await problemen bij de getJobs

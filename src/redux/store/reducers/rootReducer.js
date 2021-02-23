@@ -4,6 +4,7 @@ import {combineReducers} from "redux";
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 const UPDATE_USER_JOBS = 'UPDATE_USER_JOBS'
+const UPDATE_USERNAME = 'UPDATE_USERNAME'
 
 const SET_JOB = 'SET_JOB'
 
@@ -11,6 +12,13 @@ export function updateUser(jobs) {
     return {
         type: 'UPDATE_USER_JOBS',
         jobs
+    }
+}
+
+export function updateUsername(username) {
+    return {
+        type: 'UPDATE_USERNAME',
+        username
     }
 }
 
@@ -76,6 +84,13 @@ function users(state=defaultUser, action){
                 selectedJobTitle: defaultUser.selectedJobTitle,
                 selectedSkills: defaultUser.selectedSkills
             }
+
+        case UPDATE_USERNAME:
+            return{
+                ...state,
+                username: action.payload.username
+            } 
+
         
         /**
          * UPDATE USER JOBS:
@@ -95,6 +110,7 @@ function users(state=defaultUser, action){
                 selectedJobTitle: action.payload.selectedJobTitle,
                 selectedSkills: action.payload.selectedSkills
             }
+
             
         default:
             return state;
