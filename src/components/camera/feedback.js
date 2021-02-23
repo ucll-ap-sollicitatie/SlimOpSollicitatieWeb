@@ -1,8 +1,12 @@
 import { Helmet } from 'react-helmet';
+import {connect} from 'react-redux'
 
 function Feedback(props){
 
     const criteria = ["Criteria A", "Criteria B", "Criteria C", "Criteria D"]
+
+    document.getElementById("video").src = props.videoList
+
 
     return(
         <div className="App">
@@ -12,7 +16,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <img src="https://via.placeholder.com/768x432"></img>
+                <video id="video" controls></video>
                 
                 {criteria.map(criterium => 
                     {
@@ -32,5 +36,12 @@ function Feedback(props){
     function onChange(e){
         console.log(`Updated ${e.target.id} to ${e.target.checked}`)
     }
+
 }
-export default Feedback
+
+const mapStateToProps = (state) => {
+    return{
+      videoList: state.vidReducer.vidblob
+    }
+}
+export default connect (mapStateToProps)(Feedback);
