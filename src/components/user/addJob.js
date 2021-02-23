@@ -23,15 +23,19 @@ function AddJob(props){
                     <form onSubmit={handleSubmit} className="wite">
                         <label htmlFor="titel">Functie die je wil inoefenen</label>
                         <input type="text" placeholder="titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
+                        <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="inter">Interpersoonlijke vaardigheid</label>
                         <input type="text" placeholder="inter" id="inter" onChange={(e) => setInter(e.target.value)}/>
+                        <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Technische vaardigheid 1</label>
                         <input type="text" placeholder="Technische vaardigheid 1" id="tech" onChange={(e) => setTech(e.target.value)}/>
+                        <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech2">Technische vaardigheid 2</label>
                         <input type="text" placeholder="Technische vaardigheid 2" id="tech2" onChange={(e) => setTech2(e.target.value)}/>
+                        <p id="tech2error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <button>Voeg job toe</button>
                     </form>
@@ -42,14 +46,28 @@ function AddJob(props){
     async function handleSubmit(e)
     {
         e.preventDefault();
-        const result = await addJobdb(titel, inter, tech, tech2, email)
-        console.log(result === true)
-        if(result === true){
-            var jobs = await getJobs(email)
-            props.updateUser(jobs)
-            history.push("/profile");
-        }
+
+        if(ifEmpty("titel", titel) && ifEmpty("inter", inter)  && ifEmpty("tech", tech) && ifEmpty("tech2", tech2) ){
+            const result = await addJobdb(titel, inter, tech, tech2, email)
+            console.log(result === true)
+            if(result === true){
+                var jobs = await getJobs(email)
+                props.updateUser(jobs)
+                history.push("/profile");
+            }
+        }   
     }
+
+    function ifEmpty(field, elem){
+        if(elem === ""){
+            var el = document.getElementById(field + "error")
+            el.style.display = "block";
+            return false
+        }
+        return true
+
+    }
+
 }
 
 const mapStateToProps = (state) => {
