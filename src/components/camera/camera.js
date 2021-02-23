@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Webcam from "react-webcam"
 import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 import {connect} from "react-redux";
+
 var vl;
 
 

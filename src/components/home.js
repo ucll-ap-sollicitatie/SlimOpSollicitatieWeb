@@ -4,12 +4,18 @@ import '../App.css';
 import {Link} from "react-router-dom";
 import {connect} from 'react-redux'
 import { useHistory } from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 function Home(props) {
     const history = useHistory();
 
     return(
+        
     <div className="App">
+        <Helmet>
+            <title>SOS - Home</title>
+        </Helmet>
+        
         <h1>Welkom bij slim op sollicitatie</h1>
 
         <section>

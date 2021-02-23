@@ -3,6 +3,7 @@ import {useHistory} from "react-router-dom";
 import {addJobdb, getJobs} from "./apiUser";
 import {connect} from "react-redux";
 import {useDispatch} from 'react-redux'
+import { Helmet } from 'react-helmet';
 
 
 function AddJob(props){
@@ -18,6 +19,10 @@ function AddJob(props){
 
         return (
             <div className="centerPage">
+            <Helmet>
+                <title>SOS - Add Job</title>
+            </Helmet>
+
                 <div>
                     <h1>Maak een nieuwe job aan</h1>
                     <form onSubmit={handleSubmit} className="wite">

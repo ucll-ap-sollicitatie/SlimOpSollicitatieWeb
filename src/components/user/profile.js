@@ -2,6 +2,7 @@ import React, { useState,useEffect  } from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import {deleteJobdb,getJobs} from "./apiUser";
+import { Helmet } from 'react-helmet';
 
 
 
@@ -24,7 +25,12 @@ function Profile(props){
 
     //console.log(props.email)
     return (
+        
     <div className="centerPage">
+    <Helmet>
+        <title>SOS - Profile</title>
+    </Helmet>
+
     <div className="containter profilePage">
         <section>
             <div className="profileRight">
@@ -82,7 +88,6 @@ function Profile(props){
 
     }
 
-    //er zijn volgens mij nog ergens await problemen bij de getJobs
     async function deleteJob(e) {
         e.preventDefault();
         const result = await deleteJobdb(e.target.id, props.email)

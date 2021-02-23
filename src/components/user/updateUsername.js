@@ -2,6 +2,7 @@ import {updateUsername} from "./apiUser"
 import React, { useState } from 'react';
 import {connect} from "react-redux";
 import {Link, useHistory} from "react-router-dom";
+import { Helmet } from 'react-helmet';
 
 function UpdateUsername(props){
     const [username, setUsername] = useState('');
@@ -11,6 +12,10 @@ function UpdateUsername(props){
 
     return (
         <div className="centerPage">
+        <Helmet>
+            <title>SOS - Change Username</title>
+        </Helmet>
+
             <div>
                 <h1>Change username</h1>
                 <form onSubmit={handleSubmit} className="wite">

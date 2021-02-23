@@ -1,9 +1,14 @@
+import { Helmet } from 'react-helmet';
+
 function Feedback(props){
 
     const criteria = ["Criteria A", "Criteria B", "Criteria C", "Criteria D"]
 
     return(
         <div className="App">
+            <Helmet>
+                <title>SOS - Feedback</title>
+            </Helmet>
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
