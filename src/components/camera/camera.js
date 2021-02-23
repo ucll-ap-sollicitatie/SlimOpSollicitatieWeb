@@ -3,7 +3,7 @@ import Webcam from "react-webcam"
 import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 import {connect} from "react-redux";
 var vl;
-
+var videoBlob;
 
 function Camera(props) {
   var title = props.selectedJobTitle
@@ -12,6 +12,10 @@ function Camera(props) {
     return (
       <WebcamStreamCapture />
     );
+}
+
+function getPreview(){
+  return videoBlob;
 }
 
 var vragencounter;
@@ -84,8 +88,20 @@ const WebcamStreamCapture = () => {
         a.href = url;
         a.download = "react-webcam-stream-capture.webm";
         //a.click();
-        /** -------------------- */       
-        document.getElementById("showskill").src = URL.createObjectURL(blob);
+        /** -------------------- */      
+        videoBlob = URL.createObjectURL(blob); 
+        
+        document.getElementById("video").src = URL.createObjectURL(blob);
+        var video = document.getElementById("video"), track;
+        
+        video.addEventListener("onplay", function() {
+          track = this.addTextTrack("captions", "English", "en");
+          track.mode = "showing";
+        track.addCue(new VTTCue(0, 12, "[Test]"));
+        track.addCue(new VTTCue(18.7, 21.5, "This blade has a dark past."));
+        track.addCue(new VTTCue(22.8, 26.8, "It has shed much innocent blood."));
+        });
+        
 
 
 
@@ -178,7 +194,8 @@ const WebcamStreamCapture = () => {
         <button onClick={handleDownload}>Download</button>
       )}
       </div>
-      <video id="showskill" controls></video>
+      <video id="video" controls>
+      </video>
     </>
   );
   };
@@ -190,7 +207,7 @@ const WebcamStreamCapture = () => {
     }
 }
 
-export default connect (mapStateToProps)(Camera);
+export default connect (mapStateToProps)(Camera)(getPreview);
 
 /** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011
  *  Camera: react-webcam

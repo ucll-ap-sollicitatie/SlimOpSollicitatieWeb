@@ -10,7 +10,7 @@ import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
 import './components/css/AppMain.css'
-import Feedback from "./components/feedback"
+import Feedback from "./components/camera/feedback"
 import UpdateUsername from "./components/user/updateUsername"
 import ChooseJob from "./components/camera/chooseJob"
 import {connect} from "react-redux";
