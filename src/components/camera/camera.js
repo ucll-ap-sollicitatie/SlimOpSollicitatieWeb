@@ -208,7 +208,7 @@ const WebcamStreamCapture = () => {
     }
 }
 
-export default connect (mapStateToProps)(Camera)(getPreview);
+export default connect (mapStateToProps)(Camera);
 
 /** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011
  *  Camera: react-webcam
