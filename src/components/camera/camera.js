@@ -5,11 +5,12 @@ import {connect} from "react-redux";
 
 var vl;
 var videoBlob;
-
+var glprops;
 function Camera(props) {
   var title = props.selectedJobTitle
   var skills = props.selectedSkills
   vl = parsedvragenlijst(title, skills)
+  glprops = props
     return (
       <WebcamStreamCapture />
     );
@@ -90,7 +91,10 @@ const WebcamStreamCapture = () => {
         a.download = "react-webcam-stream-capture.webm";
         //a.click();
         /** -------------------- */      
-        videoBlob = URL.createObjectURL(blob); 
+        videoBlob = URL.createObjectURL(blob);
+        console.log(glprops) 
+        glprops.setBlob(videoBlob)
+        //update state here
         
         document.getElementById("video").src = URL.createObjectURL(blob);
         var video = document.getElementById("video"), track;
@@ -207,8 +211,15 @@ const WebcamStreamCapture = () => {
       selectedSkills: state.users.selectedSkills
     }
 }
+const mapDispatchToProps = (dispatch) => {
+  return{
+      setBlob: (vidblob) => {
+          dispatch({type: 'SET_BLOB', payload: {vidblob}})
+      }
+  }
+}
 
-export default connect (mapStateToProps)(Camera);
+export default connect (mapStateToProps,mapDispatchToProps)(Camera);
 
 /** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011
  *  Camera: react-webcam

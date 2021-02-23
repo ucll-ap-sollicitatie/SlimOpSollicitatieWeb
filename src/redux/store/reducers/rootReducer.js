@@ -56,6 +56,11 @@ const defaultUser =
         selectedSkills: ["Vriendelijk", "snel", "slim"]
     }
 
+const defaultVid =
+    {
+        vidblob: null
+    }
+
 
 function users(state=defaultUser, action){
     switch (action.type) {
@@ -91,7 +96,6 @@ function users(state=defaultUser, action){
                 username: action.payload.username
             } 
 
-        
         /**
          * UPDATE USER JOBS:
          *  change the jobs of a user
@@ -111,14 +115,37 @@ function users(state=defaultUser, action){
                 selectedSkills: action.payload.selectedSkills
             }
 
-            
         default:
             return state;
     }
 }
 
+//-------------------------------------------------------------------------------------------------------------
+
+const SET_BLOB = 'SET_BLOB'
+
+export function setBlob(blob) {
+    return {
+        type: 'SET_BLOB',
+        blob
+    }
+}
+function vidReducer(state=defaultVid, action){
+    switch (action.type) {
+        case SET_BLOB:
+            return{
+                ...state,
+                vidblob: action.payload.vidblob
+            }
+
+        default:
+            return state
+    }
+}
+
 const userApp = combineReducers({
-    users
+    users,
+    vidReducer
 })
 
 
