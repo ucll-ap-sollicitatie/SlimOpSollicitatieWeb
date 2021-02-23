@@ -16,9 +16,6 @@ function Camera(props) {
     );
 }
 
-function getPreview(){
-  return videoBlob;
-}
 
 var vragencounter;
 

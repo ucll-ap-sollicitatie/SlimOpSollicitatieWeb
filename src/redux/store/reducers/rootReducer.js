@@ -56,12 +56,6 @@ const defaultUser =
         selectedSkills: ["Vriendelijk", "snel", "slim"]
     }
 
-const defaultVid =
-    {
-        vidblob: null
-    }
-
-
 function users(state=defaultUser, action){
     switch (action.type) {
         /**
@@ -123,6 +117,10 @@ function users(state=defaultUser, action){
 //-------------------------------------------------------------------------------------------------------------
 
 const SET_BLOB = 'SET_BLOB'
+const defaultVid =
+    {
+        vidblob: []
+    }
 
 export function setBlob(blob) {
     return {
@@ -135,7 +133,7 @@ function vidReducer(state=defaultVid, action){
         case SET_BLOB:
             return{
                 ...state,
-                vidblob: action.payload.vidblob
+                vidblob: [...state.vidblob, action.payload.vidblob]
             }
 
         default:
