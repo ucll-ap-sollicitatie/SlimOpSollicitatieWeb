@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
+import { Helmet } from 'react-helmet';
 
 
 function ChooseJob(props){
@@ -9,6 +10,9 @@ function ChooseJob(props){
 
     return(
         <div>
+            <Helmet>
+                <title>SOS - Record</title>
+            </Helmet>
             <h1>Choose your job</h1>
             <p>You can add more jobs in your profile</p>
 

@@ -13,7 +13,9 @@ import {loadState, saveState} from './redux/localStorage.js'
 const persistedState = loadState()
 const store = createStore(
   userApp,
-  persistedState
+  persistedState,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+
   );
 store.subscribe(() => {
   saveState({users: store.getState().users})
