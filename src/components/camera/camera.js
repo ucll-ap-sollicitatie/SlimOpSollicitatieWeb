@@ -96,7 +96,7 @@ const WebcamStreamCapture = () => {
         glprops.setBlob(videoBlob)
         //update state here
         
-        document.getElementById("video").src = URL.createObjectURL(blob);
+/** VIDEO TRACKS
         var video = document.getElementById("video"), track;
         
         video.addEventListener("onplay", function() {
@@ -106,37 +106,7 @@ const WebcamStreamCapture = () => {
         track.addCue(new VTTCue(18.7, 21.5, "This blade has a dark past."));
         track.addCue(new VTTCue(22.8, 26.8, "It has shed much innocent blood."));
         });
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        */
         /** -------------------- */
         window.URL.revokeObjectURL(url);
         setRecordedChunks([]);
@@ -199,8 +169,6 @@ const WebcamStreamCapture = () => {
         <button onClick={handleDownload}>Download</button>
       )}
       </div>
-      <video id="video" controls>
-      </video>
     </>
   );
   };
