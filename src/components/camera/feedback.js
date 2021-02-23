@@ -5,9 +5,6 @@ function Feedback(props){
 
     const criteria = ["Criteria A", "Criteria B", "Criteria C", "Criteria D"]
 
-    document.getElementById("video").src = props.videoList
-
-
     return(
         <div className="App">
             <Helmet>
@@ -16,7 +13,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" controls></video>
+                <video id="video" src={props.videoList[0]} controls></video>
                 
                 {criteria.map(criterium => 
                     {
@@ -29,8 +26,8 @@ function Feedback(props){
                 )}
 
             </section>
-
         </div>
+        
     )
 
     function onChange(e){
