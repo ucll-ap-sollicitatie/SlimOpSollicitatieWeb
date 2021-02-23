@@ -14,7 +14,6 @@ function Camera(props) {
     );
 }
 
-
 var vragencounter;
 
 //the question list that will be used
@@ -84,22 +83,9 @@ const WebcamStreamCapture = () => {
         a.style = "display: none";
         a.href = url;
         a.download = "react-webcam-stream-capture.webm";
-        a.click();
+        //a.click();
         /** -------------------- */       
-        let Client = require('ftp');
-        let fs = require('fs');
-
-        let c = new Client();
-        c.connect("159.65.200.245", 22, false, "ftpuser", "ftp")
-        c.mkdir("test")
-        c.end()
-
-
-
-
-
-
-
+        document.getElementById("showskill").src = URL.createObjectURL(blob);
 
 
 
@@ -192,6 +178,7 @@ const WebcamStreamCapture = () => {
         <button onClick={handleDownload}>Download</button>
       )}
       </div>
+      <video id="showskill" controls></video>
     </>
   );
   };
@@ -205,7 +192,8 @@ const WebcamStreamCapture = () => {
 
 export default connect (mapStateToProps)(Camera);
 
-
 /** Camera code source: https://codepen.io/mozmorris/pen/yLYKzyp?editors=0011
  *  Camera: react-webcam
+ * 
+ * Webm preview: https://jsfiddle.net/Sjeiti/wnLxoejh/
  */
