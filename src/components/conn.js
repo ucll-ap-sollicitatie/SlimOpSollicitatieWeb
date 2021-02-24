@@ -155,6 +155,21 @@ function videoInDb(name, email){
     })
 }
 
+function getAllVidsFromUser(email){
+    return new Promise((resolve, reject) => {
+
+    pool.query('select * from slimopsol.videos where email = ' + "'" + email + "'", (err, res) => {
+        let arr = []
+        res.rows.forEach(row => {
+            arr.push(row.videoname)
+        })
+        resolve(arr)
+
+    })
+})
+
+}
+
 /**
  * Creates server, with possible requests.
  *
@@ -315,6 +330,31 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
+    }
+    else if(reqUrl.path === "/users/vidInDb" && req.method === "GET"){
+        let data = '';
+        let resul = ''
+        let resp = ''
+
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        try{
+        req.on('end', async() => {
+            jsondata = JSON.parse(data)
+            resul = await getAllVidsFromUser(jsondata.email)
+            resp = {"vids": resul}
+            console.log(resp)
+
+            res.writeHead(200, header);
+            res.write(JSON.stringify(resp))
+            res.end();
+        })
+        }catch(e){
+            console.log(e)
+        }
+        
+
     }
     else {
         res.writeHead(200, header);
