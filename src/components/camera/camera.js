@@ -3,15 +3,16 @@ import Webcam from "react-webcam"
 import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 import {connect} from "react-redux";
 import axios from "axios";
+import {videoInDb} from "../user/apiUser";
 
 var vl;
 var videoBlob;
 var glprops;
-var username
+var email;
 function Camera(props) {
   var title = props.selectedJobTitle
   var skills = props.selectedSkills
-  username = props.username
+    email = props.email
   vl = parsedvragenlijst(title, skills)
   glprops = props
     return (
@@ -98,7 +99,8 @@ const WebcamStreamCapture = () => {
         glprops.setBlob(videoBlob)
         const uplVid = new FormData()
         uplVid.append("new vid", blob, fileName)
-        uplVid.append("user", username)
+        uplVid.append("user", email)
+          videoInDb(fileName, email)
 
           axios({
               method: "POST",
@@ -109,7 +111,8 @@ const WebcamStreamCapture = () => {
               }
           })
               .then(response => {
-                      if (response.status === 200) {
+                  if (response.status === 200) {
+
                           console.log("Success, firm added")
                       } else {
                           console.log("Error occurred")
@@ -202,7 +205,7 @@ const WebcamStreamCapture = () => {
     return{
       selectedJobTitle: state.users.selectedJobTitle,
       selectedSkills: state.users.selectedSkills,
-      username: state.users.username
+      email: state.users.email
     }
 }
 const mapDispatchToProps = (dispatch) => {
