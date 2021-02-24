@@ -9,9 +9,6 @@ function Feedback(props){
     var scor = 0;
     var scores = {}
 
-    createEmptyMap()
-
-
     function createEmptyMap(){
         criteria.forEach(el => {
             scores[el] = 0
@@ -34,31 +31,48 @@ function Feedback(props){
                         return(
                         <section>
                             <p>{criterium}</p>
-
-                            <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed</button>
+                            <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
                             <button id={criterium} onClick={OKClick}>OK</button>
                             <div id={criterium + "ok"} style={{display: "none"}}>
-                                <label for={criterium + "score"}>Points (between 2 and 4):</label>
+                                <label for={criterium + "score"}>Points (between 2/5 and 4/5):</label>
                                 <input type="range" min="2" max="4" class="slider" id={criterium + "score"} onChange={updateSliderScore}/>
                             </div>
-                            <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
+                            <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed</button>
                         </section>)
                     }    
                 )}
 
                 <button onClick={calcScore}>Calculate score</button>
+                <button onClick={resetScore}>Reset score</button>
+                <p>{score}</p>
 
             </section>
         </div>
         
     )
 
+    function resetScore(){
+        createEmptyMap()
+        criteria.forEach(crit => {
+            var elem = document.getElementById(crit + "ZS")
+            elem.style.display = "";
+            var elem = document.getElementById(crit + "ZG")
+            elem.style.display = "";
+            var elem = document.getElementById(crit)
+            elem.style.display = "";
+
+            var elem = document.getElementById(crit + "ok")
+            elem.style.display = "none";
+        })
+        setScore(0)
+    }
+
     function calcScore(){
         var sum = 0
         Object.keys(scores).forEach(el => {
             sum += scores[el]
         })
-        console.log(sum)
+        setScore(sum)
     }
 
     function updateSliderScore(e){
@@ -66,6 +80,8 @@ function Feedback(props){
         var id = e.target.id
         id = id.split("score")[0]
         scores[id] = parseInt(val)
+        console.log(scores)
+
     }
 
     function ZGClick(e){
@@ -82,7 +98,8 @@ function Feedback(props){
         //OK
         var elem = document.getElementById(id)
         elem.style.display = "none";
-        
+        console.log(scores)
+
     }
 
     function ZSClick(e){
@@ -97,6 +114,8 @@ function Feedback(props){
         var elem = document.getElementById(id)
         elem.style.display = "none";
         scores[id] = 1
+        console.log(scores)
+
     }
 
 
