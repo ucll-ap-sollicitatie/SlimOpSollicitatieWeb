@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Webcam from "react-webcam"
 import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 import {connect} from "react-redux";
+import axios from "axios";
 
 var vl;
 var videoBlob;
@@ -91,6 +92,28 @@ const WebcamStreamCapture = () => {
         videoBlob = URL.createObjectURL(blob);
         console.log(glprops) 
         glprops.setBlob(videoBlob)
+        const uplVid = new FormData()
+        uplVid.append("new vid", blob)
+
+          axios({
+              method: "POST",
+              url: "http://localhost:5002/upload",
+              data: uplVid,
+              headers: {
+                  "Content-Type": "multipart/form-data"
+              }
+          })
+              .then(response => {
+                      if (response.status === 200) {
+                          console.log("Success, firm added")
+                      } else {
+                          console.log("Error occurred")
+                      }
+                  }
+              ).catch(e => {
+              console.log(e)
+          })
+
         //update state here
         
 /** VIDEO TRACKS
