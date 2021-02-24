@@ -30,6 +30,7 @@ app.use(
 );
 
 app.use(function (req, res, next) {
+    
     let origin = req.headers.origin;
     if (allowedOrigins.includes(origin)) {
         res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
@@ -73,5 +74,9 @@ const storage = multer.diskStorage({
 // a method we'll use to parse the incoming multipart FormData
 const upload = multer({storage});
 
+
+
+
 app.post("/upload", upload.any(), async function (req, res) {
+    var user = req.body.user
 })

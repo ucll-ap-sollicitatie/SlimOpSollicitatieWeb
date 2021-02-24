@@ -7,9 +7,11 @@ import axios from "axios";
 var vl;
 var videoBlob;
 var glprops;
+var username
 function Camera(props) {
   var title = props.selectedJobTitle
   var skills = props.selectedSkills
+  username = props.username
   vl = parsedvragenlijst(title, skills)
   glprops = props
     return (
@@ -90,10 +92,11 @@ const WebcamStreamCapture = () => {
         //a.click();
         /** -------------------- */      
         videoBlob = URL.createObjectURL(blob);
-        console.log(glprops) 
+        //console.log(glprops) 
         glprops.setBlob(videoBlob)
         const uplVid = new FormData()
         uplVid.append("new vid", blob)
+        uplVid.append("user", username)
 
           axios({
               method: "POST",
@@ -196,7 +199,8 @@ const WebcamStreamCapture = () => {
   const mapStateToProps = (state) => {
     return{
       selectedJobTitle: state.users.selectedJobTitle,
-      selectedSkills: state.users.selectedSkills
+      selectedSkills: state.users.selectedSkills,
+      username: state.users.username
     }
 }
 const mapDispatchToProps = (dispatch) => {
