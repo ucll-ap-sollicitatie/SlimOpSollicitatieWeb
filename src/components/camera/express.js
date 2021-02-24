@@ -12,6 +12,8 @@ dotenv.config();
 app.use(bodyParser.json());// declared origins from which the server will accept requests
 let allowedOrigins = ["http://localhost:3000"];
 // middleware which checks the origins
+
+var url = Date.now().toString()
 app.use(
     cors({
         origin: function (origin, callback) {
@@ -49,6 +51,8 @@ app.listen(process.env.PORT || 5002, function () {
     console.log("App listening on", 5002);
 });
 
+
+
 // the folder on the server to which the files are to be uploaded (has to be created manually else you'll get the error)
 const UPLOAD_FILES_DIR = "./uploads";
 // set up storage
@@ -63,7 +67,9 @@ const storage = multer.diskStorage({
         // if you want to get the name of the file w/o the extension
         let ogName = originalName.split('.')[0]
         // set the name based on the field that came with the request
-        let someNameToSet = Date.now().toString()
+        console.log(originalName)
+        
+        let someNameToSet = originalName
         // check extension
         const fileExtension = ".webm";
         // set the name
@@ -76,7 +82,10 @@ const upload = multer({storage});
 
 
 
-
-app.post("/upload", upload.any(), async function (req, res) {
+var d = Date.now()
+app.post("/upload", upload.any() , async function (req, res) {
     var user = req.body.user
+    //console.log(user)
+    url = user + d.toString() 
+    //console.log(url)
 })

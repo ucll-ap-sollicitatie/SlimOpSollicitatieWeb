@@ -92,10 +92,12 @@ const WebcamStreamCapture = () => {
         //a.click();
         /** -------------------- */      
         videoBlob = URL.createObjectURL(blob);
+        
+        var fileName = username + Date.now().toString()
         //console.log(glprops) 
         glprops.setBlob(videoBlob)
         const uplVid = new FormData()
-        uplVid.append("new vid", blob)
+        uplVid.append("new vid", blob, fileName)
         uplVid.append("user", username)
 
           axios({
