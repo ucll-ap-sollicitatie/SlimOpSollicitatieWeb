@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 function Feedback(props){
 
     const criteria = ["Criteria A", "Criteria B", "Criteria C", "Criteria D"]
+
     const [score, setScore] = useState('');
     var scor = 0;
     var scores = {}
@@ -26,6 +27,7 @@ function Feedback(props){
             <section id="vid-feedback-container">
                 <video id="video" src={props.videoList[0]} controls></video>
                 
+
                 {criteria.map(criterium => 
                     {
                         return(
