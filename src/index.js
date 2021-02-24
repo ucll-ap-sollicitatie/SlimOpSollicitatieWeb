@@ -18,7 +18,10 @@ const store = createStore(
 
   );
 store.subscribe(() => {
-  saveState({users: store.getState().users})
+  saveState(
+    {users: store.getState().users,
+    vidReducer: store.getState().vidblob
+    })
 })
 ReactDOM.render(
   <React.StrictMode>
