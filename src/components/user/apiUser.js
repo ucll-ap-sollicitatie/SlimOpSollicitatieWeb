@@ -201,6 +201,31 @@ async function updateUsername(username, eml, pss){
     })
 }
 
+async function videoInDb(name, email){
+        return new Promise((resolve, reject) => {
+
+            axios
+
+                .post(`${webIp}/users/vidInDb`,
+                    {
+                        name: name,
+                        email: email
+                    },
+                    {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    }).then(function (response) {
+                console.log("respData: " + response.data)
+                resolve(response.data)
+                return response.data
+            }).catch(function (error) {
+                return "NOK"
+            });
+        })
+}
+
+
 export {
     logindb,
     registerdb,
@@ -208,5 +233,6 @@ export {
     deleteJobdb,
     getAlldatadb,
     getJobs,
-    updateUsername
+    updateUsername,
+    videoInDb
 }

@@ -148,6 +148,13 @@ function deleteJob(title, email) {
     })
 }
 
+
+function videoInDb(name, email){
+    pool.query('insert into slimopsol.videos(videoname, email) values (' + "'" + name + "', '" + email + "')" , (err, res) => {
+        console.log(err)
+    })
+}
+
 /**
  * Creates server, with possible requests.
  *
@@ -294,6 +301,20 @@ async function makeServer(req, res) {
             res.end();
     
         })
+    } else if(reqUrl.path === "/users/vidInDb" && req.method === "POST"){
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            console.log(jsondata)
+            videoInDb(jsondata.name, jsondata.email)
+        })
+        res.writeHead(200, header);
+        console.log("true")
+        res.write("true")
+        res.end();
     }
     else {
         res.writeHead(200, header);
