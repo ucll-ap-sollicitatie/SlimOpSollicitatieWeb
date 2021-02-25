@@ -227,7 +227,7 @@ async function videoInDb(name, email){
 
 async function getAllVidsDb(email){
     return new Promise((resolve, reject) => {
-        var data = JSON.stringify({"email":"jens.massie@mail.com"});
+        var data = JSON.stringify({"email": email});
 
         var config = {
             method: 'get',
