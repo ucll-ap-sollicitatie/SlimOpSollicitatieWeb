@@ -111,7 +111,7 @@ const WebcamStreamCapture = () => {
         /** -------------------- */      
         videoBlob = URL.createObjectURL(blob);
         
-        var fileName = email + Date.now().toString() + ".mp4"
+        var fileName = email + Date.now().toString() + ".webm"
         var txtName = email + Date.now().toString() + ".txt"
         //console.log(glprops)
         glprops.setBlob(videoBlob)
