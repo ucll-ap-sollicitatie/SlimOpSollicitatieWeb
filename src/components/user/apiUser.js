@@ -225,6 +225,29 @@ async function videoInDb(name, email){
         })
 }
 
+async function getAllVidsDb(email){
+    return new Promise((resolve, reject) => {
+        var data = JSON.stringify({"email":"jens.massie@mail.com"});
+
+        var config = {
+            method: 'get',
+            url: 'http://127.0.0.1:3001/users/vidInDb',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            data : data
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    })
+}
+
 
 
 export {
@@ -235,5 +258,6 @@ export {
     getAlldatadb,
     getJobs,
     updateUsername,
-    videoInDb
+    videoInDb,
+    getAllVidsDb
 }
