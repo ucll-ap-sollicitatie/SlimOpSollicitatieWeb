@@ -20,7 +20,9 @@ function Home(props) {
 
         <section>
         <h3>Bekijk hier je meest recente videos</h3>
-        <img src="https://via.placeholder.com/352x240" style={imageStyle1}/>
+            <video controls width="360">
+                <source src="http://localhost:5002/video" type="video/webm"/>
+            </video>
         <img src="https://via.placeholder.com/352x240" style={imageStyle}/>
         </section>
         <br/>
