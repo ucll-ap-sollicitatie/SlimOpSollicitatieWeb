@@ -46,6 +46,7 @@ const imageStyle1= {
 async function recenVisq(email) {
     try{
     var vids = await getRecentVideos("t@t")
+    console.log("recenVisq: " + vids)
     }catch(err){
         console.log(err)
     }

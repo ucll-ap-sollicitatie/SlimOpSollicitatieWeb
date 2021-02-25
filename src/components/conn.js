@@ -197,6 +197,7 @@ async function makeServer(req, res) {
     const reqUrl = url.parse(req.url, true);
     const path = reqUrl.path
     const regex = /\/users\/getAll\?user=(.*)/
+    const regex2 = /\/users\/getRecent\?user=(.*)/
 
     /**
      * Login user
@@ -357,32 +358,21 @@ async function makeServer(req, res) {
         } catch (e) {
             console.log(e)
         }
-    } else if (reqUrl.path === "/users/getRecent" && req.method === "GET") {
+    } else if (path.match(regex2) != null && req.method === "GET") {
         let data = '';
-        let resul = ''
-        let resp = ''
-
-        req.on('data', chunk => {
-            data += chunk;
-        })
+        email = path.match(regex2)[1]
+        console.log(email)
         try {
-        req.on('end', async () => {
-                console.log("data: " + data)
-                jsondata = JSON.parse(data)
-                
-                resul = await get2MostRecentVids(jsondata.email)
-                obj = {
-                    v1: resul[0],
-                    v2: resul[1]
-                }
-                res.writeHead(200, header);
-                res.write(JSON.stringify(obj))
-                res.end();
-            })
-        }catch (e) {
-            console.log(e)
+            resul = await get2MostRecentVids(email)
+            console.log(resul)
+        }catch (err) {
+            console.log(err)
         }
-        
+        res.writeHead(200, header);
+        res.write(JSON.stringify(resul))
+        res.end();
+
+
     } else {
         res.writeHead(200, header);
         console.log("TRUE")

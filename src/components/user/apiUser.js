@@ -4,27 +4,7 @@ const webIp = "http://127.0.0.1:3001"
 /**
  * get all jobs of a user
  */
-async function getJobs(eml){
-    return new Promise((resolve, reject) => {
 
-    var config = {
-        method: 'get',
-        url: `http://127.0.0.1:3001/users/getAll?user=${eml}`,
-        headers: { },
-      };
-      
-      axios(config)
-      .then(
-        function (response) {
-            console.log("respData: " + response.data)
-            resolve(response.data)
-            return response.data
-        })
-        .catch(function (error) {
-            return "NOK"
-        });
-    })
-}
 
 async function getAlldatadb(eml){
     return new Promise((resolve, reject) => {
@@ -205,7 +185,6 @@ async function videoInDb(name, email){
         return new Promise((resolve, reject) => {
 
             axios
-
                 .post(`${webIp}/users/vidInDb`,
                     {
                         name: name,
@@ -227,44 +206,43 @@ async function videoInDb(name, email){
 
 async function getAllVidsDb(email){
     return new Promise((resolve, reject) => {
-        var data = JSON.stringify({"email": email});
 
-        var config = {
-            method: 'get',
-            url: 'http://127.0.0.1:3001/users/vidInDb',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            data : data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
     })
 }
+async function getJobs(eml){
+    return new Promise((resolve, reject) => {
 
+    var config = {
+        method: 'get',
+        url: `http://127.0.0.1:3001/users/getAll?user=${eml}`,
+        headers: { },
+      };
+      
+      axios(config)
+      .then(
+        function (response) {
+            console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        })
+        .catch(function (error) {
+            return "NOK"
+        });
+    })
+}
 async function getRecentVideos(email){
     return new Promise((resolve, reject) => {   
-    
-        var data = JSON.stringify({"email":"t@t"});
-    
+        
         var config = {
             method: 'get',
-            url: 'http://127.0.0.1:3001/users/getRecent',
-            headers: { 
-             'Content-Type': 'application/json'
-            },
-        data : data
+            url: `http://127.0.0.1:3001/users/getRecent?user=${email}`,
+            headers: {},
       };
       
       axios(config)
       .then(function (response) {
-        console.log(JSON.stringify(response.data));
+        resolve(response.data)
+        console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);
