@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 
 function Home(props) {
     const history = useHistory();
-
+    const vid = "http://localhost:5002/video/" + "jens.massie@mail.com1614246132774.webm"
     return(
         
     <div className="App">
@@ -21,14 +21,13 @@ function Home(props) {
         <section>
         <h3>Bekijk hier je meest recente videos</h3>
             <video controls width="360">
-                <source src="http://localhost:5002/video" type="video/webm"/>
+                <source src={vid} type="video/webm"/>
             </video>
         <img src="https://via.placeholder.com/352x240" style={imageStyle}/>
         </section>
         <br/>
         <br/>
         <Link to="/chooseJob"><button>Neem een nieuwe video op</button></Link>
-        <button onClick={getvids}>click</button>
     </div>
     )
 }
@@ -41,12 +40,7 @@ const imageStyle1= {
 }
 
 
-function getvids() {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', './uploads/jens.massie@mail.com1614243669730.webm', true);
-    xhr.responseType = 'blob';
-    xhr.send();
-}
+
 
 const mapStateToProps = (state) => {
     console.log("state")
