@@ -4,6 +4,7 @@ let multer = require("multer");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const dotenv = require('dotenv');
+const fs = require("fs");
 // create the server
 const app = express();
 // set up dotenv
@@ -79,4 +80,28 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 app.post("/upload", upload.any() , async function (req, res) {
+})
+
+app.get("/video", function(req, res){
+    const range = req.headers.range;
+    if(!range){
+        res.status(400).send("Requires header range")
+    }
+
+
+    const videoPath = "./uploads/" + "t@t1614243644738.webm"
+    const videoSiza = fs.statSync(videoPath).size
+    const chunksize = 10**6
+    const start = Number(range.replace(/\D/g,""))
+    const end = Math.min(start + chunksize, videoSiza - 1)
+    const contentlength = end - start + 1;
+    const headers = {
+        "Content-Range": `bytes ${start} - ${end}/${videoSiza}`,
+        "Accept-Range": `bytes`,
+        "Content-Length": contentlength,
+        "Content-type": "video/webm",
+    };
+
+    const videoStream = fs.createReadStream(videoPath, {start, end})
+    videoStream.pipe(res)
 })
