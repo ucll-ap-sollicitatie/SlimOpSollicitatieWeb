@@ -8,7 +8,7 @@ import { Helmet } from 'react-helmet';
 
 function Home(props) {
     const history = useHistory();
-    const vid = "http://localhost:5002/video/" + ""
+    const vid = "http://localhost:5002/video/" + "t@t1614250468128.webm"
     return(
         
     <div className="App">
