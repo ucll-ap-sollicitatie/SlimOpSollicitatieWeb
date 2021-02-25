@@ -66,9 +66,7 @@ function login(email, password) {
 
             if (uname === email && hashpw === pw) {
                 console.log("Ingelogd")
-            }
-
-            else {
+            } else {
                 resolve("err")
                 return
             }
@@ -87,25 +85,25 @@ function login(email, password) {
 function register(email, password, username, confPass) {
     return new Promise((resolve, reject) => {
 
-    let hPassword = hashCode(password);
-    let confHashPassword = hashCode(confPass);
-    if (!email.includes("@") || confHashPassword.toString() !== hPassword.toString()) {
-        resolve("Err")
-        return "Err"
-    }
-    console.log("registering user with email: " + email + " password: " + password + " username: " + username)
-    pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
-        console.log("G")
-        makeJob(email)
-        resolve("OK")
+        let hPassword = hashCode(password);
+        let confHashPassword = hashCode(confPass);
+        if (!email.includes("@") || confHashPassword.toString() !== hPassword.toString()) {
+            resolve("Err")
+            return "Err"
+        }
+        console.log("registering user with email: " + email + " password: " + password + " username: " + username)
+        pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
+            console.log("G")
+            makeJob(email)
+            resolve("OK")
+        })
     })
-})
 
 }
 
 function getJobs(email) {
     pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
-        jobs =  res.rows
+        jobs = res.rows
     })
     return jobs
 }
@@ -115,14 +113,14 @@ function makeJob(email) {
     })
 }
 
-function makeNewJob(titel, inter, tech, tech2, email){
+function makeNewJob(titel, inter, tech, tech2, email) {
     pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')", (err, res) => {
-        console.log('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel +"', '" + inter +"', '" + tech + "', '" + tech2 + "', '" + email +"', '" + titel + email + "')")
+        console.log('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')")
         console.log(err)
     })
 }
 
-function updateUsername(username, email){
+function updateUsername(username, email) {
     return new Promise((resolve, reject) => {
 
         pool.query('update slimopsol.users set username =' + "'" + username + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
@@ -134,7 +132,7 @@ function updateUsername(username, email){
     })
 }
 
-function updatePassword(password, email){
+function updatePassword(password, email) {
     let hashpw = hashCode(password).toString()
 
     pool.query('update slimopsol.users set hashedpassword =' + "'" + hashpw + "'" + 'where email = ' + "'" + email + "'", (err, res) => {
@@ -149,25 +147,38 @@ function deleteJob(title, email) {
 }
 
 
-function videoInDb(name, email){
-    pool.query('insert into slimopsol.videos(videoname, email) values (' + "'" + name + "', '" + email + "')" , (err, res) => {
+function videoInDb(name, email) {
+    pool.query('insert into slimopsol.videos(videoname, email) values (' + "'" + name + "', '" + email + "')", (err, res) => {
         console.log(err)
     })
 }
 
-function getAllVidsFromUser(email){
+function getAllVidsFromUser(email) {
     return new Promise((resolve, reject) => {
 
-    pool.query('select * from slimopsol.videos where email = ' + "'" + email + "'", (err, res) => {
-        let arr = []
-        res.rows.forEach(row => {
-            arr.push(row.videoname)
+        pool.query('select * from slimopsol.videos where email = ' + "'" + email + "'", (err, res) => {
+            let arr = []
+            res.rows.forEach(row => {
+                arr.push(row.videoname)
+            })
+            resolve(arr)
+
         })
-        resolve(arr)
-
     })
-})
 
+}
+
+function get2MostRecentVids(email) {
+    return new Promise((resolve, reject) => {
+
+        pool.query('select * from videos where email =' + "'" + email + "'" + 'order by videoname desc', (err, res) => {
+            let arr = []
+            res.rows.forEach(row => {
+                arr.push(row.videoname)
+            })
+            resolve(arr)
+        })
+    })
 }
 
 /**
@@ -216,8 +227,7 @@ async function makeServer(req, res) {
         /**
          * Register user
          */
-    } 
-    else if (reqUrl.pathname == "/users/register" && req.method === "POST") {
+    } else if (reqUrl.pathname == "/users/register" && req.method === "POST") {
         let data = '';
         var ret = "true"
         //data will be the ?binary data?
@@ -225,19 +235,18 @@ async function makeServer(req, res) {
             data += chunk;
         })
         //parse data to JSON
-        req.on('end', async() => {
+        req.on('end', async () => {
             jsondata = JSON.parse(data)
             var i = await register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass)
-            if(i === "Err"){
+            if (i === "Err") {
                 ret = "false"
             }
-        res.writeHead(200, header);
-        res.write(ret)
-        res.end();
-    
+            res.writeHead(200, header);
+            res.write(ret)
+            res.end();
+
         })
-    } 
-    else if(reqUrl.path === "/users/addjob" && req.method === "POST"){
+    } else if (reqUrl.path === "/users/addjob" && req.method === "POST") {
         let data = '';
         req.on('data', chunk => {
             data += chunk;
@@ -251,8 +260,7 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
-    }
-    else if(reqUrl.path === "/users/deletejob" && req.method === "POST"){
+    } else if (reqUrl.path === "/users/deletejob" && req.method === "POST") {
         let data = '';
         req.on('data', chunk => {
             data += chunk;
@@ -266,15 +274,14 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
-    }
-    else if(path.match(regex) != null && req.method === "GET"){
+    } else if (path.match(regex) != null && req.method === "GET") {
         let data = '';
         email = path.match(regex)[1]
         console.log(email + " => Conn.js")
-        try{
+        try {
             jobs = await getJobs(email)
             console.log(jobs)
-        }catch(err){
+        } catch (err) {
             console.log(err)
         }
         // req.on('end', async () => {
@@ -290,33 +297,31 @@ async function makeServer(req, res) {
         res.writeHead(200, header);
         res.write(JSON.stringify(jobs))
         res.end();
-    }
-    else if(reqUrl.path === "/users/updateUsername" && req.method === "POST"){
+    } else if (reqUrl.path === "/users/updateUsername" && req.method === "POST") {
         let data = '';
         var re = '';
         req.on('data', chunk => {
             data += chunk;
         })
-        req.on('end', async() => {
+        req.on('end', async () => {
             jsondata = JSON.parse(data)
-            try{
-            checkpass = await login(jsondata.email, jsondata.password)
-            }catch{
+            try {
+                checkpass = await login(jsondata.email, jsondata.password)
+            } catch {
                 console.log("error")
             }
             console.log(checkpass.email)
-            if(checkpass.email){
+            if (checkpass.email) {
                 re = await updateUsername(jsondata.username, jsondata.email)
-            }
-            else{
+            } else {
                 re = "Wrong password"
             }
             res.writeHead(200, header);
             res.write(re)
             res.end();
-    
+
         })
-    } else if(reqUrl.path === "/users/vidInDb" && req.method === "POST"){
+    } else if (reqUrl.path === "/users/vidInDb" && req.method === "POST") {
         let data = '';
         req.on('data', chunk => {
             data += chunk;
@@ -330,8 +335,7 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
-    }
-    else if(reqUrl.path === "/users/vidInDb" && req.method === "GET"){
+    } else if (reqUrl.path === "/users/vidInDb" && req.method === "GET") {
         let data = '';
         let resul = ''
         let resp = ''
@@ -339,28 +343,47 @@ async function makeServer(req, res) {
         req.on('data', chunk => {
             data += chunk;
         })
-        try{
-        req.on('end', async() => {
-            jsondata = JSON.parse(data)
-            resul = await getAllVidsFromUser(jsondata.email)
-            resp = {"vids": resul}
-            console.log(resp)
+        try {
+            req.on('end', async () => {
+                jsondata = JSON.parse(data)
+                resul = await getAllVidsFromUser(jsondata.email)
+                resp = {"vids": resul}
+                console.log(resp)
 
-            res.writeHead(200, header);
-            res.write(JSON.stringify(resp))
-            res.end();
-        })
-        }catch(e){
+                res.writeHead(200, header);
+                res.write(JSON.stringify(resp))
+                res.end();
+            })
+        } catch (e) {
             console.log(e)
         }
-        
+    } else if (reqUrl.path === "/users/getRecent" && req.method === "GET") {
+        let data = '';
+        let resul = ''
+        let resp = ''
 
-    }
-    else {
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        try {
+            req.on('end', async () => {
+                jsondata = JSON.parse(data)
+                resul = await get2MostRecentVids(jsondata.email)
+                resp = {"vids": resul}
+                console.log(resp)
+
+                res.writeHead(200, header);
+                res.write(JSON.stringify(resp))
+                res.end();
+            })
+        } catch (e) {
+            console.log(e)
+        }
+    } else {
         res.writeHead(200, header);
         console.log("true")
         res.write("true")
-        res.end();        
+        res.end();
     }
 
 }
