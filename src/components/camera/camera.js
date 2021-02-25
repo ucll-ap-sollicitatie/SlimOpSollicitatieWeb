@@ -22,6 +22,8 @@ function Camera(props) {
 
 
 var vragencounter;
+var startTimer;
+var timeArray;
 
 //the question list that will be used
 //const vl = parsedvragenlijst("title", ["Vriendelijk", "Snel"])
@@ -32,6 +34,9 @@ const WebcamStreamCapture = () => {
     const [capturing, setCapturing] = React.useState(false);
     const [recordedChunks, setRecordedChunks] = React.useState([]);
     function NextQuestion(){
+      timeArray.push(((new Date()).getTime() - startTimer) / 1000)
+      timeArray.push(vl[vragencounter])
+      console.log(timeArray.join('\r\n'))
       if(vragencounter < vl.length -1 ){
         vragencounter++;
         if(vragencounter == vl.length -1){
@@ -52,6 +57,8 @@ const WebcamStreamCapture = () => {
   
     const handleStartCaptureClick = React.useCallback(() => { /** Start */
       vragencounter = 0;
+      timeArray = [];
+      startTimer = (new Date()).getTime()
       showNextButton();
       setCapturing(true);
       mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
@@ -74,6 +81,7 @@ const WebcamStreamCapture = () => {
     );
   
     const handleStopCaptureClick = React.useCallback(() => { /** Stop */
+      document.getElementById("overlay").innerHTML = vl[0]
       document.getElementById("nextQButton").style.visibility = "hidden"
       mediaRecorderRef.current.stop();
       setCapturing(false);
