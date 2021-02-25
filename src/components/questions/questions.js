@@ -8,7 +8,7 @@ const vrCar = "Welke ervering heb jij die relevant is om deze taken uit te voere
 const vrCom = "Je hebt aangegeven dat competentie -COMP- belangrijk is. Geef een voorbeeld van een situatie waarin je deze competentie hebt toegepast."
 const vrA = "Wat is jouw motivatie voor deze job als -JOB-?"
 const vrU = "Welke vragen heb jij over deze job of over het werken bij ons?"
-const vrS = "Score"
+const vrS = "Geef een score van 1-5 hoe je jezelf deze job ziet doen?"
 
 function parsedvragenlijst(functie, skills){
     var list = []
