@@ -5,15 +5,20 @@ import {Link} from "react-router-dom";
 import {connect} from 'react-redux'
 import { useHistory } from "react-router-dom";
 import { Helmet } from 'react-helmet';
+import {getRecentVideos} from './user/apiUser'
 
 function Home(props) {
     const history = useHistory();
+
+
     const vid = "http://localhost:5002/video/" + ""
     return(
     <div className="App">
         <Helmet>
             <title>SOS - Home</title>
         </Helmet>
+
+        <button onClick={recenVisq}>B</button>
         
         <h1>Welkom bij slim op sollicitatie</h1>
 
@@ -38,7 +43,14 @@ const imageStyle1= {
     marginRight: 100,
 }
 
-
+async function recenVisq(email) {
+    try{
+    var vids = await getRecentVideos("t@t")
+    }catch(err){
+        console.log(err)
+    }
+    return vids 
+}
 
 
 const mapStateToProps = (state) => {

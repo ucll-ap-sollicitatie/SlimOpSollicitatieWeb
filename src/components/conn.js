@@ -171,7 +171,7 @@ function getAllVidsFromUser(email) {
 function get2MostRecentVids(email) {
     return new Promise((resolve, reject) => {
 
-        pool.query('select * from videos where email =' + "'" + email + "'" + 'order by videoname desc', (err, res) => {
+        pool.query('select * from slimopsol.videos where email =' + "'" + email + "'" + 'order by videoname desc LIMIT 2', (err, res) => {
             let arr = []
             res.rows.forEach(row => {
                 arr.push(row.videoname)
@@ -366,22 +366,26 @@ async function makeServer(req, res) {
             data += chunk;
         })
         try {
-            req.on('end', async () => {
+        req.on('end', async () => {
+                console.log("data: " + data)
                 jsondata = JSON.parse(data)
+                
                 resul = await get2MostRecentVids(jsondata.email)
-                resp = {"vids": resul}
-                console.log(resp)
-
+                obj = {
+                    v1: resul[0],
+                    v2: resul[1]
+                }
                 res.writeHead(200, header);
-                res.write(JSON.stringify(resp))
+                res.write(JSON.stringify(obj))
                 res.end();
             })
-        } catch (e) {
+        }catch (e) {
             console.log(e)
         }
+        
     } else {
         res.writeHead(200, header);
-        console.log("true")
+        console.log("TRUE")
         res.write("true")
         res.end();
     }

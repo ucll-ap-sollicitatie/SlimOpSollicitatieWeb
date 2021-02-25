@@ -15,7 +15,6 @@ function ChooseJob(props){
             </Helmet>
             <h1>Choose your job</h1>
             <p>You can add more jobs in your profile</p>
-            
             {
                     props.jobs.map(job => { 
                         //console.log(job.titel)

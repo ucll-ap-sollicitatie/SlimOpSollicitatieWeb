@@ -249,26 +249,27 @@ async function getAllVidsDb(email){
 }
 
 async function getRecentVideos(email){
-    return new Promise((resolve, reject) => {
-        var data = JSON.stringify({"email": email});
-
+    return new Promise((resolve, reject) => {   
+    
+        var data = JSON.stringify({"email":"t@t"});
+    
         var config = {
             method: 'get',
             url: 'http://127.0.0.1:3001/users/getRecent',
-            headers: {
-                'Content-Type': 'application/json'
+            headers: { 
+             'Content-Type': 'application/json'
             },
-            data : data
-        };
-
-        axios(config)
-            .then(function (response) {
-                console.log(JSON.stringify(response.data));
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        data : data
+      };
+      
+      axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
     })
+})
 }
 
 
