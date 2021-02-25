@@ -24,6 +24,11 @@ function Camera(props) {
 var vragencounter;
 var startTimer;
 var timeArray;
+var txt;
+var uploadTxt
+
+
+
 
 //the question list that will be used
 //const vl = parsedvragenlijst("title", ["Vriendelijk", "Snel"])
@@ -36,7 +41,11 @@ const WebcamStreamCapture = () => {
     function NextQuestion(){
       timeArray.push(((new Date()).getTime() - startTimer) / 1000)
       timeArray.push(vl[vragencounter])
-      console.log(timeArray.join('\r\n'))
+      // console.log(timeArray.join('\r\n'))
+        txt = timeArray.join('\r\n')
+        console.log(txt.toString())
+        uploadTxt = makeTxt(txt.toString())
+        console.log(uploadTxt)
       if(vragencounter < vl.length -1 ){
         vragencounter++;
         if(vragencounter == vl.length -1){
@@ -102,12 +111,13 @@ const WebcamStreamCapture = () => {
         /** -------------------- */      
         videoBlob = URL.createObjectURL(blob);
         
-        var fileName = email + Date.now().toString()
-        //console.log(glprops) 
+        var fileName = email + Date.now().toString() + ".webm"
+        var txtName = email + Date.now().toString() + ".txt"
+        //console.log(glprops)
         glprops.setBlob(videoBlob)
         const uplVid = new FormData()
         uplVid.append("new vid", blob, fileName)
-        uplVid.append("user", email)
+        uplVid.append("txt", uploadTxt, txtName)
           videoInDb(fileName, email)
 
           axios({
@@ -130,7 +140,7 @@ const WebcamStreamCapture = () => {
               console.log(e)
           })
 
-        //update state here
+          //update state here
         
 /** VIDEO TRACKS
         var video = document.getElementById("video"), track;
@@ -222,6 +232,13 @@ const mapDispatchToProps = (dispatch) => {
           dispatch({type: 'SET_BLOB', payload: {vidblob}})
       }
   }
+}
+
+function makeTxt(text){
+      var data = new Blob([text], {type: 'text/plain'});
+
+
+      return data
 }
 
 export default connect (mapStateToProps,mapDispatchToProps)(Camera);

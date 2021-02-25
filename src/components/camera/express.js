@@ -13,6 +13,8 @@ app.use(bodyParser.json());// declared origins from which the server will accept
 let allowedOrigins = ["http://localhost:3000"];
 // middleware which checks the origins
 
+var d = Date.now()
+
 var url = Date.now().toString()
 app.use(
     cors({
@@ -52,8 +54,6 @@ app.listen(process.env.PORT || 5002, function () {
 });
 
 
-
-// the folder on the server to which the files are to be uploaded (has to be created manually else you'll get the error)
 const UPLOAD_FILES_DIR = "./uploads";
 // set up storage
 const storage = multer.diskStorage({
@@ -68,24 +68,15 @@ const storage = multer.diskStorage({
         let ogName = originalName.split('.')[0]
         // set the name based on the field that came with the request
         console.log(originalName)
-        
-        let someNameToSet = originalName
+
         // check extension
-        const fileExtension = ".webm";
         // set the name
-        cb(null, `${someNameToSet}${fileExtension}`);
+        cb(null, `${originalName}`);
     }
 });
 
 // a method we'll use to parse the incoming multipart FormData
 const upload = multer({storage});
 
-
-
-var d = Date.now()
 app.post("/upload", upload.any() , async function (req, res) {
-    var user = req.body.user
-    //console.log(user)
-    url = user + d.toString() 
-    //console.log(url)
 })
