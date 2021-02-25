@@ -9,6 +9,7 @@ import Camera from "./components/camera/camera"
 import loginPage from "./components/user/login";
 import profile from "./components/user/profile";
 import addJob from "./components/user/addJob";
+import FeedbackSelection from "./components/camera/feedbackSelection"
 import './components/css/AppMain.css'
 import Feedback from "./components/camera/feedback"
 import UpdateUsername from "./components/user/updateUsername"
@@ -70,7 +71,9 @@ function App(props) {
                     <Route path="/feedback" component={Feedback} exact />
                     <Route path="/updateUsername" component={UpdateUsername} exact />
                     <Route path="/chooseJob" component={ChooseJob} exact />
+                    <Route path="/feedbackSelection" component={FeedbackSelection} exact />
 
+                    
                 </Switch>
             </div>
         </BrowserRouter>

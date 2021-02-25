@@ -198,6 +198,7 @@ async function makeServer(req, res) {
     const path = reqUrl.path
     const regex = /\/users\/getAll\?user=(.*)/
     const regex2 = /\/users\/getRecent\?user=(.*)/
+    const regex3 = /\/users\/vidInDb\?user=(.*)/
 
     /**
      * Login user
@@ -336,30 +337,21 @@ async function makeServer(req, res) {
         console.log("true")
         res.write("true")
         res.end();
-    } else if (reqUrl.path === "/users/vidInDb" && req.method === "GET") {
-        let data = '';
-        let resul = ''
-        let resp = ''
-
-        req.on('data', chunk => {
-            data += chunk;
-        })
+    } else if (path.match(regex3) != null && req.method === "GET") {
+        email = path.match(regex3)[1]
         try {
-            req.on('end', async () => {
-                jsondata = JSON.parse(data)
-                resul = await getAllVidsFromUser(jsondata.email)
-                resp = {"vids": resul}
-                console.log(resp)
-
-                res.writeHead(200, header);
-                res.write(JSON.stringify(resp))
-                res.end();
-            })
-        } catch (e) {
-            console.log(e)
+            resul = await getAllVidsFromUser(email)
+        }catch(err){
         }
+        console.log(JSON.stringify(resul))
+        res.writeHead(200, header);
+        res.write(JSON.stringify(resul))
+        res.end();
+
+
+
     } else if (path.match(regex2) != null && req.method === "GET") {
-        let data = '';
+
         email = path.match(regex2)[1]
         console.log(email)
         try {

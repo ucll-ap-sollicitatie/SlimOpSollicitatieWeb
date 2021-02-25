@@ -25,7 +25,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" src={props.videoList[0]} controls></video>
+                <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls></video>
                 
 
                 {criteria.map(criterium => 
@@ -147,7 +147,7 @@ function Feedback(props){
 
 const mapStateToProps = (state) => {
     return{
-      videoList: state.vidReducer.vidblob
+        selectedvid: state.vidReducer.selectedvid
     }
 }
 export default connect (mapStateToProps)(Feedback);

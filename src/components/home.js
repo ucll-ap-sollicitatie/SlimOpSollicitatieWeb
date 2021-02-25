@@ -13,7 +13,6 @@ function Home(props) {
     <div className="App">
         <model-viewer
         load={recenVid()}>
-
         </model-viewer>
         <Helmet>
             <title>SOS - Home</title>
@@ -27,7 +26,7 @@ function Home(props) {
 
         </div>
 
-        <img src="https://via.placeholder.com/352x240" style={imageStyle}/>
+        {/* <img src="https://via.placeholder.com/352x240" style={imageStyle}/> */}
         </section>
         <br/>
         <br/>

@@ -206,8 +206,20 @@ async function videoInDb(name, email){
 
 async function getAllVidsDb(email){
     return new Promise((resolve, reject) => {
-
+        var config = {
+            method: 'get',
+            url: `http://127.0.0.1:3001/users/vidInDb?user=${email}`,
+            headers: {},
+      };
+      
+      axios(config)
+      .then(function (response) {
+        resolve(response.data)
+      })
+      .catch(function (error) {
+        console.log(error);
     })
+})
 }
 async function getJobs(eml){
     return new Promise((resolve, reject) => {

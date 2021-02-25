@@ -117,9 +117,11 @@ function users(state=defaultUser, action){
 //-------------------------------------------------------------------------------------------------------------
 
 const SET_BLOB = 'SET_BLOB'
+const SET_VID = 'SET_VID'
 const defaultVid =
     {
-        vidblob: []
+        vidblob: [],
+        selectedvid: ''
     }
 
 export function setBlob(blob) {
@@ -128,12 +130,25 @@ export function setBlob(blob) {
         blob
     }
 }
+
+export function setVid(vidstring){
+    return{
+        type: 'SET_VID',
+        vidstring
+    }
+}
+
 function vidReducer(state=defaultVid, action){
     switch (action.type) {
         case SET_BLOB:
             return{
                 ...state,
                 vidblob: [...state.vidblob, action.payload.vidblob]
+            }
+        case SET_VID:
+            return{
+                ...state,
+                selectedvid: action.payload.selectedvid
             }
 
         default:
