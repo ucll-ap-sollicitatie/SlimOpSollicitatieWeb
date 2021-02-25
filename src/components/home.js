@@ -26,6 +26,7 @@ function Home(props) {
         <br/>
         <br/>
         <Link to="/chooseJob"><button>Neem een nieuwe video op</button></Link>
+        <button onClick={getvids}>click</button>
     </div>
     )
 }
@@ -38,7 +39,12 @@ const imageStyle1= {
 }
 
 
-
+function getvids() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './uploads/jens.massie@mail.com1614243669730.webm', true);
+    xhr.responseType = 'blob';
+    xhr.send();
+}
 
 const mapStateToProps = (state) => {
     console.log("state")
