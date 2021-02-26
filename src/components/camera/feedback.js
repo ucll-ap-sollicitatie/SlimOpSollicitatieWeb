@@ -80,6 +80,9 @@ function Feedback(props){
     }
 
     function correctTimeStamp(id){
+        if(timestampslist[id]){
+            id = id
+        }else id = 0
         goToTime(timestampslist[id])
     }
 
