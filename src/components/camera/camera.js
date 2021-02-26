@@ -26,7 +26,8 @@ var vragencounter;
 var startTimer;
 var timeArray;
 var txt;
-var uploadTxt
+var uploadTxt;
+var timestamps;
 
 
 //the question list that will be used
@@ -40,7 +41,8 @@ const WebcamStreamCapture = () => {
 
     function NextQuestion() {
         timeArray.push(((new Date()).getTime() - startTimer) / 1000)
-        timeArray.push(vl[vragencounter])
+        timestamps.push(((new Date()).getTime() - startTimer) / 1000)
+        timeArray.push(vl[vragencounter])      
         // console.log(timeArray.join('\r\n'))
         if (vragencounter < vl.length - 1) {
             vragencounter++;
@@ -64,6 +66,8 @@ const WebcamStreamCapture = () => {
         /** Start */
         vragencounter = 0;
         timeArray = [];
+        timestamps = [];
+        timestamps.push(0.00)
         timeArray.push(vl[0])
         startTimer = (new Date()).getTime()
         showNextButton();
