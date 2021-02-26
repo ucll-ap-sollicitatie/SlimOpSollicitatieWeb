@@ -6,13 +6,12 @@ import e from 'cors';
 function Feedback(props){
 
     const criteria = getAllFeedbackArray()
-
+    const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
     const [criterium, setCrit] = useState(criteria[0])
 
     var scor = 0;
     var scores = {}
-
     function createEmptyMap(){
         criteria.forEach(el => {
             scores[el] = 0
@@ -31,7 +30,7 @@ function Feedback(props){
                 <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
-                    <p>{criterium}</p>
+                    <div onClick={changeCritnext}>{criterium}</div>
                     <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
                     <button id={criterium} onClick={OKClick}>OK</button>
                     <div id={criterium + "ok"} style={{display: "none"}}>
@@ -42,33 +41,46 @@ function Feedback(props){
 
                 </section>
 
-                <button onClick={getVidElement}>getvid</button>
-
                 <button onClick={changeCritprev} >prev</button>
                 <button onClick={changeCritnext}>next</button>
 
-                <button onClick={calcScore}>Calculate score</button>
-                <button onClick={createEmptyMap}>Reset score</button>
+                {/* <button onClick={calcScore}>Calculate score</button>
+                <button onClick={createEmptyMap}>Reset score</button> */}
                 <p>{score}</p>
 
 
-                <section id="timestamps"></section>
+                <section id="timestamps">
+                    {timestampslist.map(el => {
+                        return(
+                            <div>
+                                <button id={el} onClick={handleTimeSwitch}>{el}</button>
+                            </div>
+                        )
+                    })}
+                </section>
 
             </section>
         </div>
         
     )
 
-    function getVidElement() {
+    function handleTimeSwitch(e){
+        goToTime(e.target.id)
+    }
+
+    function goToTime(t) {
         var elem = document.getElementById("video");
         var srcB = document.getElementById("video").src;
-        elem.setAttribute('preload', 'auto');
         elem.src = srcB
-        elem.currentTime = 7
+        elem.currentTime = t
          
         elem.play()
         console.log(elem.currentTime)
         console.log(elem)
+    }
+
+    function correctTimeStamp(id){
+        goToTime(timestampslist[id])
     }
 
     function changeCritprev() {
@@ -79,6 +91,7 @@ function Feedback(props){
         else{
             index = criteria.length -1
         }
+        correctTimeStamp(index)
         setCrit(criteria[index])
     }
 
@@ -90,6 +103,7 @@ function Feedback(props){
         else{
             index = 0
         }
+        correctTimeStamp(index)
         setCrit(criteria[index])
     }
 
@@ -139,7 +153,10 @@ function Feedback(props){
 
 const mapStateToProps = (state) => {
     return{
-        selectedvid: state.vidReducer.selectedvid
+        selectedvid: state.vidReducer.selectedvid,
+        timestamps: state.vidReducer.timestamps
     }
 }
+
+
 export default connect (mapStateToProps)(Feedback);
