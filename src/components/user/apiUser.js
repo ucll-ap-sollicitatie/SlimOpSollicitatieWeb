@@ -182,7 +182,7 @@ async function updateUsername(username, eml, pss){
 
 async function videoInDb(name, email, timestamps){
         return new Promise((resolve, reject) => {
-            timestamps = {}
+            timestamps = `{${timestamps}}`
             axios
                 .post(`${webIp}/users/vidInDb`,
                     {

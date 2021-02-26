@@ -159,7 +159,11 @@ function getAllVidsFromUser(email) {
         pool.query('select * from slimopsol.videos where email = ' + "'" + email + "'", (err, res) => {
             let arr = []
             res.rows.forEach(row => {
-                arr.push(row.videoname)
+                const vid = {
+                    "name": row.videoname,
+                    "timestamps": row.timestamps,
+                }
+                arr.push(vid)
             })
             resolve(arr)
 
@@ -347,7 +351,6 @@ async function makeServer(req, res) {
             resul = await getAllVidsFromUser(email)
         }catch(err){
         }
-        console.log(JSON.stringify(resul))
         res.writeHead(200, header);
         res.write(JSON.stringify(resul))
         res.end();

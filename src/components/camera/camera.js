@@ -123,8 +123,8 @@ const WebcamStreamCapture = () => {
             const uplVid = new FormData()
             uplVid.append("new vid", blob, fileName)
             uplVid.append("txt", uploadTxt, txtName)
-            videoInDb(fileName, email)
-            
+            videoInDb(fileName, email, timestamps)
+
             axios({
                 method: "POST",
                 url: "http://localhost:5002/upload",
