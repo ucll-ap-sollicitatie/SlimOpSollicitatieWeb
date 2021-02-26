@@ -62,7 +62,6 @@ app.post("/upload", upload.any() , async function (req, res) {
 
 app.get("/video/:name", function(req, res){
     const range = req.headers.range;
-    console.log(range)
     if(!range){
         res.status(400).send("Requires header range")
     }

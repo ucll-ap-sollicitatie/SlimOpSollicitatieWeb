@@ -82,7 +82,7 @@ function login(email, password) {
     })
 }
 
-function register(email, password, username, confPass) {
+function register(email, password, username, confPass, voornaam) {
     return new Promise((resolve, reject) => {
 
         let hPassword = hashCode(password);
@@ -92,7 +92,7 @@ function register(email, password, username, confPass) {
             return "Err"
         }
         console.log("registering user with email: " + email + " password: " + password + " username: " + username)
-        pool.query('insert into slimopsol.users(email, hashedpassword, username) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "')", (err, res) => {
+        pool.query('insert into slimopsol.users(email, hashedpassword, username, voornaam) values' + "('" + email + "' , '" + hPassword + "' , '" + username + "', '" + voornaam + "')", (err, res) => {
             console.log("G")
             makeJob(email)
             resolve("OK")
@@ -173,13 +173,17 @@ function get2MostRecentVids(email) {
 
         pool.query('select * from slimopsol.videos where email =' + "'" + email + "'" + 'order by videoname desc LIMIT 2', (err, res) => {
             let arr = []
+            try{
             res.rows.forEach(row => {
                 arr.push(row.videoname)
             })
             resolve(arr)
-        })
+        } catch (e) {
+            resolve([])
+        }
+
     })
-}
+}) }
 
 /**
  * Creates server, with possible requests.
@@ -239,15 +243,15 @@ async function makeServer(req, res) {
         //parse data to JSON
         req.on('end', async () => {
             jsondata = JSON.parse(data)
-            var i = await register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass)
+            var i = await register(jsondata.email, jsondata.pass, jsondata.username, jsondata.confPass, jsondata.vn)
             if (i === "Err") {
                 ret = "false"
             }
             res.writeHead(200, header);
             res.write(ret)
             res.end();
-
         })
+
     } else if (reqUrl.path === "/users/addjob" && req.method === "POST") {
         let data = '';
         req.on('data', chunk => {

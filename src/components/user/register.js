@@ -9,18 +9,22 @@ function Register(props){
     const [password, setPassword] = useState('');
     const [username, setUsername] = useState('');
     const [confPass, setConfPass] = useState('');
+    const [voornaam, setVoornaam] = useState('');
 
     return (
-        <div className="centerPage">
+        <div className="centerPage " style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
         <div className="container registerPage">
             <h1>Gelieve te registreren</h1>
-            <form onSubmit={handleSubmit} className="wite">
+            <form onSubmit={handleSubmit} className="wite" >
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
 
                 <label htmlFor="username">Username</label>
                 <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
                 <p id="eruser" style={{display: "none"}}>username cant be empty</p>
+
+                <label htmlFor="voornaam">Voornaam</label>
+                <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
 
                 <label htmlFor="password">Password</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
@@ -48,32 +52,36 @@ function Register(props){
      */
     async function handleSubmit(e)
     {
+        var elemt = document.getElementById("eruser")
         /**
          * error when username is empty
          */
         if(username === ""){
-            var elem = document.getElementById("eruser")
-            elem.style.display = "block";
+
+            elemt.style.display = "block"
         }else{
-            elem.style.display = "none";
+            elemt.style.display = "none"
+            e.preventDefault();
+            const result = await registerdb(email, password, username, confPass, voornaam)
+            console.log(result === true)
+            if(result === true){
+                history.push("/login");
+            }
+            /**
+             * Error when server returns error (general)
+             */
+            else{
+                var elem = document.getElementById("error")
+                if (elem.style.display === "none") {
+                    elem.style.display = "block";
+                }
+            }
         }
 
-        e.preventDefault();
-        const result = await registerdb(email, password, username, confPass)
-        console.log(result === true)        
-        if(result === true){
-            history.push("/login");
-        }
-        /**
-         * Error when server returns error (general)
-         */
-        else{
-            var elem = document.getElementById("error")
-            if (elem.style.display === "none") {
-                elem.style.display = "block";
-              } 
-        }
     }
 }
+
+
+
 
 export default Register;

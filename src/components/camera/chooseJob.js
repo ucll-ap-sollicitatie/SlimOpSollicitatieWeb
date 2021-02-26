@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import { Helmet } from 'react-helmet';
+import {getJobs} from "../user/apiUser";
 
 
 function ChooseJob(props){
-
     const history = useHistory();
 
     return(
@@ -39,6 +39,8 @@ function ChooseJob(props){
         history.push("/camera")
     }
 }
+
+
 
 const mapStateToProps = (state) => {
     return{

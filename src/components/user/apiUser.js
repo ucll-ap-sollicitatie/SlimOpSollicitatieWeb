@@ -67,18 +67,18 @@ async function logindb(eml, pss) {
  *  un: username
  *  cp: confirm password
  */
-async function registerdb(eml, pss, un, cp) {
+async function registerdb(eml, pss, un, cp, vn) {
     return new Promise((resolve, reject) => {
-
         axios
             // sends post request to the api on this path
-            .post(`${webIp}/users/register`,
+            .post(`http://127.0.0.1:3001/users/register`,
                 //the request body:
                 {
                     email: eml,
                     pass: pss,
                     username: un,
-                    confPass: cp
+                    confPass: cp,
+                    vn: vn
                 },
                 //without header, it will not send a POST but a OPTIONS request
                 {
@@ -93,7 +93,6 @@ async function registerdb(eml, pss, un, cp) {
         })
             .catch(function (error) {
                 return "NOK"
-                // console.log(error);
             });
     })
 }
