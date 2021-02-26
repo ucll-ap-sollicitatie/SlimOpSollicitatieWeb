@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import {registerdb} from "../user/apiUser"
 import { useHistory } from "react-router-dom";
 
+
+
 function Register(props){
     const history = useHistory();
 
@@ -11,26 +13,32 @@ function Register(props){
     const [confPass, setConfPass] = useState('');
     const [voornaam, setVoornaam] = useState('');
 
+
+
     return (
-        <div className="centerPage " style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+        <div className="centerPage ">
         <div className="container registerPage">
             <h1>Gelieve te registreren</h1>
-            <form onSubmit={handleSubmit} className="wite" >
+            <form onSubmit={handleSubmit} className="wite">
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
                 <label htmlFor="username">Username</label>
                 <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
-                <p id="eruser" style={{display: "none"}}>username cant be empty</p>
+                <p id="eruser"  style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
 
                 <label htmlFor="voornaam">Voornaam</label>
                 <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
+                <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
 
                 <label htmlFor="password">Password</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
-                
+                <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zien</p>
+
                 <label htmlFor="confpassword">Confirm password</label>
                 <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
+                <p id="erconf"  style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
 
                 <button>Maak account</button>
             </form>
@@ -42,6 +50,8 @@ function Register(props){
             </div>
         </div>
     );
+
+
     /**
      * When a user submits the form,
      * 1. preventDefault: https://www.w3schools.com/jsref/event_preventdefault.asp
@@ -50,23 +60,49 @@ function Register(props){
      * 4.1. TODO: Clear fields when input is wrong
      * 4.2. redirect to home page when login is succesfull
      */
+
+
     async function handleSubmit(e)
     {
         var elemt = document.getElementById("eruser")
-        /**
-         * error when username is empty
-         */
-        if(username === ""){
+        var erremail = document.getElementById("eremail")
+        var ervn = document.getElementById("ervn")
+        var erpw = document.getElementById("erpw")
+        var erconf = document.getElementById("erconf")
 
+        elemt.style.display = "none"
+        erremail.style.display = "none"
+        ervn.style.display = "none"
+        erpw.style.display = "none"
+        erconf.style.display = "none"
+        e.preventDefault();
+
+        if(username === ''){
             elemt.style.display = "block"
-        }else{
+            return
+        } else if(email === "" || !email.includes(".")){
+            erremail.style.display = "block"
+            return
+        }
+        else if(voornaam === ""){
+            ervn.style.display = "block"
+            return
+        } else if(password === ""){
+            erpw.style.display = "block"
+            return
+        } else if(confPass !== password){
+            erconf.style.display = "block"
+            return
+        }
+        else
+            console.log(username)
             elemt.style.display = "none"
-            e.preventDefault();
             const result = await registerdb(email, password, username, confPass, voornaam)
             console.log(result === true)
             if(result === true){
                 history.push("/login");
             }
+
             /**
              * Error when server returns error (general)
              */
@@ -77,11 +113,6 @@ function Register(props){
                 }
             }
         }
-
-    }
 }
-
-
-
 
 export default Register;

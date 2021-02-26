@@ -25,8 +25,6 @@ function Home(props) {
                 <div id="vids">
 
                 </div>
-
-                {/* <img src="https://via.placeholder.com/352x240" style={imageStyle}/> */}
             </section>
             <br/>
             <br/>
