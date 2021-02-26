@@ -147,8 +147,8 @@ function deleteJob(title, email) {
 }
 
 
-function videoInDb(name, email) {
-    pool.query('insert into slimopsol.videos(videoname, email) values (' + "'" + name + "', '" + email + "')", (err, res) => {
+function videoInDb(name, email, timestamps) {
+    pool.query('insert into slimopsol.videos(videoname, email, timestamps) values (' + "'" + name + "', '" + email + "','" + timestamps + "')", (err, res) => {
         console.log(err)
     })
 }
@@ -335,7 +335,7 @@ async function makeServer(req, res) {
         req.on('end', () => {
             jsondata = JSON.parse(data)
             console.log(jsondata)
-            videoInDb(jsondata.name, jsondata.email)
+            videoInDb(jsondata.name, jsondata.email, jsondata.timestamps)
         })
         res.writeHead(200, header);
         console.log("true")
