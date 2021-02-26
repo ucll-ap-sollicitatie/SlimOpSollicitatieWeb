@@ -5,6 +5,7 @@ import {Link, useHistory} from "react-router-dom";
 
 function FeedbackSelection(props) {
     const history = useHistory();
+    let vids = [];
 
     return(
         <div className="App">
@@ -20,8 +21,7 @@ function FeedbackSelection(props) {
     )
 
     async function getall() {
-        let vids = await getAllVidsDb(props.email)
-        var timestamps = vids.timestamps
+        vids = await getAllVidsDb(props.email)
 
         document.getElementById("vids").innerHTML = ""
         vids.forEach(element => {
@@ -31,13 +31,19 @@ function FeedbackSelection(props) {
             let htmltext = parseName(element.name.toString())
             el.innerHTML = htmltext
             document.getElementById("vids").append(el)
-            console.log(element)
         });
     }
 
     function onClick(e){
         console.log(e.target.id)
-        props.setVid(e.target.id)
+        let timestamps = []
+        vids.forEach(el =>{
+            if(el.name === e.target.id){
+                timestamps = el.timestamps
+            }
+        })
+        console.log(timestamps)
+        props.setVid(e.target.id, timestamps)
         history.push("/feedback")
     }
 
@@ -58,8 +64,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return{
-        setVid: (selectedvid) => {
-            dispatch({type: 'SET_VID', payload: {selectedvid}})
+        setVid: (selectedvid, timestamps) => {
+            dispatch({type: 'SET_VID', payload: {selectedvid,timestamps}})
         }
     }
 }

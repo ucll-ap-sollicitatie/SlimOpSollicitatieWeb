@@ -121,7 +121,8 @@ const SET_VID = 'SET_VID'
 const defaultVid =
     {
         vidblob: [],
-        selectedvid: ''
+        selectedvid: '',
+        timestamps: ''
     }
 
 export function setBlob(blob) {
@@ -148,7 +149,8 @@ function vidReducer(state=defaultVid, action){
         case SET_VID:
             return{
                 ...state,
-                selectedvid: action.payload.selectedvid
+                selectedvid: action.payload.selectedvid,
+                timestamps: action.payload.timestamps
             }
 
         default:
