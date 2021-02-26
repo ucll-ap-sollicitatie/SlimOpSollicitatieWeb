@@ -20,7 +20,7 @@ const store = createStore(
 store.subscribe(() => {
   saveState(
     {users: store.getState().users,
-    vidReducer: store.getState().vidblob
+    vidReducer: store.getState().selectedvid
     })
 })
 ReactDOM.render(

@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet';
 import {connect} from 'react-redux'
 import React, { useState } from 'react';
 import {getAllFeedbackArray} from '../questions/feedbackquestions'
+import e from 'cors';
 function Feedback(props){
 
     const criteria = getAllFeedbackArray()
@@ -27,24 +28,8 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls></video>
+                <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls width="640" height="480"></video>
                 
-
-                {/* {criteria.map(criterium => 
-                    {
-                        return(
-                        <section>
-                            <p>{criterium}</p>
-                            <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
-                            <button id={criterium} onClick={OKClick}>OK</button>
-                            <div id={criterium + "ok"} style={{display: "none"}}>
-                                <label for={criterium + "score"}>Points (between 2/5 and 4/5):</label>
-                                <input type="range" min="2" max="4" class="slider" id={criterium + "score"} onChange={updateSliderScore}/>
-                            </div>
-                            <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed</button>
-                        </section>)
-                    }    
-                )} */}
                 <section>
                     <p>{criterium}</p>
                     <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
@@ -57,6 +42,8 @@ function Feedback(props){
 
                 </section>
 
+                <button onClick={getVidElement}>getvid</button>
+
                 <button onClick={changeCritprev} >prev</button>
                 <button onClick={changeCritnext}>next</button>
 
@@ -64,10 +51,25 @@ function Feedback(props){
                 <button onClick={createEmptyMap}>Reset score</button>
                 <p>{score}</p>
 
+
+                <section id="timestamps"></section>
+
             </section>
         </div>
         
     )
+
+    function getVidElement() {
+        var elem = document.getElementById("video");
+        var srcB = document.getElementById("video").src;
+        elem.setAttribute('preload', 'auto');
+        elem.src = srcB
+        elem.currentTime = 7
+         
+        elem.play()
+        console.log(elem.currentTime)
+        console.log(elem)
+    }
 
     function changeCritprev() {
         var index = criteria.indexOf(criterium)
