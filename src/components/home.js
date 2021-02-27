@@ -6,8 +6,15 @@ import {connect} from 'react-redux'
 import {useHistory} from "react-router-dom";
 import {Helmet} from 'react-helmet';
 import {getRecentVideos} from './user/apiUser'
+import {get} from "react-hook-form";
+
+var test = 0;
+
 
 function Home(props) {
+
+
+    console.log("LALALALALALALALAL:" + test)
     const history = useHistory();
     return (
         <div className="App">
@@ -32,18 +39,21 @@ function Home(props) {
                 <button>Neem een nieuwe video op</button>
             </Link>
         </div>
+
     )
 
     async function recenVid() {
+
             if(props.email == null){
                 history.push("/login")
             }
             try {
                 var email = props.email
                 var vids = await getRecentVideos(email)
+                console.log("VIDEOS= " + vids.length)
                 const myNode = document.getElementById("vids");
                 myNode.innerHTML = '';
-
+                if(vids.length === 2 ){
                 var vid1 = document.createElement("video");
                 vid1.controls = true
                 vid1.setAttribute('width', "360")
@@ -58,7 +68,19 @@ function Home(props) {
                 vid2.setAttribute('src', "http://localhost:5002/video/" + vids[1])
                 vid2.setAttribute('type', "video/webm")
                 document.getElementById("vids").append(vid2)
-
+                } else if(vids.length === 0) {
+                    var noVid = document.createElement("noVid");
+                    noVid.innerText = "Maak snel een nieuwe video je hebt er nog geen !!!"
+                    myNode.append(noVid)
+                } else {
+                    var vid3 = document.createElement("video");
+                    vid3.controls = true
+                    vid3.setAttribute('width', "360")
+                    vid3.setAttribute('src', "http://localhost:5002/video/" + vids[0])
+                    vid3.setAttribute('type', "video/webm")
+                    vid3.setAttribute('id', 'vid3')
+                    document.getElementById("vids").append(vid3)
+                }
             } catch (err) {
                 console.log(err)
             }
