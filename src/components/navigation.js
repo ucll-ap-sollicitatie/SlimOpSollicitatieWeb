@@ -33,11 +33,10 @@ const Navigation = (props) => {
                             - add a new NavLink element with the path and label
                         */}
                         <NavLink className="nav-item nav-link" to="/">Home</NavLink>
-                        <NavLink className="nav-item nav-link" to="/chooseJob">Record interview</NavLink>
-                        <NavLink className="nav-item nav-link" to="/profile">My Profile</NavLink>
+                        <NavLink className="nav-item nav-link" to="/chooseJob">Interview opnemen </NavLink>
                         <NavLink className="nav-item nav-link" to="/feedbackSelection">Feedback</NavLink>
-
-                        <Link onClick={handleClick} className="nav-item nav-link" > Logout</Link>
+                        <NavLink className="nav-item nav-link" to="/profile">Mijn profiel</NavLink>
+                        <Link onClick={handleClick} className="nav-item nav-link" > Uitloggen</Link>
 
                     </Nav>
                 </Container>
@@ -58,9 +57,8 @@ const Navigation = (props) => {
                             - Follow instructions in App.js
                             - add a new NavLink element with the path and label
                         */}
-                       <NavLink className="nav-item nav-link" to="/">Home</NavLink>
                        <NavLink className="nav-item nav-link" to="/login">Login</NavLink>
-                       <NavLink className="nav-item nav-link" to="/register">Register</NavLink>
+                       <NavLink className="nav-item nav-link" to="/register">Registreer</NavLink>
 
                    </Nav>
                </Container>

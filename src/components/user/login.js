@@ -19,16 +19,17 @@ function Login(props)
         <div className="loginPage">
             <h1>Gelieve in te loggen</h1>
             <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Username</label>
+                <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Username" id="email" onChange={(e) => setEmail(e.target.value)}/>
 
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Wachtwoord</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
 
-                <button>Login</button>
+                <button>Inloggen</button>
+                <div onClick={navToRegister}>Nog geen account?</div>
             </form>
             <div>
-                <p id="error" style={{display: "none"}}>Wrong username or password</p>
+                <p id="error" style={{display: "none"}}>Foute gebruikersnaam of wachtwoord</p>
             </div>
         </div>
         </div>
@@ -41,6 +42,10 @@ function Login(props)
      * 3.1. TODO: Clear fields when input is wrong
      * 3.2. TODO: redirect to home page when login is succesful
      */
+
+     function navToRegister(){
+        history.push('register')
+     }
     async function handleSubmit(e)
     {
         e.preventDefault();

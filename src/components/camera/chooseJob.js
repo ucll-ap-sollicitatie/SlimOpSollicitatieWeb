@@ -12,10 +12,10 @@ function ChooseJob(props){
     return(
         <div>
             <Helmet>
-                <title>SOS - Record</title>
+                <title>SOS - Opnemen</title>
             </Helmet>
-            <h1>Choose your job</h1>
-            <p>You can add more jobs in your profile</p>
+            <h1>Kies je job</h1>
+            <p>Kies een job uit de lijst hieronder. Voor deze job ga je een interview afleggen. Als je een eigen jobtitel wilt toevoegen kan je op de knop "Voeg nieuwe job toe" klikken. Op je profiel kan je kijken welke competenties bij welke jobs horen.</p>
             {
                     jobsList.map(job => { 
                         //console.log(job.titel)

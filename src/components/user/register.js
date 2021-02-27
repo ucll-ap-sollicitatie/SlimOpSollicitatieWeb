@@ -24,7 +24,7 @@ function Register(props){
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
                 <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
-                <label htmlFor="username">Username</label>
+                <label htmlFor="username">Gebruikersnaam</label>
                 <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
                 <p id="eruser"  style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
 
@@ -32,11 +32,11 @@ function Register(props){
                 <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
                 <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
 
-                <label htmlFor="password">Password</label>
+                <label htmlFor="password">Wachtwoord</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
                 <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zien</p>
 
-                <label htmlFor="confpassword">Confirm password</label>
+                <label htmlFor="confpassword">Herhaal Wachtwoord</label>
                 <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
                 <p id="erconf"  style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
 
@@ -44,7 +44,7 @@ function Register(props){
             </form>
 
             <div>
-                <p id="error" style={{display: "none"}}>Problem with creating your account</p>
+                <p id="error" style={{display: "none"}}>Er was een probleem met het aanmaken van jouw account</p>
             </div>
 
             </div>

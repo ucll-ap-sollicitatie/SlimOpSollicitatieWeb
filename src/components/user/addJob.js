@@ -20,7 +20,7 @@ function AddJob(props){
         return (
             <div className="centerPage">
             <Helmet>
-                <title>SOS - Add Job</title>
+                <title>SOS - Nieuwe Job</title>
             </Helmet>
 
                 <div>
