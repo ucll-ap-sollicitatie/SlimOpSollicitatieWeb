@@ -8,6 +8,7 @@ import {addJobdb4params, getJobs} from "../user/apiUser";
 
 function ChooseJob(props){
     const history = useHistory();
+    const [jobsList, setjobs] = useState(props.jobs)
     return(
         <div>
             <Helmet>
@@ -16,7 +17,7 @@ function ChooseJob(props){
             <h1>Choose your job</h1>
             <p>You can add more jobs in your profile</p>
             {
-                    props.jobs.map(job => { 
+                    jobsList.map(job => { 
                         //console.log(job.titel)
                         return (
                             <div>
@@ -65,7 +66,10 @@ function ChooseJob(props){
         var tech = document.getElementById("tech").value
         var email = props.email
         const result = await addJobdb4params(titel, inter, tech, email)
-
+        var jobs = await getJobs(email)
+        console.log(jobs)
+        setjobs(jobs)
+        props.updateUser(jobs)
     }
 
     function handleClick(e){
@@ -94,6 +98,9 @@ const mapDispatchToProps = (dispatch) => {
     return{
         setjob: (selectedJobTitle, selectedSkills) => {
             dispatch({type: 'SET_JOB', payload: {selectedJobTitle, selectedSkills}})
+        },
+        updateUser: (jobs) => {
+            dispatch({type: 'UPDATE_USER_JOBS', payload: {jobs}})
         }
     }
 }

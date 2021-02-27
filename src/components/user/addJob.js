@@ -1,6 +1,6 @@
 import React, {Component, useState} from 'react';
 import {useHistory} from "react-router-dom";
-import {addJobdb, getJobs} from "./apiUser";
+import {addJobdb, getJobs,addJobdb4params} from "./apiUser";
 import {connect} from "react-redux";
 import {useDispatch} from 'react-redux'
 import { Helmet } from 'react-helmet';
@@ -26,21 +26,25 @@ function AddJob(props){
                 <div>
                     <h1>Maak een nieuwe job aan</h1>
                     <form onSubmit={handleSubmit} className="wite">
-                        <label htmlFor="titel">Functie die je wil inoefenen</label>
+                        <label htmlFor="titel">De functie waarvoor ik ga solliciteren is</label>
                         <input type="text" placeholder="titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
                         <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="inter">Interpersoonlijke vaardigheid</label>
+                        <p>Als je solliciteert dan vraagt een organisatie dat je bepaalde vaardigheden bezit. Dit kunnen
+                             jobgerelateerde competenties zijn: zoals programmeren, onderwijzen, 
+                            koken,… of persoonsgebonden competenties zijn: samenwerken, klantgerichtheid, presenteren,…</p>
+
+                        <label htmlFor="inter">Persoonsgebonden competentie</label>
                         <input type="text" placeholder="inter" id="inter" onChange={(e) => setInter(e.target.value)}/>
                         <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="tech">Technische vaardigheid 1</label>
+                        <label htmlFor="tech">Jobgerelateerde competentie</label>
                         <input type="text" placeholder="Technische vaardigheid 1" id="tech" onChange={(e) => setTech(e.target.value)}/>
                         <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="tech2">Technische vaardigheid 2</label>
+                        {/* <label htmlFor="tech2">Technische vaardigheid 2</label>
                         <input type="text" placeholder="Technische vaardigheid 2" id="tech2" onChange={(e) => setTech2(e.target.value)}/>
-                        <p id="tech2error" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="tech2error" style={{display: "none"}}>Mag niet leeg zijn</p> */}
 
                         <button>Voeg job toe</button>
                     </form>
@@ -52,8 +56,8 @@ function AddJob(props){
     {
         e.preventDefault();
 
-        if(ifEmpty("titel", titel) && ifEmpty("inter", inter)  && ifEmpty("tech", tech) && ifEmpty("tech2", tech2) ){
-            const result = await addJobdb(titel, inter, tech, tech2, email)
+        if(ifEmpty("titel", titel) && ifEmpty("inter", inter)  && ifEmpty("tech", tech) /**&& ifEmpty("tech2", tech2)*/ ){
+            const result = await addJobdb4params(titel, inter, tech, email)
             console.log(result === true)
             if(result === true){
                 var jobs = await getJobs(email)
