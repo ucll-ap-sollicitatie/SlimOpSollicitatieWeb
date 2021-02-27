@@ -263,11 +263,11 @@ async function makeServer(req, res) {
         })
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            console.log(jsondata)
+            console.log(jsondata.tech2)
             makeNewJob(jsondata.titel, jsondata.inter, jsondata.tech, jsondata.tech2, jsondata.email)
         })
         res.writeHead(200, header);
-        console.log("true")
+        console.log("false")
         res.write("true")
         res.end();
     } else if (reqUrl.path === "/users/deletejob" && req.method === "POST") {

@@ -126,7 +126,31 @@ async function addJobdb(tit, inter, tech, tech2, email) {
         });
     })
 }
+async function addJobdb4params(tit, inter, tech, email) {
+    return new Promise((resolve, reject) => {
 
+        axios
+
+            .post(`${webIp}/users/addjob`,
+            {
+                titel: tit,
+                inter: inter,
+                tech: tech,
+                email: email
+            },
+            {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                }
+            }).then(function (response) {
+            console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        }).catch(function (error) {
+            return "NOK"
+        });
+    })
+}
 /**
  * api request to delete a job from the user
  */
@@ -274,5 +298,6 @@ export {
     updateUsername,
     videoInDb,
     getAllVidsDb,
-    getRecentVideos
+    getRecentVideos,
+    addJobdb4params
 }

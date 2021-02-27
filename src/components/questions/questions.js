@@ -17,8 +17,10 @@ function parsedvragenlijst(functie, skills){
         vraag = vraag.replace("-JOB-", functie)
         if(vraag.includes("-COMP-")){
             for(var i = 0; i<skills.length; i++){
-                var q = vraag.replace("-COMP-", skills[i])
-                list.push(q)
+                if(skills[i] != "undefined"){
+                    var q = vraag.replace("-COMP-", skills[i])
+                    list.push(q)    
+                }
             }
         }
         else{
