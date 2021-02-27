@@ -13,21 +13,21 @@ function UpdateUsername(props){
     return (
         <div className="centerPage">
         <Helmet>
-            <title>SOS - Change Username</title>
+            <title>SOS - Verander gebruikersnaam</title>
         </Helmet>
 
             <div>
-                <h1>Change username</h1>
+                <h1>Verander gebruikersnaam</h1>
                 <form onSubmit={handleSubmit} className="wite">
-                    <label htmlFor="titel">Username</label>
+                    <label htmlFor="titel">Gebruikersnaam</label>
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
-                    <p id="userror" style={{display: "none"}}>Username cannot be empty</p>
+                    <p id="userror" style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
 
-                    <label htmlFor="pass">password</label>
+                    <label htmlFor="pass">Wachtwoord</label>
                     <input type="password" placeholder="pass" id="pass" onChange={(e) => setPassword(e.target.value)}/>
-                    <p id="passerror" style={{display: "none"}}>password is not correct</p>
+                    <p id="passerror" style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
 
-                    <button>update username</button>
+                    <button>Verander gebruikersnaam</button>
                 </form>
             </div>
         </div>

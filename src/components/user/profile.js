@@ -28,7 +28,7 @@ function Profile(props){
         
     <div className="centerPage">
     <Helmet>
-        <title>SOS - Profile</title>
+        <title>SOS - Profiel</title>
     </Helmet>
 
     <div className="containter profilePage">
@@ -67,7 +67,7 @@ function Profile(props){
                 
                  
                 <Link to="/addJob">
-                    <button style={buttonStyle}>Add job</button>
+                    <button style={buttonStyle}>Nieuwe Jobtitel</button>
                 </Link>
                 <button onClick={updateJobs}>Refresh</button>
 

@@ -41,8 +41,8 @@ function Feedback(props){
 
                 </section>
 
-                <button onClick={changeCritprev} >prev</button>
-                <button onClick={changeCritnext}>next</button>
+                <button onClick={changeCritprev}>Vorige</button>
+                <button onClick={changeCritnext}>Volgende</button>
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}

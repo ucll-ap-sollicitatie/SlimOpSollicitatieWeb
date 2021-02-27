@@ -34,7 +34,7 @@ function Register(props){
 
                 <label htmlFor="password">Wachtwoord</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
-                <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zien</p>
+                <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
 
                 <label htmlFor="confpassword">Herhaal Wachtwoord</label>
                 <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>

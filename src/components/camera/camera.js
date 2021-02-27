@@ -205,16 +205,16 @@ const WebcamStreamCapture = () => {
         <>
             <div className="centerPage">
                 <div id="overlay">{vl[0]}</div>
-                <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Next question</button>
+                <button id="nextQButton" style={{visibility: "hidden"}} onClick={NextQuestion}>Volgende vraag</button>
             </div>
             <div id="cameraDiv">
 
                 <Webcam audio={true} ref={webcamRef}/>
                 <br/>
                 {capturing ? (
-                    <button onClick={handleStopCaptureClick}>Stop Capture</button>
+                    <button onClick={handleStopCaptureClick}>Stop Opname</button>
                 ) : (
-                    <button onClick={handleStartCaptureClick}>Start Capture</button>
+                    <button onClick={handleStartCaptureClick}>Start Opname</button>
                 )}
                 {recordedChunks.length > 0 && (
                     <button onClick={handleDownload}>Download</button>
