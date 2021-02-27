@@ -35,7 +35,9 @@ function Home(props) {
     )
 
     async function recenVid() {
-
+            if(props.email == null){
+                history.push("/login")
+            }
             try {
                 var email = props.email
                 var vids = await getRecentVideos(email)
