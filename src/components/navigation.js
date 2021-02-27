@@ -33,7 +33,7 @@ const Navigation = (props) => {
                             - add a new NavLink element with the path and label
                         */}
                         <NavLink className="nav-item nav-link" to="/">Home</NavLink>
-                        <NavLink className="nav-item nav-link" to="/camera">Camera</NavLink>
+                        <NavLink className="nav-item nav-link" to="/chooseJob">Record interview</NavLink>
                         <NavLink className="nav-item nav-link" to="/profile">My Profile</NavLink>
                         <NavLink className="nav-item nav-link" to="/feedbackSelection">Feedback</NavLink>
 
