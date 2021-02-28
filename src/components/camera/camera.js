@@ -9,6 +9,7 @@ var vl;
 var videoBlob;
 var glprops;
 var email;
+var cap = false;
 
 function Camera(props) {
     var title = props.selectedJobTitle
@@ -16,6 +17,7 @@ function Camera(props) {
     email = props.email
     vl = parsedvragenlijst(title, skills)
     glprops = props
+
     return (
         <WebcamStreamCapture/>
     );
@@ -28,7 +30,6 @@ var timeArray;
 var txt;
 var uploadTxt;
 var timestamps;
-
 
 //the question list that will be used
 //const vl = parsedvragenlijst("title", ["Vriendelijk", "Snel"])
@@ -63,6 +64,7 @@ const WebcamStreamCapture = () => {
     }
 
     const handleStartCaptureClick = React.useCallback(() => {
+        
         /** Start */
         vragencounter = 0;
         timeArray = [];
@@ -72,13 +74,15 @@ const WebcamStreamCapture = () => {
         startTimer = (new Date()).getTime()
         showNextButton();
         setCapturing(true);
+
+
         mediaRecorderRef.current = new MediaRecorder(webcamRef.current.stream, {
             mimeType: "video/webm"
         });
         mediaRecorderRef.current.addEventListener(
             "dataavailable",
             handleDataAvailable
-        );
+        );        
         mediaRecorderRef.current.start();
     }, [webcamRef, setCapturing, mediaRecorderRef]);
 
@@ -92,6 +96,7 @@ const WebcamStreamCapture = () => {
     );
 
     const handleStopCaptureClick = React.useCallback(() => {
+        document.getElementById("caps").hidden = true
         /** Stop */
         document.getElementById("overlay").innerHTML = vl[0]
         document.getElementById("nextQButton").style.visibility = "hidden"
@@ -200,6 +205,14 @@ const WebcamStreamCapture = () => {
 //        )}
 //      </div>
 //    );
+var timer = setInterval(checker,1000);
+function checker(){
+    if(document.getElementById("start") != null){
+        cap = true;
+        document.getElementById("start").hidden = false
+        clearInterval(timer)
+    }
+}
 
     return (  /** returns webcam + check capturing state to start/stop/download */
         <>
@@ -211,13 +224,16 @@ const WebcamStreamCapture = () => {
 
                 <Webcam audio={true} ref={webcamRef}/>
                 <br/>
+                <div id="caps">
                 {capturing ? (
                     <button onClick={handleStopCaptureClick}>Stop Opname</button>
                 ) : (
-                    <button onClick={handleStartCaptureClick}>Start Opname</button>
+                    <button id="start" onClick={handleStartCaptureClick} hidden>Start Opname</button>
                 )}
+                </div>
+                {timer.visibility}
                 {recordedChunks.length > 0 && (
-                    <button onClick={handleDownload}>Download</button>
+                    <button onClick={handleDownload}>Opslaan</button>
                 )}
             </div>
         </>
