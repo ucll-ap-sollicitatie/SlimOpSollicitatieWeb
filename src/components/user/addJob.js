@@ -52,21 +52,32 @@ function AddJob(props){
             </div>
         )
 
+        /**
+         * When a user submits the form, a new job is created in the database, and is saved in state.
+         * On success: redirected to /profile
+         */
     async function handleSubmit(e)
     {
         e.preventDefault();
-
+        //check if empty
         if(ifEmpty("titel", titel) && ifEmpty("inter", inter)  && ifEmpty("tech", tech) /**&& ifEmpty("tech2", tech2)*/ ){
+            //add job to db
             const result = await addJobdb4params(titel, inter, tech, email)
-            console.log(result === true)
             if(result === true){
+                //get all jobs from db
                 var jobs = await getJobs(email)
+                //set all jobs in db
                 props.updateUser(jobs)
+                //redirect to /profile
                 history.push("/profile");
             }
         }   
     }
 
+    /**
+     * returns true or false based on if the field is empty.
+     * If empty, display error
+     */
     function ifEmpty(field, elem){
         if(elem === ""){
             var el = document.getElementById(field + "error")

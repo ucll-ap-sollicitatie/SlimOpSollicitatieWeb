@@ -14,7 +14,9 @@ const header = {
 
 let jobs = []
 
-const {Pool} = require('pg')
+const {Pool} = require('pg');
+const { resolve } = require("path");
+const { json } = require("body-parser");
 const pool = new Pool({
     user: 'civracsv',
     host: 'dumbo.db.elephantsql.com',
@@ -146,6 +148,12 @@ function deleteJob(title, email) {
     })
 }
 
+function setFeedback(video, feedback) {
+    pool.query('update slimopsol.videos set feedback =' + "'" + feedback + "'" + 'where videoname = ' + "'" + video + "'", (err, res) => {
+        console.log(err)
+        resolve("OK")
+    })
+}
 
 function videoInDb(name, email, timestamps) {
     pool.query('insert into slimopsol.videos(videoname, email, timestamps) values (' + "'" + name + "', '" + email + "','" + timestamps + "')", (err, res) => {
@@ -263,7 +271,7 @@ async function makeServer(req, res) {
         })
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            console.log(jsondata.tech2)
+            //console.log(jsondata.tech2)
             makeNewJob(jsondata.titel, jsondata.inter, jsondata.tech, jsondata.tech2, jsondata.email)
         })
         res.writeHead(200, header);
@@ -372,6 +380,22 @@ async function makeServer(req, res) {
         res.end();
 
 
+    } else if (reqUrl.path === "/users/setFeedback" && req.method === "POST"){
+        let data = '';
+
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            jsondata = JSON.parse(data)
+            setFeedback(jsondata.video, JSON.stringify(jsondata.feedback))
+
+            res.writeHead(200, header);
+            console.log("TRUE")
+            res.write("true")
+            res.end();
+    
+        })
     } else {
         res.writeHead(200, header);
         console.log("TRUE")

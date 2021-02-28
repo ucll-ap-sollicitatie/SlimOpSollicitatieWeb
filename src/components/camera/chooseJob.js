@@ -3,6 +3,7 @@ import {Link, useHistory} from "react-router-dom";
 import {connect} from "react-redux";
 import { Helmet } from 'react-helmet';
 import {addJobdb4params, getJobs} from "../user/apiUser";
+import '../../App.css';
 
 
 
@@ -44,8 +45,16 @@ function ChooseJob(props){
                         <button>Voeg job toe</button>
                     </form>
             </div>
+            <button onClick={updateJobs}>Refresh</button>
+
         </div>
     )
+
+    async function updateJobs(){
+        var jobsnew = await getJobs(props.email)
+        props.updateUser(jobsnew)
+        setjobs(jobsnew)
+    }
 
     function toggleDisplay(e){
         var el = document.getElementById("addJobWrap")
@@ -66,10 +75,8 @@ function ChooseJob(props){
         var tech = document.getElementById("tech").value
         var email = props.email
         const result = await addJobdb4params(titel, inter, tech, email)
-        var jobs = await getJobs(email)
-        console.log(jobs)
-        setjobs(jobs)
-        props.updateUser(jobs)
+        
+        toggleDisplay()
     }
 
     function handleClick(e){

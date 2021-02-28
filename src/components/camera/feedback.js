@@ -2,22 +2,17 @@ import { Helmet } from 'react-helmet';
 import {connect} from 'react-redux'
 import React, { useState } from 'react';
 import {getAllFeedbackArray} from '../questions/feedbackquestions'
+import {setFeedback} from '../user/apiUser'
 import e from 'cors';
+var scores = {}
+
 function Feedback(props){
 
     const criteria = getAllFeedbackArray()
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
     const [criterium, setCrit] = useState(criteria[0])
-
-    var scor = 0;
-    var scores = {}
-    function createEmptyMap(){
-        criteria.forEach(el => {
-            scores[el] = 0
-        });
-        console.log(scores)
-    }
+  
     console.log(scores)
     return(
         <div className="App">
@@ -34,8 +29,8 @@ function Feedback(props){
                     <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
                     <button id={criterium} onClick={OKClick}>OK</button>
                     <div id={criterium + "ok"} style={{display: "none"}}>
-                        <label for={criterium + "score"}>Points (between 2/5 and 4/5):</label>
-                        <input type="range" min="2" max="4" class="slider" id={criterium + "score"} onChange={updateSliderScore}/>
+                        <label htmlFor={criterium + "score"}>Points (between 2/5 and 4/5):</label>
+                        <input type="range" min="2" max="4" className="slider" id={criterium + "score"} onChange={updateSliderScore}/>
                     </div>
                     <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed</button>
 
@@ -46,7 +41,7 @@ function Feedback(props){
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}
-                <p>{score}</p>
+                <button onClick={saveFeedback}>save feedback</button>
 
 
                 <section id="timestamps">
@@ -64,21 +59,28 @@ function Feedback(props){
         
     )
 
+    function saveFeedback() {
+        var srcB = document.getElementById("video").src;
+        setFeedback(props.selectedvid, scores)
+    }
+
     function handleTimeSwitch(e){
         goToTime(e.target.id)
     }
-
+   /**
+     * Change the current time of the video to t seconds
+     */
     function goToTime(t) {
         var elem = document.getElementById("video");
         var srcB = document.getElementById("video").src;
         elem.src = srcB
         elem.currentTime = t
-         
         elem.play()
-        console.log(elem.currentTime)
-        console.log(elem)
     }
 
+    /**
+     * find currect timestamp of question id
+     */
     function correctTimeStamp(id){
         if(timestampslist[id]){
             id = id
@@ -86,26 +88,38 @@ function Feedback(props){
         goToTime(timestampslist[id])
     }
 
+    /**
+     * go to the previous question
+     */
     function changeCritprev() {
+        //get current index
         var index = criteria.indexOf(criterium)
+        //update index
         if (index > 0){
             index = index - 1
         }
         else{
             index = criteria.length -1
         }
+        //update question and criteria
         correctTimeStamp(index)
         setCrit(criteria[index])
     }
 
+    /**
+     * go to the next question
+     */
     function changeCritnext() {
+        //get current index
         var index = criteria.indexOf(criterium)
+        //update index
         if (index < criteria.length -1){
             index = index + 1
         }
         else{
             index = 0
         }
+        //update question and criteria
         correctTimeStamp(index)
         setCrit(criteria[index])
     }
@@ -117,7 +131,9 @@ function Feedback(props){
     function calcScore(){
         
     }
-
+   /**
+     * 
+     */
     function updateSliderScore(e){
         var val = e.target.value
         var id = e.target.id
@@ -127,6 +143,9 @@ function Feedback(props){
 
     }
 
+    /**
+     * 
+     */
     function ZGClick(e){
         console.log(`Awarded 5 points!`)
         var id = e.target.id
@@ -134,11 +153,14 @@ function Feedback(props){
         scores[id] = 5
         console.log(scores)
     }
-
+   /**
+     * 
+     */
     function ZSClick(e){
         var id = e.target.id
         id = id.split("ZS")[0]
-
+        scores[id] = 1
+        console.log(scores)
     }
 
 
