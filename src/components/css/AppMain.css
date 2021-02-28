@@ -52,17 +52,31 @@ button:before {
 	justify-content: space-evenly;
 }
 
+#overlay{
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 1em;
+}
+
 .centerPage{
 	text-align: center;
 	text-align: -webkit-center;
-    text-align: -moz-center;
+  text-align: -moz-center;
 }
 
-.registerPage, .loginPage{
+.chooseJob{
+  margin-left: 15%;
+  margin-right: 15%;
+  text-align: center;
+	text-align: -webkit-center;
+  text-align: -moz-center;
+}
+
+.registerPage, .loginPage, .chooseJobForm{
 	display: table-caption;
 }
 
-.loginPage input, .registerPage input{
+.loginPage input, .registerPage input, .chooseJobForm input{
 	border-radius: 8px;
 	text-align: center;
 }
@@ -70,13 +84,26 @@ button:before {
 .loginPage button, .registerPage button{
 	margin-top: 0.5em;
 }
-
-.profileRight{
-	float: right;
-}
-
 .profilePage ul{
 	list-style-type: none;
+}
+
+.profilePage{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.profileRight{
+  grid-column: 3;
+  grid-row: 1;
+}
+.profileLeft{
+grid-column: 1 / span 2;
+grid-row: 1;
+}
+
+.profilePadding h4, .profilePadding h5{
+  padding-left: 40px;
 }
 
 #nextQButton{

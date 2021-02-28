@@ -25,21 +25,21 @@ function AddJob(props){
 
                 <div>
                     <h1>Maak een nieuwe job aan</h1>
-                    <form onSubmit={handleSubmit} className="wite">
+                    <form onSubmit={handleSubmit} className="wite" className="chooseJobForm">
                         <label htmlFor="titel">De functie waarvoor ik ga solliciteren is</label>
-                        <input type="text" placeholder="titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
+                        <input type="text" placeholder="Titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
                         <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <p>Als je solliciteert dan vraagt een organisatie dat je bepaalde vaardigheden bezit. Dit kunnen
+                        <p hidden>Als je solliciteert dan vraagt een organisatie dat je bepaalde vaardigheden bezit. Dit kunnen
                              jobgerelateerde competenties zijn: zoals programmeren, onderwijzen, 
                             koken,… of persoonsgebonden competenties zijn: samenwerken, klantgerichtheid, presenteren,…</p>
 
                         <label htmlFor="inter">Persoonsgebonden competentie</label>
-                        <input type="text" placeholder="inter" id="inter" onChange={(e) => setInter(e.target.value)}/>
+                        <input type="text" placeholder="Competentie" id="inter" onChange={(e) => setInter(e.target.value)}/>
                         <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Jobgerelateerde competentie</label>
-                        <input type="text" placeholder="Technische vaardigheid 1" id="tech" onChange={(e) => setTech(e.target.value)}/>
+                        <input type="text" placeholder="Competentie" id="tech" onChange={(e) => setTech(e.target.value)}/>
                         <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         {/* <label htmlFor="tech2">Technische vaardigheid 2</label>

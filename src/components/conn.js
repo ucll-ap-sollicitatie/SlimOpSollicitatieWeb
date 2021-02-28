@@ -16,6 +16,7 @@ let jobs = []
 
 const {Pool} = require('pg');
 const { resolve } = require("path");
+const { json } = require("body-parser");
 const pool = new Pool({
     user: 'civracsv',
     host: 'dumbo.db.elephantsql.com',
@@ -387,8 +388,7 @@ async function makeServer(req, res) {
         })
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            console.log(jsondata)
-            setFeedback(jsondata.video, jsondata.feedback)
+            setFeedback(jsondata.video, JSON.stringify(jsondata.feedback))
 
             res.writeHead(200, header);
             console.log("TRUE")
@@ -397,8 +397,7 @@ async function makeServer(req, res) {
     
         })
         
-    }
-    else {
+    } else {
         res.writeHead(200, header);
         console.log("TRUE")
         res.write("true")

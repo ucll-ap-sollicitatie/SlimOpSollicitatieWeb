@@ -35,6 +35,6 @@ function parseQuestionFeedback(vnaam, compj, comps){
  * Make array from all feedback questions
  */
 function getAllFeedbackArray(){
-    return [fTaken, fCarriere, fCompetentiesJob, fCompetentiesPers, fUitzoeken, fScorenAlgemeen]
+    return [fTaken, fCarriere, fCompetentiesPers, fCompetentiesJob, fUitzoeken, fScorenAlgemeen]
 }
 export {getAllFeedbackObject, getAllFeedbackArray};
