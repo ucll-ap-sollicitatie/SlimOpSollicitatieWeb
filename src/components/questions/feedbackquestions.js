@@ -25,6 +25,6 @@ function getAllFeedbackObject(){
 }
 
 function getAllFeedbackArray(){
-    return [fTaken, fCarriere, fCompetentiesJob, fCompetentiesPers, fUitzoeken, fScorenAlgemeen]
+    return [fTaken, fCarriere, fCompetentiesPers, fCompetentiesJob, fUitzoeken, fScorenAlgemeen]
 }
 export {getAllFeedbackObject, getAllFeedbackArray};

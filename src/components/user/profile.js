@@ -32,7 +32,7 @@ function Profile(props){
     </Helmet>
 
     <div className="containter profilePage">
-        <section>
+
             <div className="profileRight">
             <img src="https://via.placeholder.com/150" alt="Profile Pic" style={imgstyle}/>
             <section>
@@ -41,18 +41,16 @@ function Profile(props){
                 <Link to="/updateUsername">
                     <button style={buttonStyle}>Wijzig Gebruikersnaam</button>
                 </Link>
-
-
             </section>
             </div>
-            <section>
+            <section className="profileLeft">
                  {
                     jobs.map(job => { 
                         //console.log(job.titel)
                         return (
-                            <div>
+                            <div className="profilePadding">
                                 <h4>{job.titel}</h4>
-                                <h5>skills:</h5>
+                                <h5>Skills:</h5>
                                 <ul>
                                     <li>{job.inter}</li>
                                     <li>{job.tech}</li>
@@ -72,7 +70,7 @@ function Profile(props){
                 <button onClick={updateJobs}>Refresh</button>
 
             </section>
-        </section>
+
 
         </div>
     </div>
