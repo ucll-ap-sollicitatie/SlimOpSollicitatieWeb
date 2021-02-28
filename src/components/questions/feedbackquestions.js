@@ -9,6 +9,9 @@ const fScorenL = " -VNAAM- heeft voor de verkeerde job gesolliciteerd. Hoe goed 
 const fScorenM = "-VNAAM- vertelt waarom hij/zij zich in staat acht om deze job te doen. Maar heeft -VNAAM- ook verteld waarin hij/zij tekortschiet?"
 const fScorenH = "Dan is dit omdat -VNAAM- zich heel goed in staat acht om deze job te doen. Hoe geloofwaardig is zijn uitleg?"
 
+/**
+ * Make object from all feedback questions
+ */
 function getAllFeedbackObject(){
     return{ 
         "fTaken": fTaken,
@@ -24,6 +27,9 @@ function getAllFeedbackObject(){
     }
 }
 
+/**
+ * Make array from all feedback questions
+ */
 function getAllFeedbackArray(){
     return [fTaken, fCarriere, fCompetentiesJob, fCompetentiesPers, fUitzoeken, fScorenAlgemeen]
 }

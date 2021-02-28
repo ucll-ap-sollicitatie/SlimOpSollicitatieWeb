@@ -11,6 +11,10 @@ const vrU = "Welke vragen heb jij over deze job of over het werken bij ons?"
 const vrS = "Geef een score van 1-5 hoe je jezelf deze job ziet doen? En leg uit"
 
 
+
+/**
+ * replace for each question in vragenlijst(), -JOB- with variable functie and -COMP- with variable skills
+ */
 function parsedvragenlijst(functie, skills){
     var list = []
     vragenlijst().forEach(vraag => {
@@ -30,6 +34,9 @@ function parsedvragenlijst(functie, skills){
     return list
 }
 
+/**
+ * Make array from all questions
+ */
 function vragenlijst(){
     return [vrTaken, vrTakenD2, vrCar, vrCom, vrA, vrU, vrS]
 }

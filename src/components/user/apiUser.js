@@ -18,7 +18,7 @@ async function getAlldatadb(eml){
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function (response) {
-        console.log("respData: " + response.data)
+        //console.log("respData: " + response.data)
         resolve(response.data)
         return response.data
     }).catch(function (error) {
@@ -45,8 +45,7 @@ async function logindb(eml, pss) {
         };
         axios(config)
             .then(function (response) {
-                console.log("errtest")
-                console.log(response.data)
+                //console.log(response.data)
                 resolve(response.data)
                 return response;
             })
@@ -87,7 +86,7 @@ async function registerdb(eml, pss, un, cp, vn) {
                     }
                 }
             ).then(function (response) {
-            console.log("respData: " + response.data)
+            //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data;
         })
@@ -118,7 +117,7 @@ async function addJobdb(tit, inter, tech, tech2, email) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function (response) {
-            console.log("respData: " + response.data)
+            //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
         }).catch(function (error) {
@@ -143,7 +142,7 @@ async function addJobdb4params(tit, inter, tech, email) {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 }
             }).then(function (response) {
-            console.log("respData: " + response.data)
+            //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
         }).catch(function (error) {
@@ -167,7 +166,7 @@ async function deleteJobdb(titel, email){
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
                 }).then(function (response) {
-            console.log("respData: " + response.data)
+            //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
         }).catch(function (error) {
@@ -194,7 +193,7 @@ async function updateUsername(username, eml, pss){
           
           axios(config)
           .then(function (response) {
-            console.log(response.data)
+            //console.log(response.data)
             resolve(response.data)
             return response;
         }).catch(function (error) {
@@ -219,7 +218,7 @@ async function videoInDb(name, email, timestamps){
                             'Content-Type': 'application/x-www-form-urlencoded'
                         }
                     }).then(function (response) {
-                console.log("respData: " + response.data)
+                //console.log("respData: " + response.data)
                 resolve(response.data)
                 return response.data
             }).catch(function (error) {
@@ -257,7 +256,7 @@ async function getJobs(eml){
       axios(config)
       .then(
         function (response) {
-            console.log("respData: " + response.data)
+            //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
         })
@@ -278,7 +277,7 @@ async function getRecentVideos(email){
       axios(config)
       .then(function (response) {
         resolve(response.data)
-        console.log(response.data);
+        //console.log(response.data);
       })
       .catch(function (error) {
         console.log(error);

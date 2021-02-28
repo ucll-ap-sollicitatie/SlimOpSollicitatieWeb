@@ -263,7 +263,7 @@ async function makeServer(req, res) {
         })
         req.on('end', () => {
             jsondata = JSON.parse(data)
-            console.log(jsondata.tech2)
+            //console.log(jsondata.tech2)
             makeNewJob(jsondata.titel, jsondata.inter, jsondata.tech, jsondata.tech2, jsondata.email)
         })
         res.writeHead(200, header);

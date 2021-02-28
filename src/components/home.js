@@ -14,7 +14,6 @@ var test = 0;
 function Home(props) {
 
 
-    console.log("LALALALALALALALAL:" + test)
     const history = useHistory();
     return (
         <div className="App">
@@ -36,43 +35,49 @@ function Home(props) {
             <br/>
             <br/>
             <Link to="/chooseJob">
-                <button>Neem een nieuwe video op</button>
+                <button>Neem een nieuw jobinterview op</button>
             </Link>
         </div>
 
     )
 
+    /**
+     * get two latest vids from database and place them on the home page
+     */
     async function recenVid() {
-
+        //if user isn't logged in, redirect to /login
             if(props.email == null){
                 history.push("/login")
             }
             try {
+                //get latest vids
                 var email = props.email
                 var vids = await getRecentVideos(email)
-                console.log("VIDEOS= " + vids.length)
                 const myNode = document.getElementById("vids");
                 myNode.innerHTML = '';
                 if(vids.length === 2 ){
-                var vid1 = document.createElement("video");
-                vid1.controls = true
-                vid1.setAttribute('width', "360")
-                vid1.setAttribute('src', "http://localhost:5002/video/" + vids[0])
-                vid1.setAttribute('type', "video/webm")
-                vid1.setAttribute('id', 'vid1')
-                document.getElementById("vids").append(vid1)
+                    //if there are Two vids returned create the elements
+                    var vid1 = document.createElement("video");
+                    vid1.controls = true
+                    vid1.setAttribute('width', "360")
+                    vid1.setAttribute('src', "http://localhost:5002/video/" + vids[0])
+                    vid1.setAttribute('type', "video/webm")
+                    vid1.setAttribute('id', 'vid1')
+                    document.getElementById("vids").append(vid1)
 
-                var vid2 = document.createElement("video");
-                vid2.controls = true
-                vid2.setAttribute('width', "360")
-                vid2.setAttribute('src', "http://localhost:5002/video/" + vids[1])
-                vid2.setAttribute('type', "video/webm")
-                document.getElementById("vids").append(vid2)
+                    var vid2 = document.createElement("video");
+                    vid2.controls = true
+                    vid2.setAttribute('width', "360")
+                    vid2.setAttribute('src', "http://localhost:5002/video/" + vids[1])
+                    vid2.setAttribute('type', "video/webm")
+                    document.getElementById("vids").append(vid2)
                 } else if(vids.length === 0) {
+                    //if no video is returned, display message
                     var noVid = document.createElement("noVid");
                     noVid.innerText = "Maak snel een nieuwe video je hebt er nog geen !!!"
                     myNode.append(noVid)
                 } else {
+                    //if one video is returned, only place one
                     var vid3 = document.createElement("video");
                     vid3.controls = true
                     vid3.setAttribute('width', "360")
