@@ -69,7 +69,7 @@ app.get("/video/:name", function(req, res){
     const videoPath = "./uploads/" + req.params.name
 
     const videoSiza = fs.statSync(videoPath).size
-    const chunksize = 10**6
+    const chunksize = 10**7
     const start = Number(range.replace(/\D/g,""))
     const end = Math.min(start + chunksize, videoSiza - 1)
 
