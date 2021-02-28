@@ -285,6 +285,26 @@ async function getRecentVideos(email){
 })
 }
 
+async function setFeedback(vidname, feedback) {
+    var data = JSON.stringify({"video":vidname,"feedback":feedback});
+    console.log(data)
+    var config = {
+    method: 'post',
+    url: 'http://127.0.0.1:3001/users/setFeedback',
+    headers: { 
+        'Content-Type': 'application/json'
+    },
+    data : data
+    };
+
+    axios(config)
+    .then(function (response) {
+    console.log(JSON.stringify(response.data));
+    })
+    .catch(function (error) {
+    console.log(error);
+    });
+}
 
 
 export {
@@ -298,5 +318,6 @@ export {
     videoInDb,
     getAllVidsDb,
     getRecentVideos,
-    addJobdb4params
+    addJobdb4params,
+    setFeedback
 }

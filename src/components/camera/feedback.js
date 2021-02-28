@@ -2,6 +2,7 @@ import { Helmet } from 'react-helmet';
 import {connect} from 'react-redux'
 import React, { useState } from 'react';
 import {getAllFeedbackArray} from '../questions/feedbackquestions'
+import {setFeedback} from '../user/apiUser'
 import e from 'cors';
 var scores = {}
 
@@ -40,7 +41,7 @@ function Feedback(props){
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}
-                <p>{score}</p>
+                <button onClick={saveFeedback}>save feedback</button>
 
 
                 <section id="timestamps">
@@ -59,7 +60,8 @@ function Feedback(props){
     )
 
     function saveFeedback() {
-        
+        var srcB = document.getElementById("video").src;
+        setFeedback(props.selectedvid, scores)
     }
 
     function handleTimeSwitch(e){

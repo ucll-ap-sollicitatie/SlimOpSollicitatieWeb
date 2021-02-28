@@ -396,7 +396,6 @@ async function makeServer(req, res) {
             res.end();
     
         })
-        
     } else {
         res.writeHead(200, header);
         console.log("TRUE")
