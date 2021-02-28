@@ -138,7 +138,8 @@ function Feedback(props){
     function ZSClick(e){
         var id = e.target.id
         id = id.split("ZS")[0]
-
+        scores[id] = 1
+        console.log(scores)
     }
 
 
