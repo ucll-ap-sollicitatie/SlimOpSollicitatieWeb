@@ -306,6 +306,27 @@ async function setFeedback(vidname, feedback) {
     });
 }
 
+async function getFeedback(vidname){
+    return new Promise((resolve, reject) => {
+
+        var data = '';
+
+        var config = {
+            method: 'get',
+            url: `http://127.0.0.1:3001/users/getfeedback?vid=${vidname}`,
+            headers: {},
+            data : data
+        };
+
+        axios(config)
+            .then(function (response) {
+                resolve(JSON.stringify(response.data))
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        })
+}
 
 export {
     logindb,
@@ -319,5 +340,6 @@ export {
     getAllVidsDb,
     getRecentVideos,
     addJobdb4params,
-    setFeedback
+    setFeedback,
+    getFeedback
 }

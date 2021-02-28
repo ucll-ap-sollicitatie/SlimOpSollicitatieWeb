@@ -161,6 +161,18 @@ function videoInDb(name, email, timestamps) {
     })
 }
 
+function getFeedback(vidname){
+    return new Promise((resolve, reject) => {
+        pool.query('select * from slimopsol.videos where videoname = ' + "'" + vidname + "'", (err, res) => {
+            let resul = ""
+            res.rows.forEach(row => {
+                resul = row.feedback
+            })
+            resolve(resul)
+        })
+    })
+}
+
 function getAllVidsFromUser(email) {
     return new Promise((resolve, reject) => {
 
@@ -215,7 +227,7 @@ async function makeServer(req, res) {
     const regex = /\/users\/getAll\?user=(.*)/
     const regex2 = /\/users\/getRecent\?user=(.*)/
     const regex3 = /\/users\/vidInDb\?user=(.*)/
-
+    const regex4 = /\/users\/getfeedback\?vid=(.*)/
     /**
      * Login user
      */
@@ -396,7 +408,19 @@ async function makeServer(req, res) {
             res.end();
     
         })
-    } else {
+    } else if (path.match(regex4) != null && req.method === "GET"){
+        vid = path.match(regex4)[1]
+        try {
+            resul = await getFeedback(vid)
+            console.log(resul)
+        }
+        catch(err){
+        }
+        res.writeHead(200, header);
+        res.write(resul)
+        res.end();
+    }
+    else {
         res.writeHead(200, header);
         console.log("TRUE")
         res.write("true")

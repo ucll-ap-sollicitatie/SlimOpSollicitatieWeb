@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import {connect} from 'react-redux'
 import React, { useState } from 'react';
 import {getAllFeedbackArray} from '../questions/feedbackquestions'
-import {setFeedback} from '../user/apiUser'
+import {setFeedback, getFeedback} from '../user/apiUser'
 import e from 'cors';
 var scores = {}
 
@@ -19,6 +19,11 @@ function Feedback(props){
             <Helmet>
                 <title>SOS - Feedback</title>
             </Helmet>
+
+            <model-viewer
+                load={getSavedFeedback()}>
+            </model-viewer>
+
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
@@ -58,9 +63,12 @@ function Feedback(props){
         </div>
         
     )
+    async function getSavedFeedback() {
+        var rs = await getFeedback(props.selectedvid)
+        console.log(rs)
+    }
 
     function saveFeedback() {
-        var srcB = document.getElementById("video").src;
         setFeedback(props.selectedvid, scores)
     }
 
@@ -124,13 +132,7 @@ function Feedback(props){
         setCrit(criteria[index])
     }
 
-    function resetScore(){
-        
-    }
 
-    function calcScore(){
-        
-    }
    /**
      * 
      */
