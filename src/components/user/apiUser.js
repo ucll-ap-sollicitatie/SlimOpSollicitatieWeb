@@ -99,32 +99,6 @@ async function registerdb(eml, pss, un, cp, vn) {
 /**
  * api request to add a new job to the database
  */
-async function addJobdb(tit, inter, tech, tech2, email) {
-    return new Promise((resolve, reject) => {
-
-        axios
-
-            .post(`${webIp}/users/addjob`,
-            {
-                titel: tit,
-                inter: inter,
-                tech: tech,
-                tech2: tech2,
-                email: email
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function (response) {
-            //console.log("respData: " + response.data)
-            resolve(response.data)
-            return response.data
-        }).catch(function (error) {
-            return "NOK"
-        });
-    })
-}
 async function addJobdb4params(tit, inter, tech, email) {
     return new Promise((resolve, reject) => {
 
@@ -310,7 +284,6 @@ async function setFeedback(vidname, feedback) {
 export {
     logindb,
     registerdb,
-    addJobdb,
     deleteJobdb,
     getAlldatadb,
     getJobs,

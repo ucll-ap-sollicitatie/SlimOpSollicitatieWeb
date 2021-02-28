@@ -11,33 +11,34 @@ const vrU = "Welke vragen heb jij over deze job of over het werken bij ons?"
 const vrS = "Geef een score van 1-5 hoe je jezelf deze job ziet doen? En leg uit"
 
 
-
 /**
  * replace for each question in vragenlijst(), -JOB- with variable functie and -COMP- with variable skills
  */
-function parsedvragenlijst(functie, skills){
+function parsedvragenlijst(functie, skills) {
     var list = []
+    var i = 0;
     vragenlijst().forEach(vraag => {
         vraag = vraag.replace("-JOB-", functie)
-        if(vraag.includes("-COMP-")){
-            for(var i = 0; i<skills.length; i++){
-                if(skills[i] != "undefined"){
-                    var q = vraag.replace("-COMP-", skills[i])
-                    list.push(q)    
-                }
-            }
-        }
-        else{
+
+        if (vraag.includes("-COMP-")) {
+
+
+            var q = vraag.replace("-COMP-", skills[i])
+            i++
+            list.push(q)
+
+
+        } else {
             list.push(vraag)
         }
-    }); 
+    });
     return list
 }
 
 /**
  * Make array from all questions
  */
-function vragenlijst(){
+function vragenlijst() {
     return [vrTaken, vrCar, vrComPers, vrComJob, vrA, vrU, vrS]
 }
 
