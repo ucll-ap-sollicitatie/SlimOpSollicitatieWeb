@@ -27,6 +27,10 @@ function getAllFeedbackObject(){
     }
 }
 
+function parseQuestionFeedback(vnaam, compj, comps){
+
+}
+
 /**
  * Make array from all feedback questions
  */

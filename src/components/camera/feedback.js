@@ -3,13 +3,14 @@ import {connect} from 'react-redux'
 import React, { useState } from 'react';
 import {getAllFeedbackArray} from '../questions/feedbackquestions'
 import e from 'cors';
+var scores = {}
+
 function Feedback(props){
 
     const criteria = getAllFeedbackArray()
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
     const [criterium, setCrit] = useState(criteria[0])
-    var scores = {}
   
     console.log(scores)
     return(
@@ -56,6 +57,10 @@ function Feedback(props){
         </div>
         
     )
+
+    function saveFeedback() {
+        
+    }
 
     function handleTimeSwitch(e){
         goToTime(e.target.id)
