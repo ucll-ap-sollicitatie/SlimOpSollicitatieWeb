@@ -12,6 +12,7 @@ function Feedback(props){
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
     const [criterium, setCrit] = useState(criteria[0])
+    var index = criteria.indexOf(criterium)
   
     console.log(scores)
     return(
@@ -91,19 +92,16 @@ function Feedback(props){
     /**
      * go to the previous question
      */
+    
     function changeCritprev() {
         //get current index
-        var index = criteria.indexOf(criterium)
+        
         //update index
         if (index > 0){
-            index = index - 1
+            index -= 1
+            correctTimeStamp(index)
+            setCrit(criteria[index])
         }
-        else{
-            index = criteria.length -1
-        }
-        //update question and criteria
-        correctTimeStamp(index)
-        setCrit(criteria[index])
     }
 
     /**
@@ -111,17 +109,13 @@ function Feedback(props){
      */
     function changeCritnext() {
         //get current index
-        var index = criteria.indexOf(criterium)
+        
         //update index
         if (index < criteria.length -1){
-            index = index + 1
+            index += 1
+            correctTimeStamp(index)
+            setCrit(criteria[index])
         }
-        else{
-            index = 0
-        }
-        //update question and criteria
-        correctTimeStamp(index)
-        setCrit(criteria[index])
     }
 
     function resetScore(){
