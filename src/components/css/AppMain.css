@@ -64,7 +64,7 @@ button:before {
   text-align: -moz-center;
 }
 
-.chooseJob{
+.chooseJob, .feedbackQ{
   margin-left: 15%;
   margin-right: 15%;
   text-align: center;

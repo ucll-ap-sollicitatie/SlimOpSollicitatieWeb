@@ -16,7 +16,7 @@ function Feedback(props){
   
     console.log(scores)
     return(
-        <div className="App">
+        <div className="centerPage">
             <Helmet>
                 <title>SOS - Feedback</title>
             </Helmet>
@@ -31,7 +31,7 @@ function Feedback(props){
                 <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
-                    <div onClick={changeCritnext}>{criterium}</div>
+                    <div className="feedbackQ" onClick={changeCritnext}>{criterium}</div>
                     <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
                     <button id={criterium} onClick={OKClick}>OK</button>
                     <div id={criterium + "ok"} style={{display: "none"}}>
