@@ -54,7 +54,6 @@ function Profile(props){
                                 <ul>
                                     <li>{job.inter}</li>
                                     <li>{job.tech}</li>
-                                    <li>{job.tech2}</li>
                                     <button style={buttonStyle} id={job.titel} onClick={deleteJob}>Verwijder Job</button>
                                 </ul>
 

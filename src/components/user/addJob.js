@@ -13,7 +13,6 @@ function AddJob(props){
     const [titel, setTitel] = useState('');
     const [inter, setInter] = useState('');
     const [tech, setTech] = useState('');
-    const [tech2, setTech2] = useState('');
     const [email, setEmail] = useState(props.email);
 
 

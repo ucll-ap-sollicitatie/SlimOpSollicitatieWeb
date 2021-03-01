@@ -52,8 +52,11 @@ const pool = new Pool({
 function login(email, password) {
     //returns promise so that in createServer the await function works
     return new Promise((resolve, reject) => {
+<<<<<<< HEAD
         console.log(email)
 
+=======
+>>>>>>> a9528ca9b4b93135b9bffa5f1985c871f7a0774b
         pool.query('select * from slimopsol.users where email = ' + "'" + email + "'", (err, res) => {
             if (res.rowCount === 0) {
                 console.log("foutje")
@@ -112,12 +115,12 @@ function getJobs(email) {
 }
 
 function makeJob(email) {
-    pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('Ober','Klantvriendelijkheid', 'Opdienden', 'Bestelling afnemen', " + "'" + email + "'," + "'Ober" + email + "')", (err, res) => {
+    pool.query('insert into slimopsol.job(titel, inter, tech, email, titelmail) values' + "('Ober','Klantvriendelijkheid', 'Opdienden', " + "'" + email + "'," + "'Ober" + email + "')", (err, res) => {
     })
 }
 
 function makeNewJob(titel, inter, tech, tech2, email) {
-    pool.query('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')", (err, res) => {
+    pool.query('insert into slimopsol.job(titel, inter, tech, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + email + "', '" + titel + email + "')", (err, res) => {
         console.log('insert into slimopsol.job(titel, inter, tech, tech2, email, titelmail) values' + "('" + titel + "', '" + inter + "', '" + tech + "', '" + tech2 + "', '" + email + "', '" + titel + email + "')")
         console.log(err)
     })

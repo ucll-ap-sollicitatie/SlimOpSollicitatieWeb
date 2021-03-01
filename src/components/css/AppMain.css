@@ -72,7 +72,7 @@ button:before {
   text-align: -moz-center;
 }
 
-.registerPage, .loginPage, .chooseJobForm{
+.registerPage, .loginPage, .chooseJobForm, #vidSel{
 	display: table-caption;
 }
 
@@ -111,11 +111,17 @@ grid-row: 1;
 	height: 100%;
 }
 
+#vids video{
+  margin: 1em;
+}
+
+
+
+/*Nav Hover*/
 .nav-link{
     color: whitesmoke !important;
 }
 
-/*Nav Hover*/
 .nav-item {
     display: inline-block;
     vertical-align: middle;
