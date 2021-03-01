@@ -52,11 +52,6 @@ const pool = new Pool({
 function login(email, password) {
     //returns promise so that in createServer the await function works
     return new Promise((resolve, reject) => {
-<<<<<<< HEAD
-        console.log(email)
-
-=======
->>>>>>> a9528ca9b4b93135b9bffa5f1985c871f7a0774b
         pool.query('select * from slimopsol.users where email = ' + "'" + email + "'", (err, res) => {
             if (res.rowCount === 0) {
                 console.log("foutje")

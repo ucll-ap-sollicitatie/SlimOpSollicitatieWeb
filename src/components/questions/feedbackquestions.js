@@ -28,8 +28,18 @@ function getAllFeedbackObject(){
 }
 
 function parseQuestionFeedback(vnaam, compj, comps){
-
+    var newArr = []
+    getAllFeedbackArray().forEach(q => {
+        q = q.replace("-VNAAM-", vnaam)
+        q = q.replace("-COMP-", comps)
+        q = q.replace("-COMPJOB-", compj)
+        newArr.push(q)
+    })
+    return newArr
+    
 }
+
+
 
 /**
  * Make array from all feedback questions
