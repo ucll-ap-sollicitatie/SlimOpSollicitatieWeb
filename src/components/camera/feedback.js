@@ -42,18 +42,7 @@ function Feedback(props){
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}
-                <button onClick={saveFeedback}>save feedback</button>
-
-
-                <section id="timestamps">
-                    {timestampslist.map(el => {
-                        return(
-                            <div>
-                                <button id={el} onClick={handleTimeSwitch}>{el}</button>
-                            </div>
-                        )
-                    })}
-                </section>
+                <button onClick={saveFeedback}>Feedback opslaan</button>
 
             </section>
         </div>
