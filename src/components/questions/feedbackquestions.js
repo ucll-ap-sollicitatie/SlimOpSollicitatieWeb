@@ -1,7 +1,7 @@
 const fTaken = "Weet -VNAAM- vlot te vertellen welke taken hij moet uitvoeren?"
 const fCarriere = "Is de ervaring die -VNAAM- vertelt echt relevant voor deze job?"
-const fCompetentiesJob = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de competentie -COMP- bezit?"
-const fCompetentiesPers = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de competentie -COMPJOB- bezit?"
+const fCompetentiesJob = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de jobgerelateerde competentie -COMP- bezit?"
+const fCompetentiesPers = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de persoonsgebonden competentie -COMPJOB- bezit?"
 const fAttitudes = "We horen een voorbeeld dat authentiek aangeeft waarom -VNAAM- gemotiveerd is voor deze job. "
 const fUitzoeken = "De vraag die -VNAAM- stelde ging die over: \n Het goed kunnen uitvoeren van het werk : zeer goed 5 of 4 \n De verloning voor de job: zeer slecht 1 \n Een vraag naar het selectieproces dat hij/zij dient te doorlopen: OK 2 of 3"
 const fScorenAlgemeen = "Het is niet de hoogte van de score, maar de uitleg die -VNAAM- gaf voor zijn score die je beoordeelt op geloofwaardigheid"
@@ -47,4 +47,4 @@ function parseQuestionFeedback(vnaam, compj, comps){
 function getAllFeedbackArray(){
     return [fTaken, fCarriere, fCompetentiesPers, fCompetentiesJob, fUitzoeken, fScorenAlgemeen]
 }
-export {getAllFeedbackObject, getAllFeedbackArray};
+export {getAllFeedbackObject, getAllFeedbackArray, parseQuestionFeedback};

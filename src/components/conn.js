@@ -64,6 +64,7 @@ function login(email, password) {
             let hashpw = hashCode(password).toString()
             console.log("pw in db: " + pw)
             console.log("Hashed gegeven pw: " + hashpw)
+            let vnaam = res.rows[0].voornaam
 
             if (uname === email && hashpw === pw) {
                 console.log("Ingelogd")
@@ -74,7 +75,8 @@ function login(email, password) {
             const user = {
                 username: name,
                 email: email,
-                jobs: getJobs(email)
+                jobs: getJobs(email),
+                voornaam: vnaam
             }
             resolve(user)
             return user

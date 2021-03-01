@@ -50,7 +50,14 @@ function FeedbackSelection(props) {
     function parseName(vidname){
         vidname = vidname.replace(".webm", "")
         vidname = vidname.replace(props.email, "")
-        return vidname
+        var date = new Date(parseInt(vidname)).toLocaleDateString('nl-BE', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit'
+
+            })
+        var time = new Date(parseInt(vidname)).toLocaleTimeString('it-IT')
+        return time + " " + date
     }
 }
 

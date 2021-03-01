@@ -1,14 +1,14 @@
 import { Helmet } from 'react-helmet';
 import {connect} from 'react-redux'
 import React, { useState } from 'react';
-import {getAllFeedbackArray} from '../questions/feedbackquestions'
+import {getAllFeedbackArray, parseQuestionFeedback} from '../questions/feedbackquestions'
 import {setFeedback, getFeedback} from '../user/apiUser'
 import e from 'cors';
 var scores = {}
 
 function Feedback(props){
 
-    const criteria = getAllFeedbackArray()
+    const criteria = parseQuestionFeedback(props.vnaam, "", "")
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
     const [criterium, setCrit] = useState(criteria[0])
@@ -164,7 +164,8 @@ function Feedback(props){
 const mapStateToProps = (state) => {
     return{
         selectedvid: state.vidReducer.selectedvid,
-        timestamps: state.vidReducer.timestamps
+        timestamps: state.vidReducer.timestamps,
+        vnaam: state.users.voornaam
     }
 }
 

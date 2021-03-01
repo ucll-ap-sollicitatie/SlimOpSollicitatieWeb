@@ -54,7 +54,7 @@ function Login(props)
         const result = await logindb(email, password)
         console.log("result:")
         if(result.email != null){
-            props.loginUser(result.email, result.username, result.jobs)
+            props.loginUser(result.email, result.username, result.voornaam, result.jobs)
             history.push("/");
         }
         else{
@@ -80,8 +80,8 @@ const mapStateToProps = (state) => {
  */
 const mapDispatchToProps = (dispatch) => {
     return{
-        loginUser: (email, username, jobs) => {
-            dispatch({type: 'LOGIN_USER', payload: {email, username, jobs}})
+        loginUser: (email, username,voornaam, jobs) => {
+            dispatch({type: 'LOGIN_USER', payload: {email, username, voornaam, jobs}})
         }
     }
 }

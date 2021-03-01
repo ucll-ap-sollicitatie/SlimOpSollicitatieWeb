@@ -51,6 +51,7 @@ const defaultUser =
     {
         email: null,
         username: null,
+        voornaam: null,
         jobs: [],
         selectedJobTitle: "Ober",
         selectedSkills: ["Vriendelijk", "snel"]
@@ -67,6 +68,7 @@ function users(state=defaultUser, action){
                 ...state,
                 email: action.payload.email,
                 username: action.payload.username,
+                voornaam: action.payload.voornaam,
                 jobs: action.payload.jobs
             }
 
@@ -79,6 +81,7 @@ function users(state=defaultUser, action){
                 ...state,
                 email: null,
                 username: null,
+                voornaam: null,
                 jobs: [],
                 selectedJobTitle: defaultUser.selectedJobTitle,
                 selectedSkills: defaultUser.selectedSkills
