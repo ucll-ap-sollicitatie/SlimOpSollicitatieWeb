@@ -63,6 +63,8 @@ function Feedback(props){
         </div>
         
     )
+ 
+
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
         console.log(rs)
@@ -168,8 +170,6 @@ function Feedback(props){
 
     function OKClick(e){
         var okval = e.target.id
-
-
     }
     
     

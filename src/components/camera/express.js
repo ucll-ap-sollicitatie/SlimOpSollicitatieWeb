@@ -66,13 +66,15 @@ app.get("/video/:name", function(req, res){
         res.status(400).send("Requires header range")
     }
 
+   
     const videoPath = "./uploads/" + req.params.name
-
     const videoSiza = fs.statSync(videoPath).size
+
     const chunksize = 10**7
     const start = Number(range.replace(/\D/g,""))
-    const end = Math.min(start + chunksize, videoSiza - 1)
+    const end = Math.min(start + chunksize, videoSiza -1 )
 
     const videoStream = fs.createReadStream(videoPath, {start, end})
     videoStream.pipe(res)
+
 })
