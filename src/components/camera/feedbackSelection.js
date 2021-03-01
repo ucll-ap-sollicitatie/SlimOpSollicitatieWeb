@@ -8,13 +8,13 @@ function FeedbackSelection(props) {
     let vids = [];
 
     return(
-        <div className="App">
+        <div className="centerPage">
             <model-viewer
                 load={getall()}>
             </model-viewer>
 
             <h1>Kies video voor feedback op te geven</h1>
-            <div id="vids">
+            <div id="vidSel">
 
             </div>
         </div>
@@ -23,14 +23,14 @@ function FeedbackSelection(props) {
     async function getall() {
         vids = await getAllVidsDb(props.email)
 
-        document.getElementById("vids").innerHTML = ""
+        document.getElementById("vidSel").innerHTML = ""
         vids.forEach(element => {
             var el = document.createElement("button");
             el.id = element.name;
             el.onclick = onClick
             let htmltext = parseName(element.name.toString())
             el.innerHTML = htmltext
-            document.getElementById("vids").append(el)
+            document.getElementById("vidSel").append(el)
         });
     }
 

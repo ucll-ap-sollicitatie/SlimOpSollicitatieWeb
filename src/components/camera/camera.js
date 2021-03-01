@@ -121,8 +121,15 @@ const WebcamStreamCapture = () => {
             timeArray.push(((new Date()).getTime() - startTimer) / 1000)
             txt = timeArray.join('\r\n')
             uploadTxt = makeTxt(txt.toString())
-            var fileName = email + Date.now().toString() + ".webm"
-            var txtName = email + Date.now().toString() + ".txt"
+            var currentdate = new Date()
+            var datetime = currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/" 
+                + currentdate.getFullYear() + " @ "  
+                + currentdate.getHours() + ":"  
+                + currentdate.getMinutes() + ":" 
+                + currentdate.getSeconds();
+            var fileName = email + datetime.toString() + ".webm"
+            var txtName = email + datetime.toString() + ".txt"
             //console.log(glprops)
             glprops.setBlob(videoBlob)
             const uplVid = new FormData()
