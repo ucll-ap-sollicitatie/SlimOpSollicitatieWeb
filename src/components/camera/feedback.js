@@ -54,11 +54,54 @@ function Feedback(props){
         </div>
         
     )
+
+    function keepZG(crit){
+        document.getElementById(crit + "ZS").style.display = "none"
+        document.getElementById(crit).style.display = "none"
+        document.getElementById(crit + "ZG").style.display = "block"
+
+    }
+    function keepZS(crit){
+        try{
+          document.getElementById(crit + "ZG").style.display = "none"
+          document.getElementById(crit).style.display = "none"
+          document.getElementById(crit + "ZS").style.display = "block"
+
+        }catch(err){
+            console.log("err")
+        }
+    }
+    function keepok(crit){
+        document.getElementById(crit + "ZG").style.display = "none"
+        document.getElementById(crit + "ZS").style.display = "none"
+        document.getElementById(crit).style.display = "block"
+
+    }
+
+    function displayAll(crit) {
+        console.log(document.getElementById(crit + "ZG"))
+        // document.getElementById(crit + "ZG").style.display = "block"
+        // document.getElementById(crit + "ZS").style.display = "block"
+        // document.getElementById(crit).style.display = "block"
+
+    }
  
 
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
-        console.log(rs)
+        rs = JSON.parse(rs)
+        // for (const [key, value] of Object.entries(rs)) {
+        //     if(value === 5){
+        //         keepZG(key)
+        //     }
+        //     else if(value === 1){
+        //         keepZS(key)
+        //     }
+        //     else{
+        //         keepok(key)
+        //     }
+        //   }
+        return rs
     }
 
     function saveFeedback() {
@@ -95,10 +138,11 @@ function Feedback(props){
     
     function changeCritprev() {
         //get current index
-        
         //update index
         if (index > 0){
             index -= 1
+            console.log(criteria[index])
+            displayAll(criteria[index])
             correctTimeStamp(index)
             setCrit(criteria[index])
         }
@@ -113,6 +157,8 @@ function Feedback(props){
         //update index
         if (index < criteria.length -1){
             index += 1
+            console.log(criteria[index])
+            displayAll(criteria[index])
             correctTimeStamp(index)
             setCrit(criteria[index])
         }
@@ -139,6 +185,7 @@ function Feedback(props){
         var id = e.target.id
         id = id.split("ZG")[0]
         scores[id] = 5
+        keepZG(id)
         console.log(scores)
     }
    /**
@@ -148,12 +195,14 @@ function Feedback(props){
         var id = e.target.id
         id = id.split("ZS")[0]
         scores[id] = 1
+        keepZS(id)
         console.log(scores)
     }
 
 
     function OKClick(e){
         var okval = e.target.id
+        
     }
     
     

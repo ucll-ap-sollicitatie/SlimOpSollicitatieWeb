@@ -56,13 +56,10 @@ function Profile(props){
                                     <li>{job.tech}</li>
                                     <button style={buttonStyle} id={job.titel} onClick={deleteJob}>Verwijder Job</button>
                                 </ul>
-
                             </div>)
                     })
                 }
-                       
                 
-                 
                 <Link to="/addJob">
                     <button style={buttonStyle}>Nieuwe Jobtitel</button>
                 </Link>
