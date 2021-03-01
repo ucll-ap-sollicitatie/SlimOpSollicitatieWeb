@@ -1,4 +1,4 @@
-const fTaken = "Weet -VNAAM- vlot te vertellen welke taken hij moet uitvoeren?"
+const fTaken = "Weet -VNAAM- vlot te vertellen welke taken hij/zij moet uitvoeren?"
 const fCarriere = "Is de ervaring die -VNAAM- vertelt echt relevant voor deze job?"
 const fCompetentiesJob = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de jobgerelateerde competentie -COMP- bezit?"
 const fCompetentiesPers = "Hoe geloofwaarig en helder komt in het verhaal naar voor dat -VNAAM- de persoonsgebonden competentie -COMPJOB- bezit?"
@@ -29,6 +29,10 @@ function getAllFeedbackObject(){
 
 function parseQuestionFeedback(vnaam, compj, comps){
     var newArr = []
+    var naam = vnaam
+    if(!vnaam){
+        vnaam = "hij/zij"
+    }
     getAllFeedbackArray().forEach(q => {
         q = q.replace("-VNAAM-", vnaam)
         q = q.replace("-COMP-", comps)

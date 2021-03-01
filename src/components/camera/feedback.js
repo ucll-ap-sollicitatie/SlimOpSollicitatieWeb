@@ -8,6 +8,7 @@ var scores = {}
 
 function Feedback(props){
 
+    //in empty spaces you can add the specific skill. For now we don't have this functionality
     const criteria = parseQuestionFeedback(props.vnaam, "", "")
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
     const [score, setScore] = useState('');
