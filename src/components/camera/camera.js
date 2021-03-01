@@ -10,9 +10,9 @@ var videoBlob;
 var glprops;
 var email;
 var cap = false;
-
+var title = "";
 function Camera(props) {
-    var title = props.selectedJobTitle
+    title = props.selectedJobTitle
     var skills = props.selectedSkills
     email = props.email
     vl = parsedvragenlijst(title, skills)
@@ -121,7 +121,7 @@ const WebcamStreamCapture = () => {
             timeArray.push(((new Date()).getTime() - startTimer) / 1000)
             txt = timeArray.join('\r\n')
             uploadTxt = makeTxt(txt.toString())
-            var fileName = email + Date.now().toString() + ".webm"
+            var fileName = email + Date.now().toString() + "-job" + title + ".webm"
             var txtName = email + Date.now().toString() + ".txt"
             //console.log(glprops)
             glprops.setBlob(videoBlob)
