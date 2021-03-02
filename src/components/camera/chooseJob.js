@@ -73,11 +73,23 @@ function ChooseJob(props){
         var titel = document.getElementById("titel").value
         var inter = document.getElementById("inter").value
         var tech = document.getElementById("tech").value
-        var email = props.email
-        const result = await addJobdb4params(titel, inter, tech, email)
-        
-        toggleDisplay()
+
+        if(ifEmpty("titel", titel) && ifEmpty("inter", inter)  && ifEmpty("tech", tech) /**&& ifEmpty("tech2", tech2)*/ ){
+            var email = props.email
+            const result = await addJobdb4params(titel, inter, tech, email)
+            toggleDisplay()
+        }
     }
+    function ifEmpty(field, elem){
+        if(elem === ""){
+            var el = document.getElementById(field + "error")
+            el.style.display = "block";
+            return false
+        }
+        return true
+
+    }
+
 
     function handleClick(e){
         var jobtitle = e.target.id

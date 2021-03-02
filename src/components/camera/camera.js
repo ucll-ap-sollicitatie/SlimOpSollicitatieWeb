@@ -4,6 +4,7 @@ import {vragenlijst, parsedvragenlijst} from "../questions/questions.js";
 import {connect} from "react-redux";
 import axios from "axios";
 import {videoInDb} from "../user/apiUser";
+import { useHistory } from "react-router-dom";
 
 var vl;
 var videoBlob;
@@ -11,7 +12,10 @@ var glprops;
 var email;
 var cap = false;
 var title = "";
+var history; 
+
 function Camera(props) {
+    history = useHistory();
     title = props.selectedJobTitle
     var skills = props.selectedSkills
     email = props.email
@@ -166,6 +170,7 @@ const WebcamStreamCapture = () => {
             /** -------------------- */
             window.URL.revokeObjectURL(url);
             setRecordedChunks([]);
+            history.push("/")
         }
     }, [recordedChunks]);
     /**

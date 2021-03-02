@@ -66,7 +66,6 @@ app.get("/video/:name", function(req, res){
         res.status(400).send("Requires header range")
     }
 
-   
     const videoPath = "./uploads/" + req.params.name
     const videoSiza = fs.statSync(videoPath).size
 
