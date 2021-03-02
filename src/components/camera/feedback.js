@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 
 
 var scores = {}
-var dbFeedback ;
+var dbFeedback = {};
 
 function Feedback(props){
 
@@ -78,6 +78,7 @@ function Feedback(props){
             console.log("err")
         }
     }
+
     function keepok(crit){
         document.getElementById(crit + "ZG").style.display = "none"
         document.getElementById(crit + "ZS").style.display = "none"
@@ -93,7 +94,6 @@ function Feedback(props){
 
     }
  
-
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
         dbFeedback = JSON.parse(rs)
@@ -108,6 +108,7 @@ function Feedback(props){
     function handleTimeSwitch(e){
         goToTime(e.target.id)
     }
+
    /**
      * Change the current time of the video to t seconds
      */
@@ -139,7 +140,6 @@ function Feedback(props){
     /**
      * go to the previous question
      */
-    
     async function changeCritprev() {
         //get current index
         //update index
@@ -203,7 +203,6 @@ function Feedback(props){
         }
     }
 
-
    /**
      * 
      */
@@ -227,6 +226,7 @@ function Feedback(props){
         keepZG(id)
         console.log(scores)
     }
+
    /**
      * 
      */
@@ -238,16 +238,14 @@ function Feedback(props){
         console.log(scores)
     }
 
-
     function OKClick(e){
-        var okval = e.target.id
-        
+        var okval = e.target.id  
+        var id = okval + "ok"
+        keepok(okval)
+        document.getElementById(id).style.display = "inline"
+        document.getElementById(okval).style.display = "none"
+
     }
-    
-    
-
-
-
 }
 
 const mapStateToProps = (state) => {
