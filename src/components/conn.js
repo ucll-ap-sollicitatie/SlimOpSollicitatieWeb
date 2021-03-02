@@ -105,10 +105,14 @@ function register(email, password, username, confPass, voornaam) {
 }
 
 function getJobs(email) {
-    pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
-        jobs = res.rows
-    })
-    return jobs
+    try{
+        pool.query('select * from slimopsol.job where email =' + "'" + email + "'", (err, res) => {
+            jobs = res.rows
+        })
+        return jobs
+    }catch(err){
+        console.log(err)
+    }
 }
 
 function makeJob(email) {

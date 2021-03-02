@@ -4,10 +4,13 @@ import React, { useState } from 'react';
 import {getAllFeedbackArray, parseQuestionFeedback} from '../questions/feedbackquestions'
 import {setFeedback, getFeedback} from '../user/apiUser'
 import e from 'cors';
+import { useHistory } from "react-router-dom";
+
+
 var scores = {}
 var dbFeedback ;
 function Feedback(props){
-
+    const history = useHistory();
     //in empty spaces you can add the specific skill. For now we don't have this functionality
     const criteria = parseQuestionFeedback(props.vnaam, "", "")
     const [timestampslist, setTimestamps] = useState(Array.from(props.timestamps));
@@ -92,6 +95,7 @@ function Feedback(props){
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
         dbFeedback = JSON.parse(rs)
+        console.log(rs)
         return rs
     }
 
@@ -117,10 +121,17 @@ function Feedback(props){
      * find currect timestamp of question id
      */
     function correctTimeStamp(id){
+        try{
+
+       
+
         if(timestampslist[id]){
             id = id
         }else id = 0
         goToTime(timestampslist[id])
+    }catch(err){
+        history.push("/error")
+    }
     }
 
     /**
@@ -130,24 +141,26 @@ function Feedback(props){
     async function changeCritprev() {
         //get current index
         //update index
-        if (index > 0){
-            displayAll(criteria[index])
-            index -= 1
-            
-            correctTimeStamp(index)
-            await setCrit(criteria[index])
-            var value = dbFeedback[criteria[index]]
-            var crit = criteria[index]
-            showCorrectFeedback(value, crit)
-        }
+            if (index > 0){
+                displayAll(criteria[index])
+                index -= 1
+                
+                correctTimeStamp(index)
+                await setCrit(criteria[index])
+                var value = dbFeedback[criteria[index]]
+                var crit = criteria[index]
+                showCorrectFeedback(value, crit)
+            }
     }
 
     function showCorrectFeedback(value, crit) {
         console.log("showCorrectFeedback")
         if(value === 1){
+            console.log(value)
             keepZS(crit)
         }
         if(value === 5){
+            console.log(value)
             keepZG(crit)
         }
     }

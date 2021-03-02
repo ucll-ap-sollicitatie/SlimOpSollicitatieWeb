@@ -25,7 +25,7 @@ function UpdateUsername(props){
 
                     <label htmlFor="pass">Wachtwoord</label>
                     <input type="password" placeholder="pass" id="pass" onChange={(e) => setPassword(e.target.value)}/>
-                    <p id="passerror" style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
+                    <p id="passerror" style={{display: "none"}}>Wachtwoord fout</p>
 
                     <button>Verander gebruikersnaam</button>
                 </form>

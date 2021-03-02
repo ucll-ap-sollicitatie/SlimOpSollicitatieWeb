@@ -15,7 +15,7 @@ import Feedback from "./components/camera/feedback"
 import UpdateUsername from "./components/user/updateUsername"
 import ChooseJob from "./components/camera/chooseJob"
 import {connect} from "react-redux";
-
+import Error from "./components/error"
 function App(props) {
     const history = useHistory();
 
@@ -43,6 +43,7 @@ function App(props) {
                     <Route path="/" component={Home} exact/>
                     <Route path="/login" component={loginPage} exact/>
                     <Route path="/register" component={Register} exact/>
+                    <Route path="/error" component={Error} exact/>
                 </Switch>
             </div>
         </BrowserRouter>
@@ -72,7 +73,7 @@ function App(props) {
                     <Route path="/updateUsername" component={UpdateUsername} exact />
                     <Route path="/chooseJob" component={ChooseJob} exact />
                     <Route path="/feedbackSelection" component={FeedbackSelection} exact />
-
+                    <Route path="/error" component={Error} exact/>
                     
                 </Switch>
             </div>
