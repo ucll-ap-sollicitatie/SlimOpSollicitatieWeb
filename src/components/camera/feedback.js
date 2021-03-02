@@ -5,7 +5,7 @@ import {getAllFeedbackArray, parseQuestionFeedback} from '../questions/feedbackq
 import {setFeedback, getFeedback} from '../user/apiUser'
 import e from 'cors';
 var scores = {}
-
+var dbFeedback ;
 function Feedback(props){
 
     //in empty spaces you can add the specific skill. For now we don't have this functionality
@@ -58,14 +58,16 @@ function Feedback(props){
     function keepZG(crit){
         document.getElementById(crit + "ZS").style.display = "none"
         document.getElementById(crit).style.display = "none"
-        document.getElementById(crit + "ZG").style.display = "block"
-
+        document.getElementById(crit + "ZG").style.display = "inline"
     }
+
     function keepZS(crit){
+        console.log(crit + "ZG")
+        console.log(document.getElementById(crit + "ZG"))
         try{
           document.getElementById(crit + "ZG").style.display = "none"
           document.getElementById(crit).style.display = "none"
-          document.getElementById(crit + "ZS").style.display = "block"
+          document.getElementById(crit + "ZS").style.display = "inline"
 
         }catch(err){
             console.log("err")
@@ -74,33 +76,22 @@ function Feedback(props){
     function keepok(crit){
         document.getElementById(crit + "ZG").style.display = "none"
         document.getElementById(crit + "ZS").style.display = "none"
-        document.getElementById(crit).style.display = "block"
+        document.getElementById(crit).style.display = "inline"
 
     }
 
     function displayAll(crit) {
-        console.log(document.getElementById(crit + "ZG"))
-        // document.getElementById(crit + "ZG").style.display = "block"
-        // document.getElementById(crit + "ZS").style.display = "block"
-        // document.getElementById(crit).style.display = "block"
+        //console.log(document.getElementById(crit + "ZG"))
+        document.getElementById(crit + "ZG").style.display = "inline"
+        document.getElementById(crit + "ZS").style.display = "inline"
+        document.getElementById(crit).style.display = "inline"
 
     }
  
 
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
-        rs = JSON.parse(rs)
-        // for (const [key, value] of Object.entries(rs)) {
-        //     if(value === 5){
-        //         keepZG(key)
-        //     }
-        //     else if(value === 1){
-        //         keepZS(key)
-        //     }
-        //     else{
-        //         keepok(key)
-        //     }
-        //   }
+        dbFeedback = JSON.parse(rs)
         return rs
     }
 
@@ -136,31 +127,50 @@ function Feedback(props){
      * go to the previous question
      */
     
-    function changeCritprev() {
+    async function changeCritprev() {
         //get current index
         //update index
         if (index > 0){
-            index -= 1
-            console.log(criteria[index])
             displayAll(criteria[index])
+            index -= 1
+            
             correctTimeStamp(index)
-            setCrit(criteria[index])
+            await setCrit(criteria[index])
+            var value = dbFeedback[criteria[index]]
+            var crit = criteria[index]
+            showCorrectFeedback(value, crit)
+        }
+    }
+
+    function showCorrectFeedback(value, crit) {
+        console.log("showCorrectFeedback")
+        if(value === 1){
+            keepZS(crit)
+        }
+        if(value === 5){
+            keepZG(crit)
         }
     }
 
     /**
      * go to the next question
      */
-    function changeCritnext() {
+    async function changeCritnext() {
         //get current index
         
         //update index
         if (index < criteria.length -1){
+            displayAll(criteria[index])
+
             index += 1
             console.log(criteria[index])
-            displayAll(criteria[index])
             correctTimeStamp(index)
-            setCrit(criteria[index])
+            await setCrit(criteria[index])
+            var value = dbFeedback[criteria[index]]
+            var crit = criteria[index]
+
+            showCorrectFeedback(value, crit)
+
         }
     }
 
