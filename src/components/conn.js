@@ -250,6 +250,7 @@ async function makeServer(req, res) {
         //parse data to JSON
         req.on('end', async () => {
             jsondata = JSON.parse(data)
+
             try {
                 user = await login(jsondata.email, jsondata.pass)
                 console.log(user)

@@ -9,7 +9,9 @@ import { useHistory } from "react-router-dom";
 
 var scores = {}
 var dbFeedback ;
+
 function Feedback(props){
+
     const history = useHistory();
     //in empty spaces you can add the specific skill. For now we don't have this functionality
     const criteria = parseQuestionFeedback(props.vnaam, "", "")
@@ -144,12 +146,23 @@ function Feedback(props){
             if (index > 0){
                 displayAll(criteria[index])
                 index -= 1
-                
-                correctTimeStamp(index)
-                await setCrit(criteria[index])
-                var value = dbFeedback[criteria[index]]
-                var crit = criteria[index]
-                showCorrectFeedback(value, crit)
+
+                try{
+                    correctTimeStamp(index)
+                    await setCrit(criteria[index])
+                    try{
+
+                    var value = dbFeedback[criteria[index]]
+                    var crit = criteria[index]
+                    if(value != null && crit != null){
+                        showCorrectFeedback(value, crit)
+                    }
+                    }catch(err){
+                        console.log(err)
+                    }
+                }catch(err){
+                    history.push("/error")
+                }
             }
     }
 
@@ -179,10 +192,13 @@ function Feedback(props){
             console.log(criteria[index])
             correctTimeStamp(index)
             await setCrit(criteria[index])
-            var value = dbFeedback[criteria[index]]
-            var crit = criteria[index]
-
-            showCorrectFeedback(value, crit)
+            try{
+                var value = dbFeedback[criteria[index]]
+                var crit = criteria[index]
+                showCorrectFeedback(value, crit)
+            }catch(err){
+                console.log(err)
+            }
 
         }
     }
