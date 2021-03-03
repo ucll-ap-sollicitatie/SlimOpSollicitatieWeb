@@ -96,7 +96,7 @@ function Feedback(props){
  
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
-        dbFeedback = JSON.parse(rs)
+        dbFeedback = rs
         console.log(rs)
         return rs
     }
