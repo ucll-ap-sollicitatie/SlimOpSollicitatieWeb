@@ -67,7 +67,7 @@ async function logindb(eml, pss) {
  *  un: username
  *  cp: confirm password
  */
-async function registerdb(eml, pss, cp, vn) {
+async function registerdb(eml, pss, un, cp, vn) {
     return new Promise((resolve, reject) => {
         axios
             // sends post request to the api on this path
@@ -77,6 +77,7 @@ async function registerdb(eml, pss, cp, vn) {
                     email: eml,
                     pass: pss,
                     confPass: cp,
+                    un: un,
                     vn: vn
                 },
                 //without header, it will not send a POST but a OPTIONS request

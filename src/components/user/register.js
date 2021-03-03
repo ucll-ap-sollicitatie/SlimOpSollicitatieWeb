@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {registerdb} from "./apiUser"
+import {registerdb} from "../user/apiUser"
 import { useHistory } from "react-router-dom";
 
 
@@ -17,31 +17,35 @@ function Register(props){
 
     return (
         <div className="centerPage ">
-        <div className="container registerPage">
-            <h1>Gelieve te registreren</h1>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">Email</label>
-                <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
-                <p id="eremail" className="error" style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
+            <div className="container registerPage">
+                <h1>Gelieve te registreren</h1>
+                <form onSubmit={handleSubmit} className="wite">
+                    <label htmlFor="email">Email</label>
+                    <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
+                    <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
-                <label htmlFor="voornaam">Voornaam</label>
-                <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
-                <p id="ervn" className="error" style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
+                    <label htmlFor="username">Gebruikersnaam</label>
+                    <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
+                    <p id="eruser"  style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
 
-                <label htmlFor="password">Wachtwoord</label>
-                <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
-                <p id="erpw" className="error" style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
+                    <label htmlFor="voornaam">Voornaam</label>
+                    <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
+                    <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
 
-                <label htmlFor="confpassword">Herhaal Wachtwoord</label>
-                <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
-                <p id="erconf" className="error" style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
+                    <label htmlFor="password">Wachtwoord</label>
+                    <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
+                    <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
 
-                <button>Maak account</button>
-            </form>
+                    <label htmlFor="confpassword">Herhaal Wachtwoord</label>
+                    <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
+                    <p id="erconf"  style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
 
-            <div>
-                <p id="error" className="error" style={{display: "none"}}>Er was een probleem met het aanmaken van jouw account</p>
-            </div>
+                    <button>Maak account</button>
+                </form>
+
+                <div>
+                    <p id="error" style={{display: "none"}}>Er was een probleem met het aanmaken van jouw account</p>
+                </div>
 
             </div>
         </div>
@@ -73,7 +77,10 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
-       if(email === "" || !email.includes(".")){
+        if(username.replace(/\s/g,'') === ''){
+            elemt.style.display = "block"
+            return
+        } else if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
         }
@@ -88,22 +95,24 @@ function Register(props){
             return
         }
         else
-            e.preventDefault();
             console.log(username)
-            const result = await registerdb(email, password, confPass, voornaam)
-            console.log(result === true)
-            if(result === true) {
-                history.push("/login");
-            }/**
-             * Error when server returns error (general)
-             */
-            else{
-                var elem = document.getElementById("error")
-                if (elem.style.display === "none") {
-                    elem.style.display = "block";
-                }
+        elemt.style.display = "none"
+        const result = await registerdb(email, password, username, confPass, voornaam)
+        console.log(result === true)
+        if(result === true){
+            history.push("/login");
+        }
+
+        /**
+         * Error when server returns error (general)
+         */
+        else{
+            var elem = document.getElementById("error")
+            if (elem.style.display === "none") {
+                elem.style.display = "block";
             }
         }
+    }
 }
 
 export default Register;
