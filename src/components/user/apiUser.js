@@ -1,5 +1,6 @@
 const axios = require("axios");
 const webIp = "https://slimopsollicitatie.xyz:3001"
+const localIp = "http://127.0.0.1:3001"
 
 /**
  * get all jobs of a user
