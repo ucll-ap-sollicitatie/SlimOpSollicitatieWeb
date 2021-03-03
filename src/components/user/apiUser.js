@@ -208,7 +208,7 @@ async function getAllVidsDb(email) {
         var config = {
             method: 'get',
             url: `https://slimopsollicitatie.xyz:3001/users/getvidInDb?email=${email}`,
-            headers: { }
+            headers: {}
         };
 
         axios(config)
@@ -218,6 +218,7 @@ async function getAllVidsDb(email) {
             .catch(function (error) {
                 console.log(error);
             });
+    })
 }
 
 
