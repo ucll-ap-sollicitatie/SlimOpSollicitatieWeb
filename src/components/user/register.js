@@ -73,6 +73,8 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
+        await registerdb(email, password, confPass, voornaam)
+
        if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
