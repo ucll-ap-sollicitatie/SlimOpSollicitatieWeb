@@ -22,7 +22,7 @@ function Register(props){
             <form onSubmit={handleSubmit} className="wite">
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
-                <p id="eremail" className="error"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
+                <p id="eremail" className="error" style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
                 <label htmlFor="voornaam">Voornaam</label>
                 <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
