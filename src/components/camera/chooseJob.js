@@ -51,7 +51,7 @@ function ChooseJob(props){
             <br/>
 
             <p>Als je een nieuwe job aanmaakt, vergeet niet op de <b>refresh</b> knop te drukken. Dan zul je de net aangemaakte job zien in het lijstje bovenaan.</p>
-            <button onClick={updateJobs}>Refresh</button>
+            <button onClick={updateJobs} hidden>Refresh</button>
 
         </div>
     )

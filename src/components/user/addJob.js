@@ -33,12 +33,12 @@ function AddJob(props){
                         Technische vaardigheid zijn: zoals programmeren, onderwijzen, 
                             koken,… of communicatievaardigheden zijn: samenwerken, klantgerichtheid, presenteren,…</p>
 
-                        <label htmlFor="inter">communicatievaardigheden</label>
-                        <input type="text" placeholder="Competentie" id="inter" onChange={(e) => setInter(e.target.value)}/>
+                        <label htmlFor="inter">Communicatievaardigheden</label>
+                        <input type="text" placeholder="vb: samenwerken" id="inter" onChange={(e) => setInter(e.target.value)}/>
                         <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Technische vaardigheid</label>
-                        <input type="text" placeholder="Competentie" id="tech" onChange={(e) => setTech(e.target.value)}/>
+                        <input type="text" placeholder="vb: programmeren" id="tech" onChange={(e) => setTech(e.target.value)}/>
                         <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         {/* <label htmlFor="tech2">Technische vaardigheid 2</label>
