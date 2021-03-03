@@ -30,14 +30,14 @@ function AddJob(props){
                         <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <p hidden>Als je solliciteert dan vraagt een organisatie dat je bepaalde vaardigheden bezit. Dit kunnen
-                             jobgerelateerde competenties zijn: zoals programmeren, onderwijzen, 
-                            koken,… of persoonsgebonden competenties zijn: samenwerken, klantgerichtheid, presenteren,…</p>
+                        Technische vaardigheid zijn: zoals programmeren, onderwijzen, 
+                            koken,… of communicatievaardigheden zijn: samenwerken, klantgerichtheid, presenteren,…</p>
 
-                        <label htmlFor="inter">Persoonsgebonden competentie</label>
+                        <label htmlFor="inter">communicatievaardigheden</label>
                         <input type="text" placeholder="Competentie" id="inter" onChange={(e) => setInter(e.target.value)}/>
                         <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="tech">Jobgerelateerde competentie</label>
+                        <label htmlFor="tech">Technische vaardigheid</label>
                         <input type="text" placeholder="Competentie" id="tech" onChange={(e) => setTech(e.target.value)}/>
                         <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 

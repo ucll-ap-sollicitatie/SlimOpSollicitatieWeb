@@ -16,7 +16,7 @@ function ChooseJob(props){
                 <title>SOS - Opnemen</title>
             </Helmet>
             <h1 className>Kies je job</h1>
-            <p className="chooseJob">Kies een job uit de lijst hieronder. Voor deze job ga je een interview afleggen. Als je een eigen jobtitel wilt toevoegen kan je op de knop "Voeg nieuwe job toe" klikken. Op je profiel kan je kijken welke competenties bij welke jobs horen.</p>
+            <p className="chooseJob"><b>Kies een job</b> uit de lijst hieronder. Voor deze job ga je een interview afleggen. Als je een eigen jobtitel wilt toevoegen kan je op de knop "<b>Voeg nieuwe job toe</b>" klikken. Op je profiel kan je kijken welke competenties bij welke jobs horen.</p>
             {
                     jobsList.map(job => { 
                         //console.log(job.titel)
@@ -29,22 +29,28 @@ function ChooseJob(props){
 
             <button onClick={toggleDisplay} className="centerPage">Voeg een nieuwe job toe</button>
             <div id="addJobWrap" style={{display:"none"}}>
+                <p>Denk zelf eens na welke vaardigheden je nodig hebt om deze functie uit te voeren. Vul deze in</p>
+                <br/>
             <form onSubmit={handleSubmit} className="wite" className="chooseJobForm">
                         <label htmlFor="titel">Functie die je wil inoefenen</label>
-                        <input type="text" placeholder="titel" id="titel" />
+                        <input type="text" placeholder="bv. Java developer" id="titel" />
                         <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="inter">Interpersoonlijke vaardigheid</label>
-                        <input type="text" placeholder="Vaardigheid" id="inter" />
+                        <label htmlFor="inter">communicatievaardigheden</label>
+                        <input type="text" placeholder="bv. samenwerken" id="inter" />
                         <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Technische vaardigheid</label>
-                        <input type="text" placeholder="Vaardigheid" id="tech" />
+                        <input type="text" placeholder="bv. Java" id="tech" />
                         <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <button>Voeg job toe</button>
                     </form>
             </div>
+            <br/>
+            <br/>
+
+            <p>Als je een nieuwe job aanmaakt, vergeet niet op de <b>refresh</b> knop te drukken. Dan zul je de net aangemaakte job zien in het lijstje bovenaan.</p>
             <button onClick={updateJobs}>Refresh</button>
 
         </div>

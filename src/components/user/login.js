@@ -26,10 +26,10 @@ function Login(props)
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
 
                 <button>Inloggen</button>
-                <div onClick={navToRegister}>Nog geen account?</div>
+                <div onClick={navToRegister}>Nog geen account? klik <b>hier</b> om een nieuw account aan te maken</div>
             </form>
             <div>
-                <p id="error" style={{display: "none"}}>Foute gebruikersnaam of wachtwoord</p>
+                <p id="error" style={{display: "none"}}>Foute email of wachtwoord</p>
             </div>
         </div>
         </div>

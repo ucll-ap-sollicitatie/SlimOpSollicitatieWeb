@@ -32,27 +32,35 @@ function Feedback(props){
             </model-viewer>
 
             <h1>Feedback</h1>
-
+<p>Geef hier je feedback op de opgenome video. Dit is aan de hand van een puntensysteem.</p>
+<p>Kies een waarde uit: Zeer slecht(1/5), Zeer goed(5/5), Oké (een waarde tussen 2/5 en 4/5)</p>
+<p>Wanneer je de volgende vraag wilt beoordelen, gebruik de knop 'Volgende'</p>
             <section id="vid-feedback-container">
                 <video id="video" src={"https://slimopsollicitatie.xyz:3001/video/?vid=" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
                     <div className="feedbackQ" onClick={changeCritnext}>{criterium}</div>
-                    <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht</button>
-                    <button id={criterium} onClick={OKClick}>OK</button>
+                    <button id={criterium + "ZS"} onClick={ZSClick}>Zeer slecht (1/5)</button>
+                    <button id={criterium} onClick={OKClick}>Oké</button>
                     <div id={criterium + "ok"} style={{display: "none"}}>
-                        <label htmlFor={criterium + "score"}>Points (between 2/5 and 4/5):</label>
+                        <label htmlFor={criterium + "score"}>2/5</label>
                         <input type="range" min="2" max="4" className="slider" id={criterium + "score"} onChange={updateSliderScore}/>
+                        <p style={{display: 'inline'}}>4/5</p>
                     </div>
-                    <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed</button>
+                    <button id={criterium + "ZG"} onClick={ZGClick}>Zeer goed (5/5)</button>
 
                 </section>
+                <br/>
 
-                <button onClick={changeCritprev}>Vorige</button>
-                <button onClick={changeCritnext}>Volgende</button>
+                <button onClick={changeCritprev}>Vorige vraag</button>
+                <button onClick={changeCritnext}>Volgende vraag</button>
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}
+                <br/>
+                <br/>
+
+                <p>Wanneer je <b>Alle</b> vragen hebt beoordeeld, kan je hier de feedback oplaan</p>
                 <button onClick={saveFeedback}>Feedback opslaan</button>
 
             </section>
