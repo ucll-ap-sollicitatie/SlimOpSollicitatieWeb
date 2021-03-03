@@ -63,6 +63,7 @@ function Feedback(props){
     function keepZG(crit){
         document.getElementById(crit + "ZS").style.display = "none"
         document.getElementById(crit).style.display = "none"
+        document.getElementById(crit + "ok").style.display = "none"
         document.getElementById(crit + "ZG").style.display = "inline"
     }
 
@@ -72,6 +73,8 @@ function Feedback(props){
         try{
           document.getElementById(crit + "ZG").style.display = "none"
           document.getElementById(crit).style.display = "none"
+          document.getElementById(crit + "ok").style.display = "none"
+
           document.getElementById(crit + "ZS").style.display = "inline"
 
         }catch(err){
