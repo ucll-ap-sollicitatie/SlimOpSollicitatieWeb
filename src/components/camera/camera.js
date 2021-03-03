@@ -11,6 +11,7 @@ var videoBlob;
 var glprops;
 var email;
 var cap = false;
+var cap2 = false;
 var title = "";
 var history; 
 
@@ -53,7 +54,7 @@ const WebcamStreamCapture = () => {
             vragencounter++;
             if (vragencounter == vl.length - 1) {
                 document.getElementById("nextQButton").style.visibility = "hidden"
-                document.getElementById("stop").style.visibility = "visible"
+                document.getElementById("stop").hidden = "false"
             }
         }
         document.getElementById("overlay").innerHTML = vl[vragencounter]
@@ -69,9 +70,6 @@ const WebcamStreamCapture = () => {
     }
 
     const handleStartCaptureClick = React.useCallback(() => {
-        if(document.getElementById("stop" != null)){
-            document.getElementById("stop").style.visibility = "hidden"
-        }
         /** Start */
         vragencounter = 0;
         timeArray = [];
@@ -222,6 +220,15 @@ function checker(){
     }
 }
 
+var timer2 = setInterval(checker,1000);
+function checker(){
+    if(document.getElementById("stop") != null){
+        cap2 = true;
+        document.getElementById("stop").hidden = true
+        clearInterval(timer)
+    }
+}
+
     return (  /** returns webcam + check capturing state to start/stop/download */
         <>
             <div className="centerPage">
@@ -240,6 +247,7 @@ function checker(){
                 )}
                 </div>
                 {timer.visibility}
+                {timer2.visibility}
                 {recordedChunks.length > 0 && (
                     <button onClick={handleDownload}>Opslaan</button>
                 )}
