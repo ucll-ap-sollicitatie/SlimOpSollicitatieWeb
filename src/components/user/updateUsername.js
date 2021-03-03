@@ -21,11 +21,11 @@ function UpdateUsername(props){
                 <form onSubmit={handleSubmit} className="wite">
                     <label htmlFor="titel">naam</label>
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
-                    <p id="userror" style={{display: "none"}}>Gelieve een naam in te vullen</p>
+                    <p id="userror" className="error" style={{display: "none"}}>Gelieve een naam in te vullen</p>
 
                     <label htmlFor="pass">Wachtwoord</label>
                     <input type="password" placeholder="pass" id="pass" onChange={(e) => setPassword(e.target.value)}/>
-                    <p id="passerror" style={{display: "none"}}>Wachtwoord fout</p>
+                    <p id="passerror" className="error" style={{display: "none"}}>Wachtwoord fout</p>
 
                     <button>Verander jouw naam</button>
                 </form>

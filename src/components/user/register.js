@@ -40,7 +40,7 @@ function Register(props){
             </form>
 
             <div>
-                <p id="error" style={{display: "none"}}>Er was een probleem met het aanmaken van jouw account</p>
+                <p id="error" className="error" style={{display: "none"}}>Er was een probleem met het aanmaken van jouw account</p>
             </div>
 
             </div>

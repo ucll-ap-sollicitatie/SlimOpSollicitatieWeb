@@ -2,6 +2,10 @@ body{
     color: #052f72 !important;
 }
 
+.error{
+  color: red;
+}
+
 button{
 	max-height: 100%;
     margin: 1em;

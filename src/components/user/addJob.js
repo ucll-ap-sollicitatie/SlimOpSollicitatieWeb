@@ -27,7 +27,7 @@ function AddJob(props){
                     <form onSubmit={handleSubmit} className="wite" className="chooseJobForm">
                         <label htmlFor="titel">De functie waarvoor ik ga solliciteren is</label>
                         <input type="text" placeholder="Titel" id="titel" onChange={(e) =>setTitel(e.target.value)}/>
-                        <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="titelerror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <p hidden>Als je solliciteert dan vraagt een organisatie dat je bepaalde vaardigheden bezit. Dit kunnen
                         Technische vaardigheid zijn: zoals programmeren, onderwijzen, 
@@ -35,11 +35,11 @@ function AddJob(props){
 
                         <label htmlFor="inter">Communicatievaardigheden</label>
                         <input type="text" placeholder="vb: samenwerken" id="inter" onChange={(e) => setInter(e.target.value)}/>
-                        <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="intererror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Technische vaardigheid</label>
                         <input type="text" placeholder="vb: programmeren" id="tech" onChange={(e) => setTech(e.target.value)}/>
-                        <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="techerror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         {/* <label htmlFor="tech2">Technische vaardigheid 2</label>
                         <input type="text" placeholder="Technische vaardigheid 2" id="tech2" onChange={(e) => setTech2(e.target.value)}/>

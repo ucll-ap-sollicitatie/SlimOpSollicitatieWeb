@@ -29,7 +29,7 @@ function Login(props)
                 <div onClick={navToRegister}>Nog geen account? klik <b>hier</b> om een nieuw account aan te maken</div>
             </form>
             <div>
-                <p id="error" style={{display: "none"}}>Foute email of wachtwoord</p>
+                <p id="error" className="error" style={{display: "none"}}>Foute email of wachtwoord</p>
             </div>
         </div>
         </div>

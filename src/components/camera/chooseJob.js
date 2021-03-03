@@ -34,15 +34,15 @@ function ChooseJob(props){
             <form onSubmit={handleSubmit} className="wite" className="chooseJobForm">
                         <label htmlFor="titel">Functie die je wil inoefenen</label>
                         <input type="text" placeholder="bv. Java developer" id="titel" />
-                        <p id="titelerror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="titelerror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="inter">communicatievaardigheden</label>
                         <input type="text" placeholder="bv. samenwerken" id="inter" />
-                        <p id="intererror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="intererror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <label htmlFor="tech">Technische vaardigheid</label>
                         <input type="text" placeholder="bv. Java" id="tech" />
-                        <p id="techerror" style={{display: "none"}}>Mag niet leeg zijn</p>
+                        <p id="techerror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
                         <button>Voeg job toe</button>
                     </form>
