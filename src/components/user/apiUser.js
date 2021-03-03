@@ -206,10 +206,7 @@ async function videoInDb(name, email, timestamps) {
 async function getAllVidsDb(email) {
     return new Promise((resolve, reject) => {
         axios
-            .get(`${webIp}/users/getvidInDb`,
-                {
-                    "email": email
-                },
+            .get(`${webIp}/users/getvidInDb?email=${email}`,
                 {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
