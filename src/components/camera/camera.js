@@ -53,6 +53,7 @@ const WebcamStreamCapture = () => {
             vragencounter++;
             if (vragencounter == vl.length - 1) {
                 document.getElementById("nextQButton").style.visibility = "hidden"
+                document.getElementById("stop").style.visibility = "visible"
             }
         }
         document.getElementById("overlay").innerHTML = vl[vragencounter]
@@ -68,7 +69,9 @@ const WebcamStreamCapture = () => {
     }
 
     const handleStartCaptureClick = React.useCallback(() => {
-        
+        if(document.getElementById("stop" != null)){
+            document.getElementById("stop").style.visibility = "hidden"
+        }
         /** Start */
         vragencounter = 0;
         timeArray = [];
@@ -231,7 +234,7 @@ function checker(){
                 <br/>
                 <div id="caps">
                 {capturing ? (
-                    <button onClick={handleStopCaptureClick}>Stop Opname</button>
+                    <button id="stop" onClick={handleStopCaptureClick}>Stop Opname</button>
                 ) : (
                     <button id="start" onClick={handleStartCaptureClick} hidden>Start Opname</button>
                 )}
