@@ -13,7 +13,8 @@ function FeedbackSelection(props) {
                 load={getall()}>
             </model-viewer>
 
-            <h1>Kies video voor feedback op te geven</h1>
+            <h1>Feedback</h1>
+            <p>Kies een video uit de lijst.</p>
             <div id="vidSel">
 
             </div>

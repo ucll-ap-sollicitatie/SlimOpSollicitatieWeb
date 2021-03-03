@@ -59,10 +59,11 @@ function Feedback(props){
                 <button onClick={createEmptyMap}>Reset score</button> */}
                 <br/>
                 <br/>
-
-                <p>Wanneer je <b>Alle</b> vragen hebt beoordeeld, kan je hier de feedback oplaan</p>
+                
+                <div hidden id="hide_save">
+                <p>Wanneer je <b>alle</b> vragen hebt beoordeeld, kan je hier de feedback oplaan</p>
                 <button onClick={saveFeedback}>Feedback opslaan</button>
-
+                </div>
             </section>
         </div>
         
@@ -200,6 +201,7 @@ function Feedback(props){
         
         //update index
         if (index < criteria.length -1){
+            
             displayAll(criteria[index])
 
             index += 1
@@ -214,6 +216,9 @@ function Feedback(props){
                 console.log(err)
             }
 
+        }
+        else {
+            document.getElementById("hide_save").hidden = false
         }
     }
 
