@@ -225,7 +225,7 @@ function checker(){
     if(document.getElementById("stop") != null){
         cap2 = true;
         document.getElementById("stop").hidden = true
-        clearInterval(timer)
+        clearInterval(timer2)
     }
 }
 
