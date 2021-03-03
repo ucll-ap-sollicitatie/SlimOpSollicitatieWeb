@@ -34,7 +34,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls width="640" height="480"></video>
+                <video id="video" src={"https://slimopsollicitatie.xyz:3001/video/?vid=" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
                     <div className="feedbackQ" onClick={changeCritnext}>{criterium}</div>
@@ -63,6 +63,7 @@ function Feedback(props){
     function keepZG(crit){
         document.getElementById(crit + "ZS").style.display = "none"
         document.getElementById(crit).style.display = "none"
+        document.getElementById(crit + "ok").style.display = "none"
         document.getElementById(crit + "ZG").style.display = "inline"
     }
 
@@ -72,6 +73,8 @@ function Feedback(props){
         try{
           document.getElementById(crit + "ZG").style.display = "none"
           document.getElementById(crit).style.display = "none"
+          document.getElementById(crit + "ok").style.display = "none"
+
           document.getElementById(crit + "ZS").style.display = "inline"
 
         }catch(err){
@@ -96,7 +99,7 @@ function Feedback(props){
  
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
-        dbFeedback = JSON.parse(rs)
+        dbFeedback = rs
         console.log(rs)
         return rs
     }
@@ -175,6 +178,9 @@ function Feedback(props){
         if(value === 5){
             console.log(value)
             keepZG(crit)
+        }
+        if(value === 2 || value === 3 || value === 4){
+            keepok(crit)
         }
     }
 

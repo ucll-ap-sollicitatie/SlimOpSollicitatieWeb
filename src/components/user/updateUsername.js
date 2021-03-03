@@ -37,14 +37,14 @@ function UpdateUsername(props){
         e.preventDefault();
 
         //set in state
-        if(username === ""){
+        if(username.replace(/\s/g,'') === ""){
             var elem = document.getElementById("userror")
             elem.style.display = "block";
         }
         else{
             var i = await updateUsername(username, props.email, password)
             console.log(i)
-            if(i === "OK"){
+            if(i === true){
                 setUsername(username)
                 props.updateUsername(username)
                 history.push("/profile");    

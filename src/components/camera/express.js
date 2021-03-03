@@ -8,7 +8,7 @@ const fs = require("fs");
 const app = express();
 dotenv.config();
 app.use(bodyParser.json());
-let allowedOrigins = ["http://localhost:3000"];
+let allowedOrigins = ["https://slimopsollicitatie:443"];
 
 app.use(
     cors({
@@ -42,7 +42,7 @@ app.listen(process.env.PORT || 5002, function () {
     console.log("App listening on", 5002);
 });
 
-const UPLOAD_FILES_DIR = "./uploads";
+const UPLOAD_FILES_DIR = "/uploads";
 const storage = multer.diskStorage({
     destination(req, file, cb) {
         cb(null, UPLOAD_FILES_DIR);
