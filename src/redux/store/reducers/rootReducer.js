@@ -53,7 +53,7 @@ const defaultUser =
         username: null,
         voornaam: null,
         jobs: [],
-        selectedJobTitle: "Developper",
+        selectedJobTitle: "Developer",
         selectedSkills: ["Klantgericht", "Java"]
     }
 
