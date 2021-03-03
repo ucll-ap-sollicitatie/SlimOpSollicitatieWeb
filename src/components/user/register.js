@@ -19,7 +19,7 @@ function Register(props){
         <div className="centerPage ">
         <div className="container registerPage">
             <h1>Gelieve te registreren</h1>
-            <form onSubmit={handleSubmit} className="wite">
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
                 <p id="eremail" className="error" style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
