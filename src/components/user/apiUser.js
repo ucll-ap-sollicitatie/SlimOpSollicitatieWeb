@@ -67,7 +67,7 @@ async function logindb(eml, pss) {
  *  un: username
  *  cp: confirm password
  */
-async function registerdb(eml, pss,, cp, vn) {
+async function registerdb(eml, pss, cp, vn) {
     return new Promise((resolve, reject) => {
         axios
             // sends post request to the api on this path
