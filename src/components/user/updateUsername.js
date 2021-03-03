@@ -37,7 +37,7 @@ function UpdateUsername(props){
         e.preventDefault();
 
         //set in state
-        if(username === ""){
+        if(username.replace(/\s/g,'') === ""){
             var elem = document.getElementById("userror")
             elem.style.display = "block";
         }

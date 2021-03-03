@@ -77,17 +77,17 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
-        if(username === ''){
+        if(username.replace(/\s/g,'') === ''){
             elemt.style.display = "block"
             return
         } else if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
         }
-        else if(voornaam === ""){
+        else if(voornaam.replace(/\s/g,'') === ""){
             ervn.style.display = "block"
             return
-        } else if(password === ""){
+        } else if(password.replace(/\s/g,'') === ""){
             erpw.style.display = "block"
             return
         } else if(confPass !== password){
