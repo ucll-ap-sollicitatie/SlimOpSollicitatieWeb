@@ -300,7 +300,9 @@ async function getFeedback(vidname) {
 
         axios(config)
             .then(function (response) {
+                console.log(response.data)
                 resolve(response.data)
+                return response.data
             })
             .catch(function (error) {
                 console.log(error);
