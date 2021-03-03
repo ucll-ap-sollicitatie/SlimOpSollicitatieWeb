@@ -214,6 +214,8 @@ async function getAllVidsDb(email) {
         axios(config)
             .then(function (response) {
                 console.log(response.data);
+                resolve(response.data)
+                return response.data
             })
             .catch(function (error) {
                 console.log(error);
