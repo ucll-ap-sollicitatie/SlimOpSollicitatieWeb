@@ -136,7 +136,7 @@ const WebcamStreamCapture = () => {
 
             axios({
                 method: "POST",
-                url: "https:/slimopsollicitatie.xyz:3001/upload",
+                url: "https://slimopsollicitatie.xyz:3001/upload",
                 data: uplVid,
                 headers: {
                     "Content-Type": "multipart/form-data"
