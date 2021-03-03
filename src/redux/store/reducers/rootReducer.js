@@ -53,8 +53,8 @@ const defaultUser =
         username: null,
         voornaam: null,
         jobs: [],
-        selectedJobTitle: "Ober",
-        selectedSkills: ["Vriendelijk", "snel"]
+        selectedJobTitle: "Developper",
+        selectedSkills: ["Klantgericht", "Java"]
     }
 
 function users(state=defaultUser, action){
