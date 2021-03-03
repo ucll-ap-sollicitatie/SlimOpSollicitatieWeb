@@ -22,19 +22,19 @@ function Register(props){
             <form onSubmit={handleSubmit} className="wite">
                 <label htmlFor="email">Email</label>
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
-                <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
+                <p id="eremail" className="error"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
                 <label htmlFor="voornaam">Voornaam</label>
                 <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
-                <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
+                <p id="ervn" className="error" style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
 
                 <label htmlFor="password">Wachtwoord</label>
                 <input type="password" placeholder="Password" id="password" onChange={(e) => setPassword(e.target.value)}/>
-                <p id="erpw"  style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
+                <p id="erpw" className="error" style={{display: "none"}}>Wachtwoord mag niet leeg zijn</p>
 
                 <label htmlFor="confpassword">Herhaal Wachtwoord</label>
                 <input type="password" placeholder="Confirm Password" id="confpassword" onChange={(e) => setConfPass(e.target.value)}/>
-                <p id="erconf"  style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
+                <p id="erconf" className="error" style={{display: "none"}}>De wachtwoorden komen niet overeen</p>
 
                 <button>Maak account</button>
             </form>
