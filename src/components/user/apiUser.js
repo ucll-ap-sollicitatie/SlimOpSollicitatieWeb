@@ -203,6 +203,9 @@ async function videoInDb(name, email, timestamps){
 }
 
 async function getAllVidsDb(email){
+    return new Promise((resolve, reject) => {
+
+
     var data = JSON.stringify({"email": email})
 
     var config = {
@@ -216,11 +219,12 @@ async function getAllVidsDb(email){
 
     axios(config)
         .then(function (response) {
-            console.log(JSON.stringify(response.data));
+            resolve(response.data)
         })
         .catch(function (error) {
             console.log(error);
         });
+    })
 }
 
 
