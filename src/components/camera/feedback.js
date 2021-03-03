@@ -52,8 +52,8 @@ function Feedback(props){
                 </section>
                 <br/>
 
-                <button style={{backgroundColor : "#025669"}} onClick={changeCritprev}>Vorige vraag</button>
-                <button style={{backgroundColor : "#025669"}} onClick={changeCritnext}>Volgende vraag</button>
+                <button style={{backgroundColor : "#054872"}} onClick={changeCritprev}>Vorige vraag</button>
+                <button style={{backgroundColor : "#054872"}} onClick={changeCritnext}>Volgende vraag</button>
 
                 {/* <button onClick={calcScore}>Calculate score</button>
                 <button onClick={createEmptyMap}>Reset score</button> */}
