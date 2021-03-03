@@ -53,6 +53,7 @@ button:before {
 }
 
 #overlay{
+  font-size: large;
   margin-left: 15%;
   margin-right: 15%;
   margin-top: 1em;
