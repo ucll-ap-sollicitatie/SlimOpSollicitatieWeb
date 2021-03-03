@@ -78,7 +78,7 @@ function AddJob(props){
      * If empty, display error
      */
     function ifEmpty(field, elem){
-        if(elem === ""){
+        if(elem.replace(/\s/g,'') === ""){
             var el = document.getElementById(field + "error")
             el.style.display = "block";
             return false

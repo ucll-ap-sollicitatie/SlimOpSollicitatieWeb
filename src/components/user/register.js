@@ -24,10 +24,6 @@ function Register(props){
                 <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
                 <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
-                <label htmlFor="username">Gebruikersnaam</label>
-                <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
-                <p id="eruser"  style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
-
                 <label htmlFor="voornaam">Voornaam</label>
                 <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
                 <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
@@ -77,17 +73,14 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
-        if(username === ''){
-            elemt.style.display = "block"
-            return
-        } else if(email === "" || !email.includes(".")){
+       if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
         }
-        else if(voornaam === ""){
+        else if(voornaam.replace(/\s/g,'') === ""){
             ervn.style.display = "block"
             return
-        } else if(password === ""){
+        } else if(password.replace(/\s/g,'') === ""){
             erpw.style.display = "block"
             return
         } else if(confPass !== password){
@@ -97,7 +90,7 @@ function Register(props){
         else
             console.log(username)
             elemt.style.display = "none"
-            const result = await registerdb(email, password, username, confPass, voornaam)
+            const result = await registerdb(email, password, confPass, voornaam)
             console.log(result === true)
             if(result === true){
                 history.push("/login");
