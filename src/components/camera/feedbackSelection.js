@@ -23,6 +23,8 @@ function FeedbackSelection(props) {
     async function getall() {
         vids = await getAllVidsDb(props.email)
 
+        console.log(vids)
+
         document.getElementById("vidSel").innerHTML = ""
         vids.forEach(element => {
             var el = document.createElement("button");
@@ -80,4 +82,3 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (FeedbackSelection);
- 
