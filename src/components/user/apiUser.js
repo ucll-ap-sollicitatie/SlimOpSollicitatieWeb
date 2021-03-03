@@ -203,22 +203,27 @@ async function videoInDb(name, email, timestamps){
 }
 
 async function getAllVidsDb(email){
-    return new Promise((resolve, reject) => {
-        var config = {
-            method: 'get',
-            url: `${webIp}/users/getvidInDb?user=${email}`,
-            headers: {},
-      };
-      
-      axios(config)
-      .then(function (response) {
-        resolve(response.data)
-      })
-      .catch(function (error) {
-        console.log(error);
-    })
-})
+    var data = JSON.stringify({"email": email})
+
+    var config = {
+        method: 'get',
+        url: 'https://slimopsollicitatie.xyz:3001/users/getvidInDb',
+        headers: {
+            'Content-Type': 'text/plain'
+        },
+        data : data
+    };
+
+    axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
+
+
 async function getJobs(eml){
     return new Promise((resolve, reject) => {
 
