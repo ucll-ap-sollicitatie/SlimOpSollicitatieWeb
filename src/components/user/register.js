@@ -73,8 +73,6 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
-        await registerdb(email, password, confPass, voornaam)
-
        if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
@@ -92,14 +90,11 @@ function Register(props){
         else
             e.preventDefault();
             console.log(username)
-            elemt.style.display = "none"
             const result = await registerdb(email, password, confPass, voornaam)
             console.log(result === true)
-            if(result === true){
+            if(result === true) {
                 history.push("/login");
-            }
-
-            /**
+            }/**
              * Error when server returns error (general)
              */
             else{

@@ -71,7 +71,7 @@ async function registerdb(eml, pss, cp, vn) {
     return new Promise((resolve, reject) => {
         axios
             // sends post request to the api on this path
-            .post(`https://slimopsollicitatie.xyz:3001/users/register`,
+            .post(`${webIp}/users/register`,
                 //the request body:
                 {
                     email: eml,
