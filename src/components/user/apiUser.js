@@ -205,20 +205,19 @@ async function videoInDb(name, email, timestamps) {
 
 async function getAllVidsDb(email) {
     return new Promise((resolve, reject) => {
-        axios
-            .get(`${webIp}/users/getvidInDb?email=${email}`,
-                {
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded'
-                    }
-                }).then(function (response) {
-            //console.log("respData: " + response.data)
-            resolve(response.data)
-            return response.data
-        }).catch(function (error) {
-            return "NOK"
-        });
-    })
+        var config = {
+            method: 'get',
+            url: `https://slimopsollicitatie.xyz:3001/users/getvidInDb?email=${email}`,
+            headers: { }
+        };
+
+        axios(config)
+            .then(function (response) {
+                console.log(JSON.stringify(response.data));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
 }
 
 
