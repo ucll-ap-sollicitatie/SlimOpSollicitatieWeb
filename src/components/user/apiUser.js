@@ -289,7 +289,6 @@ async function setFeedback(vidname, feedback) {
 
 async function getFeedback(vidname) {
     return new Promise((resolve, reject) => {
-
         var data = '';
 
         var config = {
