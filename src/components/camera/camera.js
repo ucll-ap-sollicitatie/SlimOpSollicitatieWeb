@@ -220,8 +220,8 @@ function checker(){
     }
 }
 
-var timer2 = setInterval(checker,1000);
-function checker(){
+var timer2 = setInterval(checker2,1000);
+function checker2(){
     if(document.getElementById("stop") != null){
         cap2 = true;
         document.getElementById("stop").hidden = true
