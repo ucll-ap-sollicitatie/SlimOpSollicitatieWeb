@@ -26,7 +26,7 @@ function FeedbackSelection(props) {
         console.log(vids[0])
 
         document.getElementById("vidSel").innerHTML = ""
-        vids.forEach(element => {
+        vids[0].forEach(element => {
             var el = document.createElement("button");
             el.id = element.name;
             el.onclick = onClick
