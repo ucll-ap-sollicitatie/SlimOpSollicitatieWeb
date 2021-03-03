@@ -60,7 +60,7 @@ function Home(props) {
                     var vid1 = document.createElement("video");
                     vid1.controls = true
                     vid1.setAttribute('width', "360")
-                    vid1.setAttribute('src', "https://slimopsollicitatie.xyz/video?vid=" + vids[0])
+                    vid1.setAttribute('src', "https://slimopsollicitatie.xyz:3001/video?vid=" + vids[0])
                     vid1.setAttribute('type', "video/webm")
                     vid1.setAttribute('id', 'vid1')
                     document.getElementById("vids").append(vid1)
@@ -68,7 +68,7 @@ function Home(props) {
                     var vid2 = document.createElement("video");
                     vid2.controls = true
                     vid2.setAttribute('width', "360")
-                    vid2.setAttribute('src', "https://slimopsollicitatie.xyz/video?vid=" + vids[1])
+                    vid2.setAttribute('src', "https://slimopsollicitatie.xyz:3001/video?vid=" + vids[1])
                     vid2.setAttribute('type', "video/webm")
                     document.getElementById("vids").append(vid2)
                 } else if(vids.length === 0) {
@@ -81,7 +81,7 @@ function Home(props) {
                     var vid3 = document.createElement("video");
                     vid3.controls = true
                     vid3.setAttribute('width', "360")
-                    vid3.setAttribute('src', "https://slimopsollicitatie.xyz/video?vid=" + vids[0])
+                    vid3.setAttribute('src', "https://slimopsollicitatie.xyz:3001/video?vid=" + vids[0])
                     vid3.setAttribute('type', "video/webm")
                     vid3.setAttribute('id', 'vid3')
                     document.getElementById("vids").append(vid3)
