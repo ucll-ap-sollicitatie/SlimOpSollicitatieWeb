@@ -24,10 +24,11 @@ function Register(props){
                     <input type="email" placeholder="Email" id="email" onChange={(e) => setEmail(e.target.value)}/>
                     <p id="eremail"  style={{display: "none"}}>Email kan niet leeg zijn of is geen email adres</p>
 
+                    <div style={{display: "none"}}>
                     <label htmlFor="username">Gebruikersnaam</label>
-                    <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)}/>
+                    <input type="text" placeholder="Username" id="username" onChange={(e) => setUsername(e.target.value)} style={}/>
                     <p id="eruser"  style={{display: "none"}}>Gelieve een gebruikersnaam in te vullen</p>
-
+                    </div>
                     <label htmlFor="voornaam">Voornaam</label>
                     <input type="text" placeholder="Voornaam" id="voornaam" onChange={(e) => setVoornaam(e.target.value)}/>
                     <p id="ervn"  style={{display: "none"}}>Gelieve je voornaam in te vullen</p>
@@ -77,10 +78,7 @@ function Register(props){
         erconf.style.display = "none"
         e.preventDefault();
 
-        if(username.replace(/\s/g,'') === ''){
-            elemt.style.display = "block"
-            return
-        } else if(email === "" || !email.includes(".")){
+        if(email === "" || !email.includes(".")){
             erremail.style.display = "block"
             return
         }
