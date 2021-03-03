@@ -34,7 +34,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" src={"http://localhost:5002/video/" + props.selectedvid} controls width="640" height="480"></video>
+                <video id="video" src={"https://slimopsollicitatie.xyz:3001/video/" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
                     <div className="feedbackQ" onClick={changeCritnext}>{criterium}</div>

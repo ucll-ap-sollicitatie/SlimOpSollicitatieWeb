@@ -25,6 +25,7 @@ function FeedbackSelection(props) {
 
         document.getElementById("vidSel").innerHTML = ""
         vids.forEach(element => {
+            console.log(element)
             var el = document.createElement("button");
             el.id = element.name;
             el.onclick = onClick
@@ -80,4 +81,3 @@ const mapDispatchToProps = (dispatch) => {
 
 
 export default connect(mapStateToProps, mapDispatchToProps) (FeedbackSelection);
- 
