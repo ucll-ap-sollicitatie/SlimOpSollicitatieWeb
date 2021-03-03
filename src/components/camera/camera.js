@@ -54,7 +54,7 @@ const WebcamStreamCapture = () => {
             vragencounter++;
             if (vragencounter == vl.length - 1) {
                 document.getElementById("nextQButton").style.visibility = "hidden"
-                document.getElementById("stop").hidden = "false"
+                document.getElementById("stop").hidden = false
             }
         }
         document.getElementById("overlay").innerHTML = vl[vragencounter]
@@ -220,7 +220,7 @@ function checker(){
     }
 }
 
-var timer2 = setInterval(checker2,1000);
+var timer2 = setInterval(checker2,100);
 function checker2(){
     if(document.getElementById("stop") != null){
         cap2 = true;
