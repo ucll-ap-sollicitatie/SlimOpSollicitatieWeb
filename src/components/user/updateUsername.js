@@ -16,7 +16,7 @@ function UpdateUsername(props){
             <title>SOS - Verander gebruikersnaam</title>
         </Helmet>
 
-            <div>
+            <div className="centerPage">
                 <h1>Verander naam</h1>
                 <form onSubmit={handleSubmit} className="wite">
                     <label htmlFor="titel">naam</label>
