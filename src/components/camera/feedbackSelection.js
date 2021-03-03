@@ -22,11 +22,12 @@ function FeedbackSelection(props) {
 
     async function getall() {
         vids = await getAllVidsDb(props.email)
+        let videos = Array.from(vids[0])
 
-        console.log(vids[0])
-
+        console.log(videos)
         document.getElementById("vidSel").innerHTML = ""
-        vids[0].forEach(element => {
+        videos.forEach(element => {
+            console.log(element)
             var el = document.createElement("button");
             el.id = element.name;
             el.onclick = onClick
