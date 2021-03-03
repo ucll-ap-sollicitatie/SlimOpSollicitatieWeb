@@ -7,24 +7,24 @@ const localIp = "http://127.0.0.1:3001"
  */
 
 
-async function getAlldatadb(eml){
+async function getAlldatadb(eml) {
     return new Promise((resolve, reject) => {
-    axios
-        .get(`${webIp}/users/getAll`,
-            {
-                email: eml
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function (response) {
-        //console.log("respData: " + response.data)
-        resolve(response.data)
-        return response.data
-    }).catch(function (error) {
-        return "NOK"
-    });
+        axios
+            .get(`${webIp}/users/getAll`,
+                {
+                    email: eml
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (response) {
+            //console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        }).catch(function (error) {
+            return "NOK"
+        });
     })
 }
 
@@ -106,17 +106,17 @@ async function addJobdb4params(tit, inter, tech, email) {
         axios
 
             .post(`${webIp}/users/addjob`,
-            {
-                titel: tit,
-                inter: inter,
-                tech: tech,
-                email: email
-            },
-            {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            }).then(function (response) {
+                {
+                    titel: tit,
+                    inter: inter,
+                    tech: tech,
+                    email: email
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (response) {
             //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
@@ -125,10 +125,11 @@ async function addJobdb4params(tit, inter, tech, email) {
         });
     })
 }
+
 /**
  * api request to delete a job from the user
  */
-async function deleteJobdb(titel, email){
+async function deleteJobdb(titel, email) {
     return new Promise((resolve, reject) => {
         axios
             .post(`${webIp}/users/deletejob`,
@@ -153,144 +154,141 @@ async function deleteJobdb(titel, email){
 /**
  * api request to update tue username
  */
-async function updateUsername(username, eml, pss){
+async function updateUsername(username, eml, pss) {
     return new Promise((resolve, reject) => {
         var data = JSON.stringify({"username": username, "email": eml, "password": pss});
 
         var config = {
             method: 'post',
             url: `${webIp}/users/updateUsername`,
-            headers: { 
-              'Content-Type': 'application/json'
+            headers: {
+                'Content-Type': 'application/json'
             },
-            data : data
-          };
-         
-          axios(config)
-          .then(function (response) {
-            //console.log(response.data)
-            resolve(response.data)
-            return response;
-        }).catch(function (error) {
+            data: data
+        };
+
+        axios(config)
+            .then(function (response) {
+                //console.log(response.data)
+                resolve(response.data)
+                return response;
+            }).catch(function (error) {
             return "NOK"
         });
-          
+
     })
 }
 
-async function videoInDb(name, email, timestamps){
-        return new Promise((resolve, reject) => {
-            timestamps = `{${timestamps}}`
-            axios
-                .post(`${webIp}/users/vidInDb`,
-                    {
-                        name: name,
-                        email: email,
-                        timestamps: timestamps
-                    },
-                    {
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded'
-                        }
-                    }).then(function (response) {
-                //console.log("respData: " + response.data)
-                resolve(response.data)
-                return response.data
-            }).catch(function (error) {
-                return "NOK"
-            });
-        })
-}
-
-async function getAllVidsDb(email){
+async function videoInDb(name, email, timestamps) {
     return new Promise((resolve, reject) => {
-
-
-    var data = JSON.stringify({"email": email})
-
-    var config = {
-        method: 'get',
-        url: 'https://slimopsollicitatie.xyz:3001/users/getvidInDb',
-        headers: {
-            'Content-Type': 'text/plain'
-        },
-        data : data
-    };
-
-    axios(config)
-        .then(function (response) {
-            resolve(response.data)
-        })
-        .catch(function (error) {
-            console.log(error);
-        });
-    })
-}
-
-
-async function getJobs(eml){
-    return new Promise((resolve, reject) => {
-
-    var config = {
-        method: 'get',
-        url: `${webIp}/users/getAll?user=${eml}`,
-        headers: { },
-      };
-      
-      axios(config)
-      .then(
-        function (response) {
+        timestamps = `{${timestamps}}`
+        axios
+            .post(`${webIp}/users/vidInDb`,
+                {
+                    name: name,
+                    email: email,
+                    timestamps: timestamps
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (response) {
             //console.log("respData: " + response.data)
             resolve(response.data)
             return response.data
-        })
-        .catch(function (error) {
+        }).catch(function (error) {
             return "NOK"
         });
     })
 }
-async function getRecentVideos(email){
-    return new Promise((resolve, reject) => {   
-        
+
+async function getAllVidsDb(email) {
+    return new Promise((resolve, reject) => {
+        axios
+            .get(`${webIp}/users/getvidInDb`,
+                {
+                    "email": email
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).then(function (response) {
+            //console.log("respData: " + response.data)
+            resolve(response.data)
+            return response.data
+        }).catch(function (error) {
+            return "NOK"
+        });
+    })
+}
+
+
+async function getJobs(eml) {
+    return new Promise((resolve, reject) => {
+
+        var config = {
+            method: 'get',
+            url: `${webIp}/users/getAll?user=${eml}`,
+            headers: {},
+        };
+
+        axios(config)
+            .then(
+                function (response) {
+                    //console.log("respData: " + response.data)
+                    resolve(response.data)
+                    return response.data
+                })
+            .catch(function (error) {
+                return "NOK"
+            });
+    })
+}
+
+async function getRecentVideos(email) {
+    return new Promise((resolve, reject) => {
+
         var config = {
             method: 'get',
             url: `${webIp}/users/getRecent?user=${email}`,
             headers: {},
-      };
-      
-      axios(config)
-      .then(function (response) {
-        resolve(response.data)
-        //console.log(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
+        };
+
+        axios(config)
+            .then(function (response) {
+                resolve(response.data)
+                //console.log(response.data);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     })
-})
 }
 
 async function setFeedback(vidname, feedback) {
-    var data = JSON.stringify({"video":vidname,"feedback":feedback});
+    var data = JSON.stringify({"video": vidname, "feedback": feedback});
     console.log(data)
     var config = {
-    method: 'post',
-    url: `${webIp}/users/setFeedback`,
-    headers: { 
-        'Content-Type': 'application/json'
-    },
-    data : data
+        method: 'post',
+        url: `${webIp}/users/setFeedback`,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        data: data
     };
 
     axios(config)
-    .then(function (response) {
-    console.log(JSON.stringify(response.data));
-    })
-    .catch(function (error) {
-    console.log(error);
-    });
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
-async function getFeedback(vidname){
+async function getFeedback(vidname) {
     return new Promise((resolve, reject) => {
 
         var data = '';
@@ -299,7 +297,7 @@ async function getFeedback(vidname){
             method: 'get',
             url: `${webIp}/users/getfeedback?vid=${vidname}`,
             headers: {},
-            data : data
+            data: data
         };
 
         axios(config)
@@ -309,7 +307,7 @@ async function getFeedback(vidname){
             .catch(function (error) {
                 console.log(error);
             });
-        })
+    })
 }
 
 export {
