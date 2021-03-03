@@ -206,7 +206,7 @@ async function getAllVidsDb(email){
     return new Promise((resolve, reject) => {
         var config = {
             method: 'get',
-            url: `http://127.0.0.1:3001/users/vidInDb?user=${email}`,
+            url: `${webIp}/users/getvidInDb?user=${email}`,
             headers: {},
       };
       
@@ -224,7 +224,7 @@ async function getJobs(eml){
 
     var config = {
         method: 'get',
-        url: `http://127.0.0.1:3001/users/getAll?user=${eml}`,
+        url: `${webIp}/users/getAll?user=${eml}`,
         headers: { },
       };
       
@@ -245,7 +245,7 @@ async function getRecentVideos(email){
         
         var config = {
             method: 'get',
-            url: `http://127.0.0.1:3001/users/getRecent?user=${email}`,
+            url: `${webIp}/users/getRecent?user=${email}`,
             headers: {},
       };
       
@@ -265,7 +265,7 @@ async function setFeedback(vidname, feedback) {
     console.log(data)
     var config = {
     method: 'post',
-    url: 'http://127.0.0.1:3001/users/setFeedback',
+    url: `${webIp}/users/setFeedback`,
     headers: { 
         'Content-Type': 'application/json'
     },
@@ -288,7 +288,7 @@ async function getFeedback(vidname){
 
         var config = {
             method: 'get',
-            url: `http://127.0.0.1:3001/users/getfeedback?vid=${vidname}`,
+            url: `${webIp}/users/getfeedback?vid=${vidname}`,
             headers: {},
             data : data
         };
