@@ -179,6 +179,9 @@ function Feedback(props){
             console.log(value)
             keepZG(crit)
         }
+        if(value === 2 || value === 3 || value === 4){
+            keepok(crit)
+        }
     }
 
     /**
