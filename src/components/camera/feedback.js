@@ -34,7 +34,7 @@ function Feedback(props){
             <h1>Feedback</h1>
 
             <section id="vid-feedback-container">
-                <video id="video" src={"https://slimopsollicitatie.xyz:3001/video/" + props.selectedvid} controls width="640" height="480"></video>
+                <video id="video" src={"https://slimopsollicitatie.xyz:3001/video/?vid=" + props.selectedvid} controls width="640" height="480"></video>
                 
                 <section>
                     <div className="feedbackQ" onClick={changeCritnext}>{criterium}</div>
@@ -99,7 +99,7 @@ function Feedback(props){
  
     async function getSavedFeedback() {
         var rs = await getFeedback(props.selectedvid)
-        dbFeedback = JSON.parse(rs)
+        dbFeedback = rs
         console.log(rs)
         return rs
     }

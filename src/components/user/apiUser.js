@@ -289,7 +289,6 @@ async function setFeedback(vidname, feedback) {
 
 async function getFeedback(vidname) {
     return new Promise((resolve, reject) => {
-
         var data = '';
 
         var config = {
@@ -301,7 +300,9 @@ async function getFeedback(vidname) {
 
         axios(config)
             .then(function (response) {
+                console.log(response.data)
                 resolve(response.data)
+                return response.data
             })
             .catch(function (error) {
                 console.log(error);
