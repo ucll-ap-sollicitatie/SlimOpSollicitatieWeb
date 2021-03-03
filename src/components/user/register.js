@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {registerdb} from "../user/apiUser"
+import {registerdb} from "./apiUser"
 import { useHistory } from "react-router-dom";
 
 
@@ -88,6 +88,7 @@ function Register(props){
             return
         }
         else
+            e.preventDefault();
             console.log(username)
             elemt.style.display = "none"
             const result = await registerdb(email, password, confPass, voornaam)
