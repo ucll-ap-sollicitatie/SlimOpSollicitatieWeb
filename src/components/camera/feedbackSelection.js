@@ -23,7 +23,6 @@ function FeedbackSelection(props) {
     async function getall() {
         vids = await getAllVidsDb(props.email)
 
-        console.log(vids)
         console.log(vids[0])
 
         document.getElementById("vidSel").innerHTML = ""
