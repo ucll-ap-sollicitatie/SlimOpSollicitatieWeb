@@ -77,11 +77,11 @@ button:before {
   text-align: -moz-center;
 }
 
-.registerPage, .loginPage, .chooseJobForm, #vidSel{
+.registerPage, .loginPage, .chooseJobForm, #vidSel, .updateUsername{
 	display: table-caption;
 }
 
-.loginPage input, .registerPage input, .chooseJobForm input{
+.loginPage input, .registerPage input, .chooseJobForm input, .updateUsername input{
 	border-radius: 8px;
 	text-align: center;
 }

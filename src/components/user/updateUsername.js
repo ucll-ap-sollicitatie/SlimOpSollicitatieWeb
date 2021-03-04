@@ -16,10 +16,10 @@ function UpdateUsername(props){
             <title>SOS - Verander gebruikersnaam</title>
         </Helmet>
 
-            <div className="centerPage">
+            <div className="updateUsername">
                 <h1>Verander naam</h1>
                 <form onSubmit={handleSubmit} className="wite">
-                    <label htmlFor="titel">naam</label>
+                    <label htmlFor="titel">Naam</label>
                     <input type="text" placeholder="titel" id="titel" onChange={(e) => setUsername(e.target.value)}/>
                     <p id="userror" className="error" style={{display: "none"}}>Gelieve een naam in te vullen</p>
 
