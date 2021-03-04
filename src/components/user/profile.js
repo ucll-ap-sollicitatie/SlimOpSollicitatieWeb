@@ -63,7 +63,7 @@ function Profile(props){
                 <Link to="/addJob">
                     <button style={buttonStyle}>Nieuwe Jobtitel</button>
                 </Link>
-                <button onClick={updateJobs} hidden>Refresh</button>
+                <button onClick={updateJobs} style={{display: "none"}}>Refresh</button>
 
             </section>
 
