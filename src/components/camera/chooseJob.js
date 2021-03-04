@@ -36,7 +36,7 @@ function ChooseJob(props){
                         <input type="text" placeholder="bv. Java developer" id="titel" />
                         <p id="titelerror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
-                        <label htmlFor="inter">communicatievaardigheden</label>
+                        <label htmlFor="inter">Communicatievaardigheden</label>
                         <input type="text" placeholder="bv. samenwerken" id="inter" />
                         <p id="intererror" className="error" style={{display: "none"}}>Mag niet leeg zijn</p>
 
